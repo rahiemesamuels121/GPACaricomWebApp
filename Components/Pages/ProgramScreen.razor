@@ -1,0 +1,57 @@
+﻿@page "/ourprograms"
+@attribute [StreamRendering]
+@using GPACARICOM.Models
+
+<PageTitle>Our Programs</PageTitle>
+
+<div>
+    <h1>Our Programs</h1>
+</div>
+
+<div class="row">
+    @foreach (ProgramModel program in programlist)
+    {
+        <div class="col-md-4 mb-3">
+            <div class="custom-card">
+                <img src="images/logomain.png" style="height: 100px ; width : 100px" class="catalog-image"/>
+                <h3>@program.programName</h3>
+                <p> @program.programDescription</p>
+            </div>
+        </div>
+    }
+</div>
+
+@code{
+
+    private List<ProgramModel> programlist = new(){
+    new ProgramModel{
+      programid = 100,
+      programName = "Business Assistant",
+      programDescription = "A Business Assistant program is a software tool designed to help individuals and organizations manage daily business operations more efficiently by automating tasks, organizing information, and providing decision support",
+    } ,
+    new ProgramModel{
+      programid = 100,
+      programName = "J1 Work Travel",
+      programDescription = "A Business Assistant program is a software tool designed to help individuals and organizations manage daily business operations more efficiently by automating tasks, organizing information, and providing decision support",
+    } ,
+    new ProgramModel{
+      programid = 100,
+      programName = "GPA Drone Training",
+      programDescription = "A Business Assistant program is a software tool designed to help individuals and organizations manage daily business operations more efficiently by automating tasks, organizing information, and providing decision support",
+    } ,
+    new ProgramModel{
+      programid = 100,
+      programName = "GPA Academy",
+      programDescription = "A Business Assistant program is a software tool designed to help individuals and organizations manage daily business operations more efficiently by automating tasks, organizing information, and providing decision support",
+    } ,
+    };
+}
+
+<style>
+    .catalog-image {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+    }
+</style>
+

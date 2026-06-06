@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "RITu0GFTNhQ=",
+  "success": true,
+  "projectFilePath": "F:\\Development\\LEARNING\\GPACARICOM\\GPACARICOM.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\rahie\\.nuget\\packages\\microsoft.aspnetcore.app.internal.assets\\10.0.8\\microsoft.aspnetcore.app.internal.assets.10.0.8.nupkg.sha512",
+    "C:\\Users\\rahie\\.nuget\\packages\\radzen.blazor\\10.4.7\\radzen.blazor.10.4.7.nupkg.sha512"
+  ],
+  "logs": []
+}
