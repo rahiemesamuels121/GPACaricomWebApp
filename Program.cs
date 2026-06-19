@@ -1,4 +1,6 @@
 using GPACARICOM.Components;
+using GPACARICOM.Services;
+using GPACARICOM.Services.Interfaces;
 using Radzen;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddRadzenComponents();
+builder.Services.AddScoped<IDatabaseConnectionService,
+                           DatabaseConnectionService>();
 
 var app = builder.Build();
 
