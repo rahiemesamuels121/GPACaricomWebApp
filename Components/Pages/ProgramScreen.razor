@@ -12,7 +12,7 @@
     @foreach (ProgramModel program in programlist)
     {
         <div class="col-md-4 mb-3">
-            <div class="custom-card">
+            <div class="custom-card" style="background-color:var(--background); height:400px; overflow:clip">
                 <img src="images/logomain.png" style="height: 100px ; width : 100px" class="catalog-image"/>
                 <h3>@program.programName</h3>
                 <p> @program.programDescription</p>

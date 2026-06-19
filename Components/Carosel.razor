@@ -1,9 +1,9 @@
 ﻿<RadzenStack class="rz-p-0 rz-p-md-12">
-    <RadzenCarousel @bind-SelectedIndex="@selectedIndex" Auto="@auto" Interval="4000"
-                    ItemsPerPage="@itemsPerPage" PagerOverlay="false" Style="height: 500px; width: 100%;">
+    <RadzenCarousel @bind-SelectedIndex="@selectedIndex" Auto="@auto" Interval="6000"
+                    ItemsPerPage="@itemsPerPage" PagerOverlay="true" Style="height: 400px; width: 100%;">
         <Items>
             <RadzenCarouselItem>
-                <RadzenImage Path="https://picsum.photos/800/500?random=1" Style="width: 100%; height: 100%; object-fit: cover; padding: 0.5rem;" />
+                    <RadzenImage Path="/images/logomain.png" Style="width: 100%; height: 100%; object-fit: contain; padding: 0.5rem;" />
             </RadzenCarouselItem>
             <RadzenCarouselItem>
                 <RadzenImage Path="https://picsum.photos/800/500?random=4" Style="width: 100%; height: 100%; object-fit: cover; padding: 0.5rem;" />
@@ -16,9 +16,6 @@
             </RadzenCarouselItem>
             <RadzenCarouselItem>
                 <RadzenImage Path="https://picsum.photos/800/500?random=5" Style="width: 100%; height: 100%; object-fit: cover; padding: 0.5rem;" />
-            </RadzenCarouselItem>
-            <RadzenCarouselItem>
-                https://picsum.photos/800/500?random=3" Style="width: 100%; height: 100%; object-fit: cover; padding: 0.5rem;" />
             </RadzenCarouselItem>
         </Items>
     </RadzenCarousel>
