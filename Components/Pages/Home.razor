@@ -2,7 +2,10 @@
 @rendermode InteractiveServer
 @using GPACARICOM.Models
 @using GPACARICOM.Components
+@using GPACARICOM.Services.Interfaces
 @inject NavigationManager NavigationManager
+@inject ArticleService ArticleService;
+
 
 <PageTitle>Home</PageTitle>
 <!-- Infinite Carousel -->
@@ -16,6 +19,8 @@
     </h1>
 
    <RadzenStack Gap="1rem" Orientation="Orientation.Horizontal" Wrap="FlexWrap.Wrap">
+
+       @if()
 
     @for (int i = 0; i < articleList.Count; i++)
     {

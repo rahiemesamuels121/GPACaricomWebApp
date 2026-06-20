@@ -4,7 +4,7 @@ namespace GPACARICOM.Services.Interfaces
 {
     public interface IArticleService
     {
-        List<Article> GetArticles();
+        public Task<List<Article>> GetArticlesAsync();
         Article GetArticle(int id);
        bool AddNewArticle(Article article);
        bool UpdateArticle(Article article);

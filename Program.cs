@@ -11,6 +11,8 @@ builder.Services.AddRazorComponents()
 builder.Services.AddRadzenComponents();
 builder.Services.AddScoped<IDatabaseConnectionService,
                            DatabaseConnectionService>();
+builder.Services.AddScoped<IArticleService,
+                           ArticleService>();
 
 var app = builder.Build();
 
