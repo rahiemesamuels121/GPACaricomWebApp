@@ -1,11 +1,19 @@
-﻿namespace GPACARICOM.Models
+﻿using GPACARICOM.Models.Interface;
+
+namespace GPACARICOM.Models
 {
-    public class ProgramModel
+    public class ProgramModel : IAuditable
     {
         public int programid { get; set; }
         public string programName { get; set; } = string.Empty;
         public string programDescription { get; set; } = string.Empty;
         public string programDate { get; set; } = string.Empty;
-
+        public DateTime CreatedDate { get ; set ; }
+        public string CreatedBy { get; set; } = string.Empty;
+        public DateTime? UpdatedDate { get ; set ; }
+        public string? UpdatedBy { get; set; }
+        public bool IsDeleted { get; set; }
+        public DateTime? DeletedDate { get; set; }
+        public string? DeletedBy { get; set; }
     }
 }

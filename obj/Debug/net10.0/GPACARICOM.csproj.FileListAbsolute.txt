@@ -450,7 +450,6 @@ C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\r9w1mufl9l-{0}-4vyp0a2xjt
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\i1901ftr2x-{0}-cjvtifvnlk-cjvtifvnlk.gz
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\6xb9o06z95-{0}-cis8qdv5k3-cis8qdv5k3.gz
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\t2tvocn0z4-{0}-0mszqgqney-0mszqgqney.gz
-C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\0kflhpufn0-{0}-6gyfjleh3x-6gyfjleh3x.gz
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\7aihphi6ov-{0}-fs7m30jngr-fs7m30jngr.gz
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\hnkyj2mm0i-{0}-t1cqhe9u97-t1cqhe9u97.gz
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\z923y7k82i-{0}-c2jlpeoesf-c2jlpeoesf.gz
@@ -499,14 +498,11 @@ C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\3f6dp0f5hr-{0}-0j3bgjxly4
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\yn3qbntaig-{0}-abdmv1u4y3-abdmv1u4y3.gz
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\rf1d692886-{0}-ne14ti1q68-ne14ti1q68.gz
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\63ov3qor6m-{0}-ig5xotzpx5-ig5xotzpx5.gz
-C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\mofdwdf3u9-{0}-d06eixtxzv-d06eixtxzv.gz
-C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\3f5mrt8af5-{0}-d06eixtxzv-d06eixtxzv.gz
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\staticwebassets.build.json
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\staticwebassets.build.json.cache
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\staticwebassets.development.json
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\staticwebassets.build.endpoints.json
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\swae.build.ex.cache
-C:\Mac\Home\Documents\dev\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\GPACARICOM.csproj.Up2Date
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\GPACARICOM.genruntimeconfig.cache
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\ref\GPACARICOM.dll
@@ -655,3 +651,7 @@ C:\Users\rahie\source\repos\rahiemesamuels121\GPACaricomWebApp\obj\Debug\net10.0
 C:\Users\rahie\source\repos\rahiemesamuels121\GPACaricomWebApp\obj\Debug\net10.0\compressed\0kflhpufn0-{0}-nfzz8fo20f-nfzz8fo20f.gz
 C:\Users\rahie\source\repos\rahiemesamuels121\GPACaricomWebApp\obj\Debug\net10.0\compressed\mofdwdf3u9-{0}-wx7sgik1vi-wx7sgik1vi.gz
 C:\Users\rahie\source\repos\rahiemesamuels121\GPACaricomWebApp\obj\Debug\net10.0\compressed\3f5mrt8af5-{0}-wx7sgik1vi-wx7sgik1vi.gz
+C:\Mac\Home\Documents\dev\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
+C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\mofdwdf3u9-{0}-pu09p5yldx-pu09p5yldx.gz
+C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\3f5mrt8af5-{0}-pu09p5yldx-pu09p5yldx.gz
+C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\0kflhpufn0-{0}-1vj9lzzzpz-1vj9lzzzpz.gz

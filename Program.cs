@@ -11,6 +11,7 @@ builder.Services.AddRazorComponents()
 builder.Services.AddRadzenComponents();
 builder.Services.AddScoped<IArticleService,
                            ArticleService>();
+builder.Services.AddScoped<IProgramService, ProgramService>();
 builder.Services.AddScoped<ItestimonialService,TestimonialService>();
 builder.Services.AddScoped<IDatabaseConnectionService,
                            DatabaseConnectionService>();

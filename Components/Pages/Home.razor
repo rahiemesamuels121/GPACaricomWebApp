@@ -10,76 +10,93 @@
 
 <PageTitle>Home</PageTitle>
 <!-- Infinite Carousel -->
-<div class="custom-card">
-<h2>Highlights</h2>
-<Carosel></Carosel>
-</div>
-<div class="custom-card" style="background-color: lightgoldenrodyellow">
-    <h1  style="color: var(--primary-yellow)">
-        Things to Know
-    </h1>
+<RadzenStack>
+   
+     <div style="padding : 0px">
+        <Carosel></Carosel>
 
-   <RadzenStack Gap="1rem" Orientation="Orientation.Horizontal" Wrap="FlexWrap.Wrap">
+     </div>
+  
+
+    <div style="padding-left:200px; padding-right:200px;">
+      
+            <h1 style="padding:20px">
+                <b>
+
+                Things to Know
+                </b>
+            </h1>
+
+            <RadzenStack Gap="1rem" Orientation="Orientation.Horizontal" Wrap="FlexWrap.Wrap">
 
     
-        @if (isLoadingArticles)
-        {
-            <div class="center-div">
-                <RadzenProgressBarCircular ShowValue="true" Mode="ProgressBarMode.Indeterminate" Size="ProgressBarCircularSize.Large" AriaLabel="Loading, large">
-                    <Template>Loading</Template>
-                </RadzenProgressBarCircular>
-            </div>
-        }
-        else
-        {
-            @for (int i = 0; i < articleList.Count; i++)
-            {
-                <div class="custom-card" style=" width: 20rem; background-color:white;" )>
-                    <h3 style="color:#05163D"> @articleList[i].title</h3>
-                    <p>@articleList[i].CreatedDate</p>
-                    <hr />
-                    <p>@articleList[i].shortDescription</p>
-                    <div style="justify-content:flex-end">
-                        <a href=datalist[i].hyperlink target="_blank"> Read More</a>
+                @if (isLoadingArticles)
+                {
+                    <div class="center-div">
+                        <RadzenProgressBarCircular ShowValue="true" Mode="ProgressBarMode.Indeterminate" Size="ProgressBarCircularSize.Large" AriaLabel="Loading, large">
+                            <Template>Loading</Template>
+                        </RadzenProgressBarCircular>
                     </div>
+                }
+                else
+                {
+                    @for (int i = 0; i < articleList.Count; i++)
+                    {
+                        <div class="custom-card" style=" width: 20rem;  background-color: var(--secondary-yellow);">
+                            <h3 style="color:#05163D"> @articleList[i].title</h3>
+                            <p>@articleList[i].CreatedDate</p>
+                            <hr />
+                            <p>@articleList[i].shortDescription</p>
+                            <div style="justify-content:flex-end">
+                                <a href=datalist[i].hyperlink target="_blank"> Read More</a>
+                            </div>
 
-                </div>
-            }
-        }
+                        </div>
+                    }
+                }
 
    
-   </RadzenStack>
-</div>
-<div class="custom-card" style="background-color:aliceblue">
-    <h1>
-        Testimonials
-    </h1>
+            </RadzenStack>
+ 
+     
 
-    @if (isLoadingTestimonials)
-    {
-        <div class="center-div">
-            <RadzenProgressBarCircular ShowValue="true" Mode="ProgressBarMode.Indeterminate" Size="ProgressBarCircularSize.Large" AriaLabel="Loading, large">
-                <Template>Loading</Template>
-            </RadzenProgressBarCircular>
-        </div>
-    }
-    else
-    {
-            @foreach (var testimonial in testimonialList)
+        <h1 style="padding:20px">
+            <b>
+                Testimonials
+
+            </b>
+            </h1>
+
+        
+
+            @if (isLoadingTestimonials)
             {
-                <div class="custom-card">
-                    <RadzenStack>
-                        <RadzenGravatar Email="info@gpa.com" />
-                        <h7>@testimonial.username </h7>
-                    </RadzenStack>
-
-                    <h5> @testimonial.testimonialTitle</h5>
-                    <p>@testimonial.testimonialbody</p>
-                    <p> @testimonial.createdDate</p>
+                <div class="center-div">
+                    <RadzenProgressBarCircular ShowValue="true" Mode="ProgressBarMode.Indeterminate" Size="ProgressBarCircularSize.Large" AriaLabel="Loading, large">
+                        <Template>Loading</Template>
+                    </RadzenProgressBarCircular>
                 </div>
             }
-        }
-</div>
+            else
+            {
+                @foreach (var testimonial in testimonialList)
+
+                {
+                    <div class="custom-card" >
+                        <RadzenStack>
+                            <RadzenGravatar Email="info@gpa.com" />
+                            <h7>@testimonial.username </h7>
+                        </RadzenStack>
+
+                        <h5> @testimonial.testimonialTitle</h5>
+                        <p>@testimonial.testimonialbody</p>
+                        <p> @testimonial.createdDate</p>
+                    </div>
+                }
+            }
+    </div>
+
+</RadzenStack>
 
 
 @code {

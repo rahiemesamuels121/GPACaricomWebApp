@@ -1,50 +1,67 @@
 ﻿@page "/ourprograms"
 @attribute [StreamRendering]
 @using GPACARICOM.Models
+@using GPACARICOM.Services.Interfaces
+@inject IProgramService ProgramService;
 
 <PageTitle>Our Programs</PageTitle>
 
-<div>
-    <h1>Our Programs</h1>
-</div>
+<div style="padding-left:200px; padding-right:200px;">
+    <div>
+        <h1>Our Programs</h1>
+    </div>
 
-<div class="row">
-    @foreach (ProgramModel program in programlist)
-    {
-        <div class="col-md-4 mb-3">
-            <div class="custom-card" style="background-color:var(--background); height:400px; overflow:clip">
-                <img src="images/logomain.png" style="height: 100px ; width : 100px" class="catalog-image"/>
-                <h3>@program.programName</h3>
-                <p> @program.programDescription</p>
+    <div class="row" sty>
+@if (isLoadingPrograms)
+        {
+            <div class="center-div">
+                <RadzenProgressBarCircular ShowValue="true" Mode="ProgressBarMode.Indeterminate" Size="ProgressBarCircularSize.Large" AriaLabel="Loading, large">
+                    <Template>Loading</Template>
+                </RadzenProgressBarCircular>
             </div>
-        </div>
-    }
+        }
+        else
+        {
+           
+            @for (int i = 0; i<programlist.Count; i++)
+            {
+                var program = programlist[i];
+                var backgroundColor = cardColors[i % cardColors.Length];
+
+                <div class="col-md-4 mb-3" >
+                    <div class="custom-card" style=" height:400px; overflow:clip 
+                         background:white;
+                         border-top:20px solid @backgroundColor;
+                         border-radius:20px;
+                         height:400px;"">
+                        <img src="images/logomain.png" style="height: 100px ; width : 100px" class="catalog-image" />
+                        <h3>@program.programName</h3>
+                        <p> @program.programDescription</p>
+                    </div>
+                </div>
+            }
+        }
+       
+    </div>
 </div>
 
 @code{
+    private readonly string[] cardColors =
+{
+    "#E8F4FD", // Blue
+    "#FFF8E1", // Yellow
+    "#E3FCEF", // Green
+    "#FDEDED", // Red
+};
 
-    private List<ProgramModel> programlist = new(){
-    new ProgramModel{
-      programid = 100,
-      programName = "Business Assistant",
-      programDescription = "A Business Assistant program is a software tool designed to help individuals and organizations manage daily business operations more efficiently by automating tasks, organizing information, and providing decision support",
-    } ,
-    new ProgramModel{
-      programid = 100,
-      programName = "J1 Work Travel",
-      programDescription = "A Business Assistant program is a software tool designed to help individuals and organizations manage daily business operations more efficiently by automating tasks, organizing information, and providing decision support",
-    } ,
-    new ProgramModel{
-      programid = 100,
-      programName = "GPA Drone Training",
-      programDescription = "A Business Assistant program is a software tool designed to help individuals and organizations manage daily business operations more efficiently by automating tasks, organizing information, and providing decision support",
-    } ,
-    new ProgramModel{
-      programid = 100,
-      programName = "GPA Academy",
-      programDescription = "A Business Assistant program is a software tool designed to help individuals and organizations manage daily business operations more efficiently by automating tasks, organizing information, and providing decision support",
-    } ,
-    };
+    private List<ProgramModel> programlist;
+    private bool isLoadingPrograms = true;
+    protected override async Task OnInitializedAsync()
+    {
+        programlist = await ProgramService.GetProgramsAsync();
+        isLoadingPrograms = false;
+    }
+
 }
 
 <style>

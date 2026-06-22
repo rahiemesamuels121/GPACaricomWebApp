@@ -1,13 +1,12 @@
 @import url('https://googleapis.com');
 :root {
-    --primary-blue: #0047AB;
+    --primary-blue: #023e8a;
     --primary-red: #CE1126;
     --primary-yellow: #FCD115;
-
-    --navy: #002B5C;
-    --crimson: #9E0B0F;
+    --secondary-blue: #caf0f8;
+    --secondary-red: #fff0f3;
+    --secondary-yellow: #fffae5;
     --gold: #D4A017;
-
     --background: #F5F7FA;
     --surface: #FFFFFF;
     --text-primary: #1A1A1A;
@@ -15,7 +14,9 @@
 }
 html, body {
     body {
-        font-family: 'Times New Roman', sans-serif;
+        font-family: "Comfortaa", sans-serif;
+        font-optical-sizing: auto;
+              font-style: normal;
     }
 
     a, .btn-link {
@@ -126,11 +127,7 @@ html, body {
         flex-direction: row;
     }
 
-    .nav-link {
-        display: flex;
-        color: #1d3461 !important;
-        background-color: snow !important;
-    }
+    
 
     .center-div {
         display: flex; /* Turns the div into a flex container */
@@ -139,4 +136,11 @@ html, body {
         /* height: 100vh; /* Give it a height to see vertical centering */
     }
 
+    .card-with-bg {
+        background-image: url('images/bg.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        /* Optional: add text color if your background is dark */
+    }
 }
