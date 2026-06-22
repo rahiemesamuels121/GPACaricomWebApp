@@ -1,4 +1,6 @@
 .navbar-toggler[b-9jp7j3w9be] {
+    position: sticky;
+    z-index: 1000;
     appearance: none;
     cursor: pointer;
     width: 3.5rem;

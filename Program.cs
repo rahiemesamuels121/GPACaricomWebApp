@@ -9,10 +9,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddRadzenComponents();
-builder.Services.AddScoped<IDatabaseConnectionService,
-                           DatabaseConnectionService>();
 builder.Services.AddScoped<IArticleService,
                            ArticleService>();
+builder.Services.AddScoped<ItestimonialService,TestimonialService>();
+builder.Services.AddScoped<IDatabaseConnectionService,
+                           DatabaseConnectionService>();
+
 
 var app = builder.Build();
 

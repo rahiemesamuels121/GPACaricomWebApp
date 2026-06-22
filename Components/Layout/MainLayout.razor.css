@@ -1,11 +1,11 @@
 .page {
     position: relative;
-    display: flex;
+    display: block;
     flex-direction: column;
 }
 
 main {
-    flex: 1;
+    padding-top:20px;
 }
 
 .sidebar {
@@ -55,16 +55,9 @@ main {
 
 @media (min-width: 641px) {
     .page {
+        display:block;
         flex-direction: row;
     }
-
-    .sidebar {
-        width: 250px;
-        height: 100vh;
-        position: sticky;
-        top: 0;
-    }
-
     .top-row {
         position: sticky;
         top: 0;

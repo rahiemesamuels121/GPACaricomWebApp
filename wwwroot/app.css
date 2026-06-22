@@ -129,6 +129,14 @@ html, body {
     .nav-link {
         display: flex;
         color: #1d3461 !important;
-        background-color: var(--primary-yellow) !important;
+        background-color: snow !important;
     }
+
+    .center-div {
+        display: flex; /* Turns the div into a flex container */
+        justify-content: center; /* Centers horizontally */
+        align-items: center; /* Centers vertically */
+        /* height: 100vh; /* Give it a height to see vertical centering */
+    }
+
 }

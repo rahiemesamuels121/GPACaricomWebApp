@@ -1,12 +1,12 @@
 /* /Components/Layout/MainLayout.razor.rz.scp.css */
 .page[b-b4px5aklg6] {
     position: relative;
-    display: flex;
+    display: block;
     flex-direction: column;
 }
 
 main[b-b4px5aklg6] {
-    flex: 1;
+    padding-top:20px;
 }
 
 .sidebar[b-b4px5aklg6] {
@@ -56,16 +56,9 @@ main[b-b4px5aklg6] {
 
 @media (min-width: 641px) {
     .page[b-b4px5aklg6] {
+        display:block;
         flex-direction: row;
     }
-
-    .sidebar[b-b4px5aklg6] {
-        width: 250px;
-        height: 100vh;
-        position: sticky;
-        top: 0;
-    }
-
     .top-row[b-b4px5aklg6] {
         position: sticky;
         top: 0;
@@ -106,6 +99,8 @@ main[b-b4px5aklg6] {
     }
 /* /Components/Layout/NavMenu.razor.rz.scp.css */
 .navbar-toggler[b-9jp7j3w9be] {
+    position: sticky;
+    z-index: 1000;
     appearance: none;
     cursor: pointer;
     width: 3.5rem;

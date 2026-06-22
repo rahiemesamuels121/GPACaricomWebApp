@@ -2,17 +2,13 @@
 @inject NavigationManager NavigationManager
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+    <header>
+     <NavMenu />
+    </header>
 
-    <main>
-        <div class="top-row px-4">
-            <RadzenButton Click="@(args => NavigateToDashboard())" ButtonStyle="ButtonStyle.Success">Login</RadzenButton>
-        </div>
-        <article class="content px-4" style="background-color:var(--background)">
+    <main class="container-fluid">
+       
             @Body
-        </article>
     </main>
 </div>
 
