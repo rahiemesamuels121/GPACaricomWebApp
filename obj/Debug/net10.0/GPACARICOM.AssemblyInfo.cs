@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GPACARICOM")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6e293fcfc12a4e443577430ceb08daadc09a25fc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7d0739d26e5f790bcb9923a0689cdf3f162e9697")]
 [assembly: System.Reflection.AssemblyProductAttribute("GPACARICOM")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GPACARICOM")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

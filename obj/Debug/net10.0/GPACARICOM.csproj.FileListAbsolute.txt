@@ -656,5 +656,6 @@ C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\0kflhpufn0-{0}-6fh6shlc9s
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\scopedcss\Components\Pages\Home.razor.rz.scp.css
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\scopedcss\Components\Pages\ProgramScreen.razor.rz.scp.css
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\scopedcss\Components\Pages\WhoWeAre.razor.rz.scp.css
-C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\mofdwdf3u9-{0}-804i6w4vmt-804i6w4vmt.gz
-C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\3f5mrt8af5-{0}-804i6w4vmt-804i6w4vmt.gz
+C:\Mac\Home\Documents\dev\obj\Debug\net10.0\scopedcss\Components\Layout\Footer.razor.rz.scp.css
+C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\mofdwdf3u9-{0}-byttzafhf4-byttzafhf4.gz
+C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\3f5mrt8af5-{0}-byttzafhf4-byttzafhf4.gz

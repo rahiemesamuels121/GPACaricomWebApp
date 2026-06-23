@@ -1,3 +1,75 @@
+/* /Components/Layout/Footer.razor.rz.scp.css */
+.site-footer[b-kew54ys61a] {
+    background: var(--primary-blue);
+    color: white;
+    padding: 4rem 0 1rem;
+    margin-top: 5rem;
+}
+
+.footer-logo[b-kew54ys61a] {
+    height: 80px;
+    margin-bottom: 1rem;
+}
+
+.site-footer h4[b-kew54ys61a],
+.site-footer h5[b-kew54ys61a] {
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.footer-links[b-kew54ys61a] {
+    list-style: none;
+    padding-left: 0;
+}
+
+    .footer-links li[b-kew54ys61a] {
+        margin-bottom: .75rem;
+    }
+
+    .footer-links a[b-kew54ys61a],
+    .footer-contact a[b-kew54ys61a] {
+        color: rgba(255,255,255,.85);
+        text-decoration: none;
+        transition: .3s;
+    }
+
+        .footer-links a:hover[b-kew54ys61a],
+        .footer-contact a:hover[b-kew54ys61a] {
+            color: var(--secondary-yellow);
+        }
+
+.footer-contact p[b-kew54ys61a] {
+    margin-bottom: 1rem;
+}
+
+.footer-contact i[b-kew54ys61a] {
+    margin-right: .75rem;
+    color: var(--secondary-yellow);
+}
+
+.footer-divider[b-kew54ys61a] {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    border-color: rgba(255,255,255,.15);
+}
+
+.footer-bottom[b-kew54ys61a] {
+    text-align: center;
+    color: rgba(255,255,255,.75);
+    font-size: .9rem;
+}
+
+@media (max-width: 768px) {
+
+    .site-footer[b-kew54ys61a] {
+        text-align: center;
+    }
+
+    .footer-contact i[b-kew54ys61a] {
+        display: block;
+        margin-bottom: .5rem;
+    }
+}
 /* /Components/Layout/MainLayout.razor.rz.scp.css */
 .page[b-b4px5aklg6] {
     position: relative;
@@ -97,6 +169,34 @@ main[b-b4px5aklg6] {
         right: 0.75rem;
         top: 0.5rem;
     }
+.fab-top[b-b4px5aklg6] {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--secondary-yellow);
+    color: #05163D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    text-decoration: none;
+    box-shadow: 0 8px 25px rgba(0,0,0,.25);
+    z-index: 9999;
+    transition: all .3s ease;
+}
+
+    .fab-top:hover[b-b4px5aklg6] {
+        transform: translateY(-5px);
+        color: #05163D;
+        box-shadow: 0 12px 30px rgba(0,0,0,.35);
+    }
+
+html[b-b4px5aklg6] {
+    scroll-behavior: smooth;
+}
 /* /Components/Layout/NavMenu.razor.rz.scp.css */
 
 
