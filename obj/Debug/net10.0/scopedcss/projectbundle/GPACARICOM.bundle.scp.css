@@ -455,9 +455,69 @@ html[b-b4px5aklg6] {
         opacity: 0;
     }
 }
+/* /Components/Pages/ContactUs.razor.rz.scp.css */
+.contact-hero[b-cfv9761kuw] {
+    background: linear-gradient( 135deg, var(--primary-blue), var(--secondary-blue) );
+    color: white;
+    text-align: center;
+    padding: 120px 20px 80px;
+}
+
+    .contact-hero h1[b-cfv9761kuw] {
+        font-size: 3rem;
+        font-weight: 700;
+    }
+
+    .contact-hero p[b-cfv9761kuw] {
+        max-width: 700px;
+        margin: auto;
+        opacity: .9;
+    }
+
+.contact-card[b-cfv9761kuw] {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+    transition: .3s;
+}
+
+    .contact-card:hover[b-cfv9761kuw] {
+        transform: translateY(-5px);
+    }
+
+.contact-icon[b-cfv9761kuw] {
+    font-size: 2rem;
+    color: var(--secondary-yellow);
+    margin-bottom: 1rem;
+}
+
+.contact-form-card[b-cfv9761kuw] {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+}
+
+    .contact-form-card h3[b-cfv9761kuw] {
+        margin-bottom: 1.5rem;
+        color: var(--primary-blue);
+    }
+
+.form-control[b-cfv9761kuw] {
+    border-radius: 12px;
+    padding: .9rem;
+}
+
+.btn-warning[b-cfv9761kuw] {
+    font-weight: 600;
+    border-radius: 50px;
+}
 /* /Components/Pages/Home.razor.rz.scp.css */
 .homepage-hero[b-8ly43kkbhr] {
-    background-color: lightgray;
+    background: linear-gradient( 200deg, var(--primary-red), var(--secondary-red) );
+    ;
     color: white;
     text-align: center;
     padding: 80px 20px;

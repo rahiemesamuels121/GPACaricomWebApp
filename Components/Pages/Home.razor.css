@@ -1,5 +1,6 @@
 ﻿.homepage-hero {
-    background-color: lightgray;
+    background: linear-gradient( 200deg, var(--primary-red), var(--secondary-red) );
+    ;
     color: white;
     text-align: center;
     padding: 80px 20px;
