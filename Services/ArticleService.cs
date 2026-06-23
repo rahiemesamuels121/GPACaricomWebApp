@@ -41,7 +41,6 @@ namespace GPACARICOM.Services.Interfaces
             string query = "SELECT * \r\nFROM articles\r\nORDER BY created_date\r\nLIMIT 3;";
             using var command = new MySqlCommand(query, connection);
             using var reader = await command.ExecuteReaderAsync();
-            var count = 0;
 
             while (await reader.ReadAsync())
             {

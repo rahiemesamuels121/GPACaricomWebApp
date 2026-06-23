@@ -1,48 +1,80 @@
 ﻿@page "/ourprograms"
 @attribute [StreamRendering]
+
 @using GPACARICOM.Models
 @using GPACARICOM.Services.Interfaces
-@inject IProgramService ProgramService;
+
+@inject IProgramService ProgramService
 
 <PageTitle>Our Programs</PageTitle>
 
-<div style="padding-left:200px; padding-right:200px;">
-    <div>
-        <h1>Our Programs</h1>
-    </div>
+<!-- Hero Section -->
+<div class="programs-hero">
+    <h1>Our Programs</h1>
+    <p>
+        Empowering Caribbean youth through education,
+        leadership development, entrepreneurship, and community engagement.
+    </p>
+</div>
 
-    <div class="row" sty>
-@if (isLoadingPrograms)
-        {
-            <div class="center-div">
-                <RadzenProgressBarCircular ShowValue="true" Mode="ProgressBarMode.Indeterminate" Size="ProgressBarCircularSize.Large" AriaLabel="Loading, large">
-                    <Template>Loading</Template>
-                </RadzenProgressBarCircular>
-            </div>
-        }
-        else
-        {
-           
-            @for (int i = 0; i<programlist.Count; i++)
+<div class="container py-5">
+
+    @if (isLoadingPrograms)
+    {
+        <div class="center-div">
+            <RadzenProgressBarCircular ShowValue="true"
+                                       Mode="ProgressBarMode.Indeterminate"
+                                       Size="ProgressBarCircularSize.Large">
+                <Template>Loading Programs...</Template>
+            </RadzenProgressBarCircular>
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+
+            @for (int i = 0; i < programlist.Count; i++)
             {
                 var program = programlist[i];
-                var backgroundColor = cardColors[i % cardColors.Length];
+                var accentColor = cardColors[i % cardColors.Length];
 
-                <div class="col-md-4 mb-3" >
-                    <div class="custom-card" style=" height:400px; overflow:clip 
-                         background:white;
-                         border-top:20px solid @backgroundColor;
-                         border-radius:20px;
-                         height:400px;"">
-                        <img src="images/logomain.png" style="height: 100px ; width : 100px" class="catalog-image" />
-                        <h3>@program.programName</h3>
-                        <p> @program.programDescription</p>
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="program-card">
+
+                        <div class="program-accent"
+                             style="background:@accentColor;">
+                        </div>
+
+                        <div class="program-content">
+
+                            <div class="program-icon">
+                                <img src="/images/logomain.png"
+                                     alt="Program"
+                                     class="program-logo" />
+                            </div>
+
+                            <h3>@program.programName</h3>
+
+                            <p>
+                                @program.programDescription
+                            </p>
+
+                            <button class="btn program-btn"
+                                    style="background:@accentColor;">
+                                Learn More
+                            </button>
+
+                        </div>
+
                     </div>
+
                 </div>
             }
-        }
-       
-    </div>
+
+        </div>
+    }
+
 </div>
 
 @code{
@@ -64,11 +96,5 @@
 
 }
 
-<style>
-    .catalog-image {
-        width: 100%;
-        height: 250px;
-        object-fit: cover;
-    }
-</style>
+
 

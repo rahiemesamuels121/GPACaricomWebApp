@@ -1,24 +1,144 @@
 ﻿@page "/ContactUS"
 @rendermode InteractiveServer
-<h1>Contact Us</h1>
-<div class="custom-card">
-  
-        <h3>
-            Telephone  1 876 481 8916
-        </h3>
- 
-</div>
-<div class="custom-card">
 
-    <a href="https://www.instagram.com/gpa_caribbean/"> <h3>Instagram</h3></a>
+<PageTitle>Contact Us</PageTitle>
 
-</div>
-<div class="custom-card">
-
-    <a href="mailto:gpacaribbean@gmail.com"> <h3>Email us</h3></a>
-
+<div class="contact-hero">
+    <h1>Get In Touch</h1>
+    <p>
+        We'd love to hear from you. Reach out for information about our
+        programs, partnerships, and opportunities.
+    </p>
 </div>
 
-@code {
+<div class="container py-5">
 
-}
+    <div class="row g-4">
+
+        <!-- Contact Information -->
+        <div class="col-lg-4">
+
+            <div class="contact-card">
+                <i class="bi bi-telephone-fill contact-icon"></i>
+                <h4>Call Us</h4>
+                <p>+1 (876) 481-8916</p>
+            </div>
+
+            <div class="contact-card">
+                <i class="bi bi-envelope-fill contact-icon"></i>
+                <h4>Email</h4>
+                <a href="mailto:gpacaribbean@gmail.com">
+                    gpacaribbean@gmail.com
+                </a>
+            </div>
+
+            <div class="contact-card">
+                <i class="bi bi-instagram contact-icon"></i>
+                <h4>Instagram</h4>
+                <a href="https://www.instagram.com/gpa_caribbean/"
+                   target="_blank">
+                    @@gpa_caribbean
+                </a>
+            </div>
+
+        </div>
+
+        <!-- Contact Form -->
+        <div class="col-lg-8">
+
+            <div class="contact-form-card">
+
+                <h3>Send Us a Message</h3>
+
+                <div class="mb-3">
+                    <input class="form-control"
+                           placeholder="Full Name" />
+                </div>
+
+                <div class="mb-3">
+                    <input class="form-control"
+                           placeholder="Email Address" />
+                </div>
+
+                <div class="mb-3">
+                    <input class="form-control"
+                           placeholder="Subject" />
+                </div>
+
+                <div class="mb-3">
+                    <textarea class="form-control"
+                              rows="6"
+                              placeholder="Your Message"></textarea>
+                </div>
+
+                <button class="btn btn-warning px-4">
+                    Send Message
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<style>
+    .contact-hero {
+        background: linear-gradient( 135deg, var(--primary-blue), var(--primary-yellow) );
+        color: white;
+        text-align: center;
+        padding: 120px 20px 80px;
+    }
+
+        .contact-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        .contact-hero p {
+            max-width: 700px;
+            margin: auto;
+            opacity: .9;
+        }
+
+    .contact-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 20px;
+        margin-bottom: 1rem;
+        box-shadow: 0 5px 20px rgba(0,0,0,.08);
+        transition: .3s;
+    }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+
+    .contact-icon {
+        font-size: 2rem;
+        color: var(--secondary-yellow);
+        margin-bottom: 1rem;
+    }
+
+    .contact-form-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: 0 5px 20px rgba(0,0,0,.08);
+    }
+
+        .contact-form-card h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary-blue);
+        }
+
+    .form-control {
+        border-radius: 12px;
+        padding: .9rem;
+    }
+
+    .btn-warning {
+        font-weight: 600;
+        border-radius: 50px;
+    }
+</style>

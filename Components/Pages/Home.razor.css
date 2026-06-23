@@ -1,0 +1,74 @@
+﻿.homepage-hero {
+    background-color: lightgray;
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+    .homepage-hero h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        max-width: 900px;
+        margin: auto;
+    }
+
+    .homepage-hero p {
+        max-width: 700px;
+        margin: 1rem auto;
+        font-size: 1.1rem;
+    }
+
+.hero-buttons {
+    margin-top: 2rem;
+}
+
+.section-spacing {
+    padding: 5rem 0;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+    .section-header h2 {
+        color: var(--primary-blue);
+        font-weight: 700;
+    }
+
+.news-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 100%;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+    transition: .3s;
+}
+
+    .news-card:hover {
+        transform: translateY(-5px);
+    }
+
+.news-accent {
+    height: 8px;
+}
+
+.testimonial-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+}
+
+.cta-section {
+    text-align: center;
+    padding: 100px 20px;
+    background: var(--primary-blue);
+    color: white;
+}
+
+    .cta-section h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+    }

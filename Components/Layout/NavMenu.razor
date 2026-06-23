@@ -1,106 +1,110 @@
-﻿<nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm"
-     style="background-color:var(--primary-blue); transition: background 0.5s ease;">
+﻿<nav class="navbar navbar-expand-lg navbar-dark custom-navbar fixed-top">
 
-    <div class="container-fluid">
+    <div class="container">
 
-        <!-- Left Spacer -->
-        <div class="flex-grow-1"></div>
+        <!-- Logo -->
+        <a class="navbar-brand d-flex align-items-center" href="/">
 
-        <!-- Center Content -->
-        <div class="d-flex align-items-center justify-content-center">
+            <img src="/images/logomain.png"
+                 alt="GPA Caribbean"
+                 class="navbar-logo" />
 
-            <a class="navbar-brand mx-4 mb-0" href="">
-                <img src="/images/logomain.png"
-                     alt="Logo"
-                     style="height:70px;" />
-            </a>
+            <div class="ms-3">
+                <div class="brand-title">
+                    GPA Caribbean
+                </div>
 
-            <button class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                <div class="brand-subtitle">
+                    Youth • Leadership • Opportunity
+                </div>
+            </div>
 
-            <div class="collapse navbar-collapse"
-                 id="navbarNav">
+        </a>
 
-                <ul class="navbar-nav gap-4 align-items-center">
+        <!-- Mobile Toggle -->
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNav">
 
-                    <li class="nav-item">
-                        <NavLink class="nav-link nav-icon-link text-white"
-                                 href=""
-                                 Match="NavLinkMatch.All">
-                            <RadzenStack style="align-content:center">
+            <span class="navbar-toggler-icon"></span>
 
-                            <i class="bi bi-house-door-fill nav-icon text-white"></i>
-                            <span>Home</span>
-                            </RadzenStack>
-                        </NavLink>
-                    </li>
+        </button>
 
-                    <li class="nav-item center-div">
-                        <NavLink class="nav-link nav-icon-link text-white"
-                                 href="whoweare">
-                                <RadzenStack style="align-content:center">
-                            <i class="bi bi-people-fill nav-icon"></i>
-                            <span>Who We Are</span>
+        <!-- Navigation -->
+        <div class="collapse navbar-collapse"
+             id="mainNav">
 
-                                </RadzenStack>
-                        </NavLink>
-                    </li>
+            <ul class="navbar-nav mx-auto">
 
-                    <li class="nav-item">
-                        <NavLink class="nav-link nav-icon-link text-white"
-                                 href="ourprograms">
-                                  <RadzenStack style="align-content:center">
+                <li class="nav-item">
+                    <NavLink class="nav-link"
+                             href=""
+                             Match="NavLinkMatch.All">
 
-                            <i class="bi bi-list-task nav-icon text-white"></i>
-                            <span>Our Programmes</span>
-                                  </RadzenStack>
-                        </NavLink>
-                    </li>
+                        <i class="bi bi-house-door-fill"></i>
+                        Home
 
-                    <li class="nav-item">
-                     
+                    </NavLink>
+                </li>
 
-                        <NavLink class="nav-link nav-icon-link text-white"
-                                 href="youthinbusiness">
-                                    <RadzenStack style="align-content:center">
+                <li class="nav-item">
+                    <NavLink class="nav-link"
+                             href="whoweare">
 
-                            <i class="bi bi-briefcase-fill nav-icon text-white"></i>
-                            <span>Youth in Business</span>
-                                    </RadzenStack>
-                        </NavLink>
-                     
-                    </li>
+                        <i class="bi bi-people-fill"></i>
+                        Who We Are
 
-                    <li class="nav-item">
-                     ">
+                    </NavLink>
+                </li>
 
-                        <NavLink class="nav-link nav-icon-link text-white"
-                                 href="ContactUs">
-                                    <RadzenStack style="align-content:center">
+                <li class="nav-item">
+                    <NavLink class="nav-link"
+                             href="ourprograms">
 
-                            <i class="bi bi-envelope-fill nav-icon text-white"></i>
-                            <span>Contact Us</span>
-                                    </RadzenStack>
-                        </NavLink>
-                     
-                    </li>
+                        <i class="bi bi-mortarboard-fill"></i>
+                        Programs
 
-                </ul>
+                    </NavLink>
+                </li>
+
+                <li class="nav-item">
+                    <NavLink class="nav-link"
+                             href="youthinbusiness">
+
+                        <i class="bi bi-briefcase-fill"></i>
+                        Youth in Business
+
+                    </NavLink>
+                </li>
+
+                <li class="nav-item">
+                    <NavLink class="nav-link"
+                             href="contactus">
+
+                        <i class="bi bi-envelope-fill"></i>
+                        Contact
+
+                    </NavLink>
+                </li>
+
+            </ul>
+
+            <div class="d-flex">
+
+                <a href="/ourprograms"
+                   class="btn btn-outline-light me-2">
+                    Join a Program
+                </a>
+
+                <a href="/login"
+                   class="btn login-btn">
+                    Log In
+                </a>
 
             </div>
 
-        </div>
 
-        <!-- Login Button -->
-        <div class="flex-grow-1 d-flex justify-content-end pe-4">
-            <a href="/login"
-               class="btn btn-warning fw-bold px-4 py-2 rounded-pill">
-                Log In
-            </a>
         </div>
 
     </div>

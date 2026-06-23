@@ -39,24 +39,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Mac/Home/Documents/dev/Components/Pages/Home.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Mac/Home/Documents/dev/Components/Pages/LoginScreen.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xMb2dpblNjcmVlbi5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Mac/Home/Documents/dev/Components/Pages/NotFound.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xOb3RGb3VuZC5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Mac/Home/Documents/dev/Components/Pages/ProgramScreen.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9ncmFtU2NyZWVuLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Mac/Home/Documents/dev/Components/Pages/WhoWeAre.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xXaG9XZUFyZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Mac/Home/Documents/dev/Components/Pages/YouthInBusiness.razor]
@@ -82,3 +70,15 @@ build_metadata.AdditionalFiles.CssScope = b-9jp7j3w9be
 [C:/Mac/Home/Documents/dev/Components/Layout/ReconnectModal.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcUmVjb25uZWN0TW9kYWwucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-9n3jbv530q
+
+[C:/Mac/Home/Documents/dev/Components/Pages/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-8ly43kkbhr
+
+[C:/Mac/Home/Documents/dev/Components/Pages/ProgramScreen.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9ncmFtU2NyZWVuLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-f8q90czt1f
+
+[C:/Mac/Home/Documents/dev/Components/Pages/WhoWeAre.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xXaG9XZUFyZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-z7fh4v8k9x
