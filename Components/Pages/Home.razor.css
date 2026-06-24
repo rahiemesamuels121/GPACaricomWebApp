@@ -1,5 +1,5 @@
 ﻿.homepage-hero {
-    background: linear-gradient( 200deg, var(--primary-red), var(--secondary-red) );
+    background: linear-gradient( 200deg,var(--secondary-green), var(--primary-blue), var(--secondary-green) );
     ;
     color: white;
     text-align: center;

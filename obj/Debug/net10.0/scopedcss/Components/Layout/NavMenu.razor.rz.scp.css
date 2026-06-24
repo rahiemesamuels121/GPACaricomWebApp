@@ -13,7 +13,6 @@
     display: none;
 }
 
-}
 
 .custom-navbar[b-9jp7j3w9be] {
     background: var(--primary-blue);
@@ -39,6 +38,7 @@
 }
 
 .navbar-nav[b-9jp7j3w9be] {
+    color: white !important;
     gap: .75rem;
 }
 

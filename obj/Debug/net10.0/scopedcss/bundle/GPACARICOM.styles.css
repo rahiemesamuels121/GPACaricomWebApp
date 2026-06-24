@@ -213,7 +213,6 @@ html[b-b4px5aklg6] {
     display: none;
 }
 
-}
 
 .custom-navbar[b-9jp7j3w9be] {
     background: var(--primary-blue);
@@ -239,6 +238,7 @@ html[b-b4px5aklg6] {
 }
 
 .navbar-nav[b-9jp7j3w9be] {
+    color: white !important;
     gap: .75rem;
 }
 
@@ -516,7 +516,7 @@ html[b-b4px5aklg6] {
 }
 /* /Components/Pages/Home.razor.rz.scp.css */
 .homepage-hero[b-8ly43kkbhr] {
-    background: linear-gradient( 200deg, var(--primary-red), var(--secondary-red) );
+    background: linear-gradient( 200deg,var(--secondary-green), var(--primary-blue), var(--secondary-green) );
     ;
     color: white;
     text-align: center;
