@@ -1,6 +1,6 @@
 /* /Components/Layout/Footer.razor.rz.scp.css */
 .site-footer[b-kew54ys61a] {
-    background: var(--primary-blue);
+    background: gray;
     color: white;
     padding: 4rem 0 1rem;
     margin-top: 5rem;
@@ -66,6 +66,7 @@
     }
 
     .footer-contact i[b-kew54ys61a] {
+        color: var(--primary-blue);
         display: block;
         margin-bottom: .5rem;
     }
@@ -78,7 +79,7 @@
 }
 
 main[b-b4px5aklg6] {
-    padding-top:200px;
+    padding-top:100px;
 }
 
 .sidebar[b-b4px5aklg6] {
@@ -516,8 +517,7 @@ html[b-b4px5aklg6] {
 }
 /* /Components/Pages/Home.razor.rz.scp.css */
 .homepage-hero[b-8ly43kkbhr] {
-    background: linear-gradient( 200deg,var(--secondary-green), var(--primary-blue), var(--secondary-green) );
-    ;
+    background: linear-gradient( 200deg,var(--secondary-blue), var(--secondary-blue), var(--secondary-blue) );
     color: white;
     text-align: center;
     padding: 80px 20px;
@@ -590,9 +590,79 @@ html[b-b4px5aklg6] {
         font-size: 2.5rem;
         font-weight: 700;
     }
+/* /Components/Pages/LoginScreen.razor.rz.scp.css */
+.login-container[b-7gorfqn6y2] {
+    min-height: 100vh;
+    background-image: url('/images/login-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.login-overlay[b-7gorfqn6y2] {
+    min-height: 100vh;
+    background: rgba(10,37,64,.65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.login-card[b-7gorfqn6y2] {
+    width: 100%;
+    max-width: 450px;
+    background: white;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 24px;
+    padding: 40px;
+    color: white;
+    box-shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+
+.login-logo[b-7gorfqn6y2] {
+    height: 80px;
+    margin-bottom: 15px;
+}
+
+.login-card h2[b-7gorfqn6y2] {
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: var(--primary-blue);
+}
+
+.login-card p[b-7gorfqn6y2] {
+    color: var(--secondary-blue);
+}
+
+.login-card label[b-7gorfqn6y2] {
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.login-card .form-control[b-7gorfqn6y2] {
+    border-radius: 12px;
+    padding: 12px;
+    border: none;
+}
+
+.login-btn[b-7gorfqn6y2] {
+    background: linear-gradient( 135deg, #0066CC, #00A6A6 );
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+    .login-btn:hover[b-7gorfqn6y2] {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0,166,166,.4);
+    }
 /* /Components/Pages/ProgramScreen.razor.rz.scp.css */
 .programs-hero[b-f8q90czt1f] {
-    background: linear-gradient( 135deg, var(--primary-blue), #1d3e8a );
+    background: linear-gradient( 135deg, var(--primary-red),white);
     color: white;
     text-align: center;
     padding: 120px 20px 80px;
@@ -669,7 +739,7 @@ html[b-b4px5aklg6] {
     }
 /* /Components/Pages/WhoWeAre.razor.rz.scp.css */
 .about-hero[b-z7fh4v8k9x] {
-    background: linear-gradient( 135deg, var(--primary-blue), #1c3d88 );
+    background: linear-gradient( 135deg, var(--primary-yellow), var(--secondary-blue) );
     color: white;
     text-align: center;
     padding: 120px 20px 80px;

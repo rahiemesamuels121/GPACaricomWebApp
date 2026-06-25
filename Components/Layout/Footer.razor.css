@@ -1,5 +1,5 @@
 ﻿.site-footer {
-    background: var(--primary-blue);
+    background: gray;
     color: white;
     padding: 4rem 0 1rem;
     margin-top: 5rem;
@@ -65,6 +65,7 @@
     }
 
     .footer-contact i {
+        color: var(--primary-blue);
         display: block;
         margin-bottom: .5rem;
     }

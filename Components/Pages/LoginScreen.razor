@@ -1,35 +1,58 @@
-﻿@page "/Login"
-<RadzenCard class="rz-my-12 rz-mx-auto rz-p-4 rz-p-md-12" style="max-width: 600px;">
-    <RadzenTemplateForm Data=@("LoginWithDefaultValues")>
-        <RadzenLogin AllowRegister="true" AllowResetPassword="true" Username=@userName Password=@password
-                    AllowRememberMe="true" RememberMe="@rememberMe"
-                    Login=@(args => OnLogin(args, "Login with default values"))
-                    ResetPassword=@(args => OnResetPassword(args, "Login with default values"))
-                    Register=@(args => OnRegister("Login with default values")) />
-    </RadzenTemplateForm>
-</RadzenCard>
+﻿@using GPACARICOM.Components.Layout
+@page "/login"
+@layout LogInLayout
 
+<div class="login-container">
+    <div class="login-overlay">
+
+        <div class="login-card">
+
+            <div class="text-center mb-4">
+                <img src="images/logomain.png"
+                     alt="Logo"
+                     class="login-logo" />
+
+                <h2>Welcome Back</h2>
+                <p>Sign in to continue</p>
+            </div>
+
+            <EditForm Model="@loginModel" OnValidSubmit="Login">
+                <DataAnnotationsValidator />
+
+                <div class="mb-3">
+                    <label>Email</label>
+                    <InputText class="form-control"
+                               @bind-Value="loginModel.Email" />
+                </div>
+
+                <div class="mb-3">
+                    <label>Password</label>
+                    <InputText type="password"
+                               class="form-control"
+                               @bind-Value="loginModel.Password" />
+                </div>
+
+                <button class="btn login-btn w-100">
+                    Sign In
+                </button>
+            </EditForm>
+
+        </div>
+
+    </div>
+</div>
 
 @code {
-    string userName = "admin";
-    string password = "admin";
-    bool rememberMe = true;
+    private LoginModel loginModel = new();
 
-    
-
-    void OnLogin(LoginArgs args, string name)
+    private async Task Login()
     {
-       
+        // Login Logic Here
     }
 
-    void OnRegister(string name)
+    public class LoginModel
     {
-        
-    }
-
-    void OnResetPassword(string value, string name)
-    {
-       
+        public string Email { get; set; } = "";
+        public string Password { get; set; } = "";
     }
 }
-

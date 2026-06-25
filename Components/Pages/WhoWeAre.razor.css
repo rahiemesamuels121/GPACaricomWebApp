@@ -1,5 +1,5 @@
 ﻿.about-hero {
-    background: linear-gradient( 135deg, var(--primary-blue), #1c3d88 );
+    background: linear-gradient( 135deg, var(--primary-yellow), var(--secondary-blue) );
     color: white;
     text-align: center;
     padding: 120px 20px 80px;
