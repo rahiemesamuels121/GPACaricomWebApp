@@ -1,10 +1,10 @@
 ﻿@page "/ourprograms"
 @attribute [StreamRendering]
-
 @using GPACARICOM.Models
 @using GPACARICOM.Services.Interfaces
-
+@using Microsoft.AspNetCore.Authorization
 @inject IProgramService ProgramService
+@attribute [Authorize]
 
 <PageTitle>Our Programs</PageTitle>
 

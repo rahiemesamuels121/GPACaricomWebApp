@@ -38,7 +38,7 @@ namespace GPACARICOM.Services.Interfaces
 
             var connection =  _dbconn.GetConnection();
             await connection.OpenAsync();
-            string query = "SELECT * \r\nFROM articles\r\nORDER BY created_date\r\nLIMIT 3;";
+            string query = "SELECT * \r\nFROM articles\r\nORDER BY created_date desc\r\nLIMIT 3;";
             using var command = new MySqlCommand(query, connection);
             using var reader = await command.ExecuteReaderAsync();
 

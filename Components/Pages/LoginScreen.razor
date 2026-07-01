@@ -1,6 +1,9 @@
 ﻿@using GPACARICOM.Components.Layout
+@using GPACARICOM.Models
+@using GPACARICOM.Services.Interfaces
 @page "/login"
 @layout LogInLayout
+@inject IAuthService Authservice;
 
 <div class="login-container">
     <div class="login-overlay">
@@ -16,20 +19,20 @@
                 <p>Sign in to continue</p>
             </div>
 
-            <EditForm Model="@loginModel" OnValidSubmit="Login">
+            <EditForm Model="@loginRequest" OnValidSubmit="Login" FormName="LoginForm">
                 <DataAnnotationsValidator />
 
                 <div class="mb-3">
                     <label>Email</label>
                     <InputText class="form-control"
-                               @bind-Value="loginModel.Email" />
+                               @bind-Value="loginRequest.Username" />
                 </div>
 
                 <div class="mb-3">
                     <label>Password</label>
                     <InputText type="password"
                                class="form-control"
-                               @bind-Value="loginModel.Password" />
+                               @bind-Value="loginRequest.Password" />
                 </div>
 
                 <button class="btn login-btn w-100">
@@ -43,16 +46,14 @@
 </div>
 
 @code {
-    private LoginModel loginModel = new();
+    private UserLoginRequest loginRequest = new();
 
     private async Task Login()
     {
-        // Login Logic Here
+        await Authservice.Login(
+            loginRequest
+        );
     }
 
-    public class LoginModel
-    {
-        public string Email { get; set; } = "";
-        public string Password { get; set; } = "";
-    }
+   
 }
