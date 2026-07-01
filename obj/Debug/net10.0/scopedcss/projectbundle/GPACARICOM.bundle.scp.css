@@ -1,6 +1,6 @@
 /* /Components/Layout/Footer.razor.rz.scp.css */
 .site-footer[b-kew54ys61a] {
-    background: gray;
+    background-image: linear-gradient( 135deg, white, gray );
     color: white;
     padding: 4rem 0 1rem;
     margin-top: 5rem;
@@ -40,6 +40,7 @@
 
 .footer-contact p[b-kew54ys61a] {
     margin-bottom: 1rem;
+    color
 }
 
 .footer-contact i[b-kew54ys61a] {
@@ -79,7 +80,7 @@
 }
 
 main[b-b4px5aklg6] {
-    padding-top:100px;
+    padding-top:50px;
 }
 
 .sidebar[b-b4px5aklg6] {
@@ -216,7 +217,7 @@ html[b-b4px5aklg6] {
 
 
 .custom-navbar[b-9jp7j3w9be] {
-    background: var(--primary-blue);
+    background: linear-gradient( 135deg, white, var(--primary-blue) );
     padding: 0.75rem 0;
     box-shadow: 0 4px 20px rgba(0,0,0,.12);
 }
