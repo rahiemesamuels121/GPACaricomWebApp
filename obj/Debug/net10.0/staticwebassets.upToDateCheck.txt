@@ -2,8 +2,6 @@ wwwroot\app.css
 wwwroot\favicon.png
 wwwroot\images\bg.png
 wwwroot\images\login-bg.JPG
-wwwroot\images\logomain.png
-wwwroot\images\principal_officer.png
 wwwroot\js\carousel-init.js
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
@@ -50,6 +48,8 @@ wwwroot\lib\bootstrap\dist\js\bootstrap.js
 wwwroot\lib\bootstrap\dist\js\bootstrap.js.map
 wwwroot\lib\bootstrap\dist\js\bootstrap.min.js
 wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
+wwwroot\images\principal_officer.png
+wwwroot\images\logomain.png
 Components\Layout\ReconnectModal.razor.js
 C:\Users\rahie\.nuget\packages\microsoft.aspnetcore.app.internal.assets\10.0.9\build\..\_framework\blazor.web.js
 C:\Users\rahie\.nuget\packages\microsoft.aspnetcore.app.internal.assets\10.0.9\build\..\_framework\blazor.server.js
