@@ -1,38 +1,33 @@
 [
   {
-    "ContainingType": "GPACARICOM.Controllers.ArticleController",
-    "Method": "GetArticles",
-    "RelativePath": "api/Article",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.List\u00601[[GPACARICOM.Models.Article, GPACARICOM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "GPACARICOM.Controllers.AuthController",
+    "ContainingType": "GPACARICOM.Controllers.AccountController",
     "Method": "Login",
-    "RelativePath": "api/Auth/login",
+    "RelativePath": "account/login",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "GPACARICOM.Models.UserLoginRequest",
-        "IsRequired": true
+        "Name": "Username",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Password",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GPACARICOM.Controllers.AccountController",
+    "Method": "Logout",
+    "RelativePath": "account/logout",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   }
 ]

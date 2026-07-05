@@ -1,0 +1,35 @@
+﻿using GPACARICOM.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
+
+
+namespace GPACARICOM.Services.API
+{
+    public class AuthApiService
+    {
+        private readonly ApiClient _apiClient;
+
+        public AuthApiService(ApiClient apiClient)
+        {
+            _apiClient = apiClient;
+
+        }
+
+        public async Task<UserLoginResponse?> Login(UserLoginRequest user)
+        {
+            var response = await _apiClient.PostAsync("Auth/login",user);
+            ApiResponse<UserLoginResponse> apiRespones = await response.Content.ReadFromJsonAsync<ApiResponse<UserLoginResponse>>() ?? new  ApiResponse<UserLoginResponse>();
+
+            if (!apiRespones.success)
+            {
+                return null;
+            }
+           
+            return apiRespones.data;
+                
+        }
+
+
+    }
+}

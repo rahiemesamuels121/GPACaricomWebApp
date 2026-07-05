@@ -1,0 +1,38 @@
+﻿.program-description {
+    font-size: 1.08rem;
+    line-height: 1.9;
+    color: #555;
+    text-align: justify;
+}
+
+.contact-form-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 35px rgba(0,0,0,.08);
+}
+
+    .contact-form-card h3 {
+        font-weight: 700;
+        color: #222;
+    }
+
+.badge {
+    font-size: .95rem;
+    border-radius: 30px;
+    padding: .75rem 1.2rem;
+}
+
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+.btn-warning {
+    background: var(--primary-green);
+    border-color: white;
+    color: white;
+    font-weight: 700;
+    border-radius: 50px;
+    padding: .75rem 1.75rem;
+    transition: .3s;
+}

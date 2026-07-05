@@ -2,10 +2,11 @@
 @rendermode InteractiveServer
 @using GPACARICOM.Models
 @using GPACARICOM.Components
-@using GPACARICOM.Services.Interfaces
+@using GPACARICOM.Services.API
 @inject NavigationManager NavigationManager
-@inject IArticleService ArticleService;
-@inject ItestimonialService TestimonialService;
+
+@inject ArticleApiService articleapiservice;
+@inject TestimonialApiService testimonialApiService;
 
 
 <PageTitle>Home</PageTitle>
@@ -179,13 +180,13 @@
     {
         try
         {
-            var articlesTask = ArticleService.GetArticlesAsync();
-            var testimonialsTask = TestimonialService.GetTestimonialsAsync();
+            var articlesTask = articleapiservice.GetAllArticles();
+            var testimonialsTask = testimonialApiService.GetAllTestimonials();
 
-            await Task.WhenAll(articlesTask, testimonialsTask);
-
-            articleList = articlesTask.Result;
-            testimonialList = testimonialsTask.Result;
+            await Task.WhenAll(articlesTask,testimonialsTask);
+            
+            articleList = articlesTask.Result.data!;
+           testimonialList = testimonialsTask.Result.data!;
         }
         catch (Exception ex)
         {

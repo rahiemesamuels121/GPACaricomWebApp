@@ -31,7 +31,7 @@
 
 .contact-icon {
     font-size: 2rem;
-    color: var(--secondary-yellow);
+    color: var(--secondary-blue);
     margin-bottom: 1rem;
 }
 
@@ -55,4 +55,7 @@
 .btn-warning {
     font-weight: 600;
     border-radius: 50px;
+    background-color: var(--secondary-blue);
+    color: white;
+    border-color: white;
 }

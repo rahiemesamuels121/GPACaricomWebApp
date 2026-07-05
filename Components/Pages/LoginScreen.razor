@@ -1,9 +1,17 @@
-﻿@using GPACARICOM.Components.Layout
+﻿@using System.Security.Claims
+@using GPACARICOM.Components.Layout
 @using GPACARICOM.Models
-@using GPACARICOM.Services.Interfaces
+@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Authentication.Cookies
+@* @inject AuthApiService authApiService; *@
+@inject NavigationManager navigationManager
+@inject NotificationService notificatinservice
+@rendermode InteractiveServer
+
+
+
 @page "/login"
 @layout LogInLayout
-@inject IAuthService Authservice;
 
 <div class="login-container">
     <div class="login-overlay">
@@ -19,7 +27,33 @@
                 <p>Sign in to continue</p>
             </div>
 
-            <EditForm Model="@loginRequest" OnValidSubmit="Login" FormName="LoginForm">
+
+
+            <form method="post" action="/account/login">
+
+    <div class="mb-3">
+        <label>Email</label>
+        <input
+            class="form-control"
+            type="text"
+            name="Username" />
+    </div>
+
+    <div class="mb-3">
+        <label>Password</label>
+        <input
+            class="form-control"
+            type="password"
+            name="Password" />
+    </div>
+
+    <button class="btn login-btn w-100" type="submit">
+        Sign In
+    </button>
+
+</form>
+
+            @* <EditForm Model="@loginRequest" OnValidSubmit="Login" FormName="LoginForm">
                 <DataAnnotationsValidator />
 
                 <div class="mb-3">
@@ -35,10 +69,10 @@
                                @bind-Value="loginRequest.Password" />
                 </div>
 
-                <button class="btn login-btn w-100">
+                <button class="btn login-btn w-100" type="submit">
                     Sign In
                 </button>
-            </EditForm>
+            </EditForm> *@
 
         </div>
 
@@ -48,11 +82,37 @@
 @code {
     private UserLoginRequest loginRequest = new();
 
-    private async Task Login()
-    {
-        await Authservice.Login(
-            loginRequest
-        );
+    // private async Task Login()
+    // {
+
+    //     var response = await apiClient.PostAsync("Auth/login",loginRequest);
+
+    //    PostAsJsonAsync("https:localhost:7269/account/login", loginRequest);
+   
+    //     if (response.IsSuccessStatusCode)
+    //     {
+    //         notificatinservice.Notify(new NotificationMessage
+    //             {
+    //                 Severity = NotificationSeverity.Success,
+    //                 Summary = "Success",
+    //                 Detail = "You have logged in successfully.",
+    //                 Duration = 3000
+    //             });
+    //         navigationManager.NavigateTo("/", forceLoad: true);
+    //     }
+    //     else
+    //     {
+    //         notificatinservice.Notify(new NotificationMessage
+    //         {
+    //             Severity = NotificationSeverity.Error,
+    //             Summary = "Login Failed",
+    //             Detail = "Error",
+    //             Duration = 4000
+    //         });
+    //     }
+    //     }
+
+        
     }
 
    

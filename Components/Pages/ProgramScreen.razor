@@ -1,12 +1,14 @@
 ﻿@page "/ourprograms"
 @attribute [StreamRendering]
 @using GPACARICOM.Models
-@using GPACARICOM.Services.Interfaces
-@using Microsoft.AspNetCore.Authorization
-@inject IProgramService ProgramService
-@attribute [Authorize]
+@using GPACARICOM.Services.API
+@inject ProgramApiService programApiService;
+@inject NavigationManager NavigationManager;
+@rendermode InteractiveServer
+@* @attribute [Authorize] *@
 
 <PageTitle>Our Programs</PageTitle>
+
 
 <!-- Hero Section -->
 <div class="programs-hero">
@@ -22,7 +24,7 @@
     @if (isLoadingPrograms)
     {
         <div class="center-div">
-            <RadzenProgressBarCircular    style="col: var(--primary-blue)"
+            <RadzenProgressBarCircular    style="color: var(--primary-blue)"
                                        Mode="ProgressBarMode.Indeterminate"
                                        Size="ProgressBarCircularSize.Large">
                 <Template>Loading</Template>
@@ -59,9 +61,10 @@
                             <p>
                                 @program.programDescription
                             </p>
-
+                        
                             <button class="btn program-btn"
-                                    style="background:@accentColor;">
+                                    style="background:@accentColor;"
+                                    @onclick="()=>ViewProgram(program.programid)">
                                 Learn More
                             </button>
 
@@ -82,7 +85,7 @@
 {
     "#E8F4FD", // Blue
     "#FFF8E1", // Yellow
-    "#E3FCEF", // Green
+    "#E3FCEF", // Green 
     "#FDEDED", // Red
 };
 
@@ -90,9 +93,16 @@
     private bool isLoadingPrograms = true;
     protected override async Task OnInitializedAsync()
     {
-        programlist = await ProgramService.GetProgramsAsync();
+        var results = await programApiService.GetAllTestimonials();
+        programlist = results.data!;
         isLoadingPrograms = false;
     }
+
+    private void ViewProgram(int programId)
+    {
+        NavigationManager.NavigateTo($"/programdetails/{programId}");
+    }
+
 
 }
 

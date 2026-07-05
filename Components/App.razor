@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using GPACARICOM.Services
+@using Microsoft.AspNetCore.Components.Authorization
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -21,13 +23,13 @@
 </head>
 
 <body>
-    <Routes />
+    <CascadingAuthenticationState>
+
+    <Routes @rendermode="InteractiveServer" />
+
+    </CascadingAuthenticationState>
     <ReconnectModal />
     <script src="@Assets["lib/bootstrap/dist/js/bootstrap.bundle.min.js"]"></script>
-    <script src="@Assets["_framework/blazor.web.js"]"></script>
-    <script src="@Assets["js/carousel-init.js"]"></script>
-    <script src="_content/Radzen.Blazor/Radzen.Blazor.js"></script>
-    <script src="@Assets["_framework/blazor.web.js"]"></script>
     <script src="@Assets["js/carousel-init.js"]"></script>
     <script src="_content/Radzen.Blazor/Radzen.Blazor.js"></script>
 </body>

@@ -12,81 +12,85 @@ build_property.EntryPointFilePath =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = GPACARICOM
 build_property.RootNamespace = GPACARICOM
-build_property.ProjectDir = C:\Users\rahie\source\repos\rahiemesamuels121\GPACaricomWebApp\
+build_property.ProjectDir = C:\Mac\Home\Documents\dev\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 10.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\rahie\source\repos\rahiemesamuels121\GPACaricomWebApp
+build_property.MSBuildProjectDirectory = C:\Mac\Home\Documents\dev
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 10.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/rahie/source/repos/rahiemesamuels121/GPACaricomWebApp/Components/App.razor]
+[C:/Mac/Home/Documents/dev/Components/App.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rahie/source/repos/rahiemesamuels121/GPACaricomWebApp/Components/Carosel.razor]
+[C:/Mac/Home/Documents/dev/Components/Carosel.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDYXJvc2VsLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rahie/source/repos/rahiemesamuels121/GPACaricomWebApp/Components/Layout/LogInLayout.razor]
+[C:/Mac/Home/Documents/dev/Components/Layout/LogInLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTG9nSW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rahie/source/repos/rahiemesamuels121/GPACaricomWebApp/Components/Pages/Error.razor]
+[C:/Mac/Home/Documents/dev/Components/Pages/Error.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rahie/source/repos/rahiemesamuels121/GPACaricomWebApp/Components/Pages/NotFound.razor]
+[C:/Mac/Home/Documents/dev/Components/Pages/NotFound.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xOb3RGb3VuZC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rahie/source/repos/rahiemesamuels121/GPACaricomWebApp/Components/Pages/OurServices.razor]
+[C:/Mac/Home/Documents/dev/Components/Pages/OurServices.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xPdXJTZXJ2aWNlcy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rahie/source/repos/rahiemesamuels121/GPACaricomWebApp/Components/Routes.razor]
+[C:/Mac/Home/Documents/dev/Components/Routes.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xSb3V0ZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rahie/source/repos/rahiemesamuels121/GPACaricomWebApp/Components/_Imports.razor]
+[C:/Mac/Home/Documents/dev/Components/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xfSW1wb3J0cy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/rahie/source/repos/rahiemesamuels121/GPACaricomWebApp/Components/Layout/Footer.razor]
+[C:/Mac/Home/Documents/dev/Components/Layout/Footer.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcRm9vdGVyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-kew54ys61a
 
-[C:/Users/rahie/source/repos/rahiemesamuels121/GPACaricomWebApp/Components/Layout/MainLayout.razor]
+[C:/Mac/Home/Documents/dev/Components/Layout/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbkxheW91dC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-b4px5aklg6
 
-[C:/Users/rahie/source/repos/rahiemesamuels121/GPACaricomWebApp/Components/Layout/NavMenu.razor]
+[C:/Mac/Home/Documents/dev/Components/Layout/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTmF2TWVudS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-9jp7j3w9be
 
-[C:/Users/rahie/source/repos/rahiemesamuels121/GPACaricomWebApp/Components/Layout/ReconnectModal.razor]
+[C:/Mac/Home/Documents/dev/Components/Layout/ReconnectModal.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcUmVjb25uZWN0TW9kYWwucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-9n3jbv530q
 
-[C:/Users/rahie/source/repos/rahiemesamuels121/GPACaricomWebApp/Components/Pages/ContactUs.razor]
+[C:/Mac/Home/Documents/dev/Components/Pages/ContactUs.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250YWN0VXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-cfv9761kuw
 
-[C:/Users/rahie/source/repos/rahiemesamuels121/GPACaricomWebApp/Components/Pages/Home.razor]
+[C:/Mac/Home/Documents/dev/Components/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-8ly43kkbhr
 
-[C:/Users/rahie/source/repos/rahiemesamuels121/GPACaricomWebApp/Components/Pages/LoginScreen.razor]
+[C:/Mac/Home/Documents/dev/Components/Pages/LoginScreen.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xMb2dpblNjcmVlbi5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-7gorfqn6y2
 
-[C:/Users/rahie/source/repos/rahiemesamuels121/GPACaricomWebApp/Components/Pages/ProgramScreen.razor]
+[C:/Mac/Home/Documents/dev/Components/Pages/ProgramDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9ncmFtRGV0YWlscy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-gv0qu3q0yo
+
+[C:/Mac/Home/Documents/dev/Components/Pages/ProgramScreen.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9ncmFtU2NyZWVuLnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-f8q90czt1f
 
-[C:/Users/rahie/source/repos/rahiemesamuels121/GPACaricomWebApp/Components/Pages/WhoWeAre.razor]
+[C:/Mac/Home/Documents/dev/Components/Pages/WhoWeAre.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xXaG9XZUFyZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-z7fh4v8k9x

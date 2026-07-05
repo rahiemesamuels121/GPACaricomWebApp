@@ -1,5 +1,5 @@
 ﻿.site-footer {
-    background-image: linear-gradient( 135deg, white, gray );
+    background-image: linear-gradient( 135deg, white, aliceblue );
     color: white;
     padding: 4rem 0 1rem;
     margin-top: 5rem;
@@ -14,6 +14,7 @@
 .site-footer h5 {
     font-weight: 700;
     margin-bottom: 1rem;
+    color: var(--primary-blue);
 }
 
 .footer-links {
@@ -23,28 +24,29 @@
 
     .footer-links li {
         margin-bottom: .75rem;
+        color: var(--primary-blue);
     }
 
     .footer-links a,
     .footer-contact a {
-        color: rgba(255,255,255,.85);
+        color: var(--primary-blue);
         text-decoration: none;
         transition: .3s;
     }
 
         .footer-links a:hover,
         .footer-contact a:hover {
-            color: var(--secondary-yellow);
+            color: var(--secondary-blue);
         }
 
 .footer-contact p {
     margin-bottom: 1rem;
-    color
+    color: var(--primary-blue);
 }
 
 .footer-contact i {
     margin-right: .75rem;
-    color: var(--secondary-yellow);
+    color: var(--primary-blue);
 }
 
 .footer-divider {
@@ -64,6 +66,9 @@
     .site-footer {
         text-align: center;
     }
+        .site-footer p {
+            color: var(--secondary-blue);
+        }
 
     .footer-contact i {
         color: var(--primary-blue);
