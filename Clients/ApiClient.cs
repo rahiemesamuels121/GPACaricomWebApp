@@ -39,4 +39,11 @@ public class ApiClient
         await AddToken();
         return await _httpClient.PostAsJsonAsync(url, model);
     }
+
+    public async Task<bool> IsAuthenticatedAsync()
+    {
+        var response = await _httpClient.GetAsync("account/check");
+
+        return response.IsSuccessStatusCode;
+    }
 }

@@ -1,6 +1,6 @@
 ﻿.homepage-hero {
-    background: linear-gradient( 200deg,var(--secondary-blue), var(--secondary-blue), var(--secondary-blue) );
-    color: white;
+    background-color: var(--primary-blue);
+    color: var(--secondary-blue);
     text-align: center;
     padding: 80px 20px;
 }

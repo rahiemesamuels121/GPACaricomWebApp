@@ -1,4 +1,8 @@
-﻿<nav class="navbar navbar-expand-lg navbar-dark custom-navbar ">
+﻿@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<nav class="navbar navbar-expand-lg  custom-navbar ">
 
     <div class="container">
 
@@ -40,6 +44,7 @@
                 <li class="nav-item">
                     <NavLink class="nav-link"
                              href=""
+                             style="text-size-a:2rem;"
                              Match="NavLinkMatch.All">
 
                         <i class="bi bi-house-door-fill"></i>
@@ -96,11 +101,21 @@
                    class="btn btn-outline-light me-2">
                     Join a Program
                 </a>
-
+                
+                @if (isLoggedin)
+                {
+                    <RadzenGravatar Email="info@radzen.com" />
+                    <p>@userid
+                    </p>
+                }
+                else
+                {
+                    
                 <a href="/login"
                    class="btn login-btn">
                     Log In
                 </a>
+                }
 
             </div>
 
@@ -110,3 +125,67 @@
     </div>
 
 </nav>
+<style>
+    .custom-navbar .nav-link {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: .75rem 1.4rem;
+        border-radius: 999px;
+        color: var(--secondary-blue);
+        text-decoration: none;
+        transition: color .35s ease, background-color .35s ease, transform .35s ease, box-shadow .35s ease;
+    }
+
+        .custom-navbar .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -4px;
+            width: 0;
+            height: 3px;
+            background: var(--primary-yellow);
+            border-radius: 999px;
+            transform: translateX(-50%);
+            transition: width .35s ease;
+        }
+
+        .custom-navbar .nav-link:hover::after {
+            width: 70%;
+        }
+
+        .custom-navbar .nav-link.active::after {
+            width: 90%;
+        }
+
+        .custom-navbar .nav-link.active {
+            color: var(--secondary-blue);
+            font-weight: 700;
+            transform: translateY(-2px);
+        }
+</style>
+@code{
+
+    bool isLoggedin;
+    string userid;
+    protected override async Task OnInitializedAsync()
+    {
+        await checkLoginStatus();
+    }
+    public async Task checkLoginStatus(){
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        if (user.Identity?.IsAuthenticated ?? false == true)
+        {
+            isLoggedin = true;
+            userid = user.FindFirst(ClaimTypes.Name)?.Value??"BOM";
+        }
+        else
+        {
+            isLoggedin = false;
+
+        }
+    }
+
+}

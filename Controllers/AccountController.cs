@@ -2,6 +2,7 @@
 using GPACARICOM.Services.API;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -31,7 +32,7 @@ public class AccountController : Controller
             new Claim(ClaimTypes.NameIdentifier, result.UserId.ToString()),
             new Claim(ClaimTypes.Name, $"{result.FirstName} {result.LastName}"),
             new Claim(ClaimTypes.Role, "2"),
-           // new Claim("access_token", result.jwt)
+           
 
         };
 
@@ -44,7 +45,7 @@ public class AccountController : Controller
         var authProperties = new AuthenticationProperties()
         {
             IsPersistent = true,
-            ExpiresUtc = DateTimeOffset.UtcNow.AddHours(12)
+            ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(15)
         };
 
         authProperties.StoreTokens(new[]
@@ -69,4 +70,12 @@ public class AccountController : Controller
             CookieAuthenticationDefaults.AuthenticationScheme);
         return Ok();
     }
+
+    [Authorize]
+    [HttpGet("check")]
+    public IActionResult Check()
+    {
+        return Ok();
+    }
+
 }

@@ -695,6 +695,7 @@ C:\Users\rahie\source\repos\rahiemesamuels121\GPACaricomWebApp\obj\Debug\net10.0
 C:\Users\rahie\source\repos\rahiemesamuels121\GPACaricomWebApp\obj\Debug\net10.0\compressed\mofdwdf3u9-{0}-sjxu82io7d-sjxu82io7d.gz
 C:\Users\rahie\source\repos\rahiemesamuels121\GPACaricomWebApp\obj\Debug\net10.0\compressed\3f5mrt8af5-{0}-sjxu82io7d-sjxu82io7d.gz
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\scopedcss\Components\Pages\ProgramDetails.razor.rz.scp.css
-C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\0kflhpufn0-{0}-qcif9cfort-qcif9cfort.gz
-C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\mofdwdf3u9-{0}-mgnwoy09jw-mgnwoy09jw.gz
-C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\3f5mrt8af5-{0}-mgnwoy09jw-mgnwoy09jw.gz
+C:\Mac\Home\Documents\dev\obj\Debug\net10.0\scopedcss\Components\Pages\ProgramRegistration.razor.rz.scp.css
+C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\0kflhpufn0-{0}-zxaf3xugol-zxaf3xugol.gz
+C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\mofdwdf3u9-{0}-shgavissig-shgavissig.gz
+C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\3f5mrt8af5-{0}-shgavissig-shgavissig.gz

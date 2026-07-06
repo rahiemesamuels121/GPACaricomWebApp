@@ -1,6 +1,16 @@
 [
   {
     "ContainingType": "GPACARICOM.Controllers.AccountController",
+    "Method": "Check",
+    "RelativePath": "account/check",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GPACARICOM.Controllers.AccountController",
     "Method": "Login",
     "RelativePath": "account/login",
     "HttpMethod": "POST",

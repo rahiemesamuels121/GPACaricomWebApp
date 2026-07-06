@@ -14,7 +14,7 @@
 .site-footer h5 {
     font-weight: 700;
     margin-bottom: 1rem;
-    color: var(--primary-blue);
+    color: var(--secondary-blue);
 }
 
 .footer-links {
@@ -24,29 +24,29 @@
 
     .footer-links li {
         margin-bottom: .75rem;
-        color: var(--primary-blue);
+        color: var(--secondary-blue);
     }
 
     .footer-links a,
     .footer-contact a {
-        color: var(--primary-blue);
+        color: var(--secondary-blue);
         text-decoration: none;
         transition: .3s;
     }
 
         .footer-links a:hover,
         .footer-contact a:hover {
-            color: var(--secondary-blue);
+            color: var(--primary-blue);
         }
 
 .footer-contact p {
     margin-bottom: 1rem;
-    color: var(--primary-blue);
+    color: var(--secondary-blue);
 }
 
 .footer-contact i {
     margin-right: .75rem;
-    color: var(--primary-blue);
+    color: var(--secondary-blue);
 }
 
 .footer-divider {

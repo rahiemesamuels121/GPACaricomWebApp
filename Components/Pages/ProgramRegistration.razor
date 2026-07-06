@@ -1,0 +1,126 @@
+﻿@page "/programregistration"
+@rendermode InteractiveServer
+
+<PageTitle>Program Registration</PageTitle>
+
+<div class="registration-hero">
+
+    <div class="container">
+
+        <div class="row align-items-center g-5">
+
+            <div class="col-lg-6">
+
+                <span class="hero-badge">
+                    TRAINING REGISTRATION
+                </span>
+
+                <h1>
+                    Register for the
+                    <span>Drone Awareness & Basic Operation</span>
+                    Training Program
+                </h1>
+
+                <p>
+                    Complete the registration form below to reserve your
+                    place in the upcoming training session. We'll contact
+                    you with confirmation and additional program details.
+                </p>
+
+                <div class="hero-features">
+
+                    <div class="feature-item">
+                        ✔ Beginner Friendly
+                    </div>
+
+                    <div class="feature-item">
+                        ✔ Hands-on Practical Training
+                    </div>
+
+                    <div class="feature-item">
+                        ✔ Certificate of Participation
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-6">
+
+                <div class="registration-card">
+
+                    <h3>Program Registration</h3>
+
+                    <p>
+                        Please complete all required information.
+                    </p>
+
+                    <form method="post" action="/programs/register">
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+                                <label>First Name</label>
+                                <input class="form-control"
+                                       type="text"
+                                       name="FirstName"
+                                       required />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label>Last Name</label>
+                                <input class="form-control"
+                                       type="text"
+                                       name="LastName"
+                                       required />
+                            </div>
+
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Organization</label>
+                            <input class="form-control"
+                                   type="text"
+                                   name="Organization" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Email Address</label>
+                            <input class="form-control"
+                                   type="email"
+                                   name="Email"
+                                   required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Phone Number</label>
+                            <input class="form-control"
+                                   type="tel"
+                                   name="PhoneNumber"
+                                   required />
+                        </div>
+
+                        <div class="mb-4">
+                            <label>Program</label>
+                            <input class="form-control"
+                                   name="ProgramName"
+                                   value="Drone Awareness & Basic Operation"
+                                   readonly />
+                        </div>
+
+                        <button class="btn register-btn w-100"
+                                type="submit">
+                            Register Now
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

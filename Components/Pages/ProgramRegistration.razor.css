@@ -1,0 +1,113 @@
+﻿.registration-hero {
+    padding: 90px 0;
+    background: linear-gradient(135deg,#0B4F8A 0%,#1E7ACB 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+    .registration-hero h1 {
+        color: white;
+        font-size: 3rem;
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 25px;
+    }
+
+        .registration-hero h1 span {
+            color: #FFC107;
+        }
+
+    .registration-hero p {
+        color: rgba(255,255,255,.9);
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+    }
+
+.hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,.15);
+    color: white;
+    padding: 8px 18px;
+    border-radius: 50px;
+    margin-bottom: 25px;
+    font-size: .85rem;
+    letter-spacing: 1px;
+}
+
+.hero-features {
+    margin-top: 40px;
+}
+
+.feature-item {
+    color: white;
+    margin-bottom: 18px;
+    font-size: 1.05rem;
+}
+
+.registration-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 25px 60px rgba(0,0,0,.18);
+}
+
+    .registration-card h3 {
+        font-weight: 700;
+        color: #0B4F8A;
+    }
+
+    .registration-card p {
+        color: #666;
+        margin-bottom: 30px;
+    }
+
+    .registration-card label {
+        font-weight: 600;
+        color: #555;
+        margin-bottom: 6px;
+    }
+
+    .registration-card .form-control {
+        height: 55px;
+        border-radius: 12px;
+        border: 1px solid #ddd;
+        transition: .3s;
+    }
+
+        .registration-card .form-control:focus {
+            border-color: #0B4F8A;
+            box-shadow: 0 0 0 .2rem rgba(11,79,138,.15);
+        }
+
+.register-btn {
+    background: #FFC107;
+    color: #222;
+    border: none;
+    height: 55px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    transition: .3s;
+}
+
+    .register-btn:hover {
+        background: #ffcd38;
+        transform: translateY(-2px);
+    }
+
+@media(max-width:991px) {
+
+    .registration-hero {
+        padding: 70px 0;
+        text-align: center;
+    }
+
+        .registration-hero h1 {
+            font-size: 2.3rem;
+        }
+
+    .registration-card {
+        margin-top: 40px;
+    }
+}

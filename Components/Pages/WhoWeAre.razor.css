@@ -1,9 +1,10 @@
 ﻿.about-hero {
-    background: linear-gradient( 135deg, var(--primary-yellow), var(--secondary-blue) );
-    color: white;
+    background-color: var(--primary-blue);
+    color: var(--secondary-blue);
     text-align: center;
     padding: 120px 20px 80px;
 }
+
 
 .about-logo {
     max-width: 280px;

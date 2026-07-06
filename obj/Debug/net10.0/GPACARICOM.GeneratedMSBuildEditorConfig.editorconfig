@@ -27,6 +27,10 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Mac/Home/Documents/dev/Components/AuthMonitor.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBdXRoTW9uaXRvci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Mac/Home/Documents/dev/Components/Carosel.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDYXJvc2VsLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
@@ -86,6 +90,10 @@ build_metadata.AdditionalFiles.CssScope = b-7gorfqn6y2
 [C:/Mac/Home/Documents/dev/Components/Pages/ProgramDetails.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9ncmFtRGV0YWlscy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-gv0qu3q0yo
+
+[C:/Mac/Home/Documents/dev/Components/Pages/ProgramRegistration.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9ncmFtUmVnaXN0cmF0aW9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-hlqgz1m7fz
 
 [C:/Mac/Home/Documents/dev/Components/Pages/ProgramScreen.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9ncmFtU2NyZWVuLnJhem9y
