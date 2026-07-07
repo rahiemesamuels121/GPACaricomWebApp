@@ -1,5 +1,8 @@
-﻿@page "/programregistration"
+﻿@page "/program-registration"
+
+@using Microsoft.AspNetCore.Authorization
 @rendermode InteractiveServer
+ @attribute [Authorize] 
 
 <PageTitle>Program Registration</PageTitle>
 

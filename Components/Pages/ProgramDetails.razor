@@ -1,4 +1,4 @@
-﻿@page "/programdetails/{ProgramId:int}"
+﻿@page "/program-details/{ProgramId:int}"
 
 @using GPACARICOM.Models
 @using GPACARICOM.Services.API
@@ -104,7 +104,7 @@ else
                     </p>
 
                     <button class="btn-warning" @onclick="CheckLoginStatus">
-                        Apply For this Program
+                        Register For this Program
                     </button>
 
                 </div>
@@ -153,7 +153,7 @@ else
 
         if (user.Identity?.IsAuthenticated == true)
         {
-            navigationManager.NavigateTo("/programregistration");
+            navigationManager.NavigateTo("/program-registration", forceLoad: true);
         }
         else
         {

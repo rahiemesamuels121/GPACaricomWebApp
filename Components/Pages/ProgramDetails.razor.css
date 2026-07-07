@@ -28,7 +28,7 @@
     height: 3rem;
 }
 .btn-warning {
-    background: var(--primary-green);
+    background: var(--primary-blue);
     border-color: white;
     color: white;
     font-weight: 700;

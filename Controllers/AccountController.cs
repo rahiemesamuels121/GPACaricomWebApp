@@ -60,7 +60,7 @@ public class AccountController : Controller
     authProperties);
 
         Console.WriteLine(result.jwt);
-        return Redirect("/");
+        return Redirect("/dashboard");
     }
 
     [HttpPost("logout")]

@@ -1,4 +1,4 @@
-﻿.login-page {
+﻿.signup-page {
     min-height: 100vh;
     display: flex;
     background: #f5f7fb;
@@ -6,7 +6,7 @@
 
 /* LEFT */
 
-.login-left {
+.signup-left {
     flex: 1;
     background: linear-gradient( 135deg, var(--primary-blue), var(--secondary-blue) );
     color: white;
@@ -39,7 +39,7 @@
 
 /* RIGHT */
 
-.login-right {
+.signup-right {
     flex: 1;
     display: flex;
     justify-content: center;
@@ -47,7 +47,7 @@
     padding: 50px;
 }
 
-.login-card {
+.signup-card {
     width: 100%;
     max-width: 470px;
     background: white;
@@ -57,7 +57,7 @@
     animation: fadeUp .6s ease;
 }
 
-    .login-card h2 {
+    .signup-card h2 {
         font-weight: 700;
         margin-bottom: 8px;
     }
@@ -74,7 +74,7 @@
         box-shadow: 0 0 0 .2rem rgba(13,110,253,.15);
     }
 
-.login-btn {
+.signup-btn {
     height: 54px;
     border-radius: 12px;
     background: var(--primary-yellow);
@@ -83,12 +83,12 @@
     transition: .25s;
 }
 
-    .login-btn:hover {
+    .signup-btn:hover {
         transform: translateY(-2px);
         box-shadow: 0 10px 25px rgba(13,110,253,.3);
     }
 
-.login-options {
+.signup-options {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -96,7 +96,7 @@
     margin-top: 12px;
 }
 
-    .login-options a {
+    .signup-options a {
         text-decoration: none;
     }
 
@@ -168,16 +168,16 @@
 
 @media(max-width:992px) {
 
-    .login-page {
+    .signup-page {
         flex-direction: column;
     }
 
-    .login-left {
+    .signup-left {
         padding: 60px 30px;
         text-align: center;
     }
 
-    .login-right {
+    .signup-right {
         padding: 25px;
     }
 

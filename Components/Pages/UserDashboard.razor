@@ -1,0 +1,129 @@
+﻿@page "/dashboard"
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<PageTitle>Dashboard</PageTitle>
+
+<div class="dashboard">
+
+
+    <div class="welcome-card">
+        <div>
+            <h2>Welcome Back, Rahieme 👋</h2>
+            <p>You have <strong>3</strong> upcoming programmes.</p>
+        </div>
+
+        <button class="primary-btn">
+            Browse Programmes
+        </button>
+    </div>
+
+    <div class="dashboard-grid">
+
+        <section class="calendar-card">
+
+            <h3>
+                <i class="bi bi-calendar3"></i>
+                Calendar
+            </h3>
+            <!-- Replace later with a real calendar -->
+            <div class="calendar-placeholder">
+                Calendar Component
+            </div>
+
+        </section>
+
+        <section class="events-card">
+
+            <h3>
+                Upcoming Events
+            </h3>
+
+            <div class="event">
+
+                <div>
+                    <h4>Drone Safety Workshop</h4>
+                    <span>15 July 2026 • 9:00 AM</span>
+                </div>
+
+                <button>
+                    View
+                </button>
+
+            </div>
+
+            <div class="event">
+
+                <div>
+                    <h4>GIS Fundamentals</h4>
+                    <span>22 July 2026 • 10:00 AM</span>
+                </div>
+
+                <button>
+                    View
+                </button>
+
+            </div>
+
+            <div class="event">
+
+                <div>
+                    <h4>Remote Pilot Training</h4>
+                    <span>29 July 2026 • 1:00 PM</span>
+                </div>
+
+                <button>
+                    View
+                </button>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <section class="history-card">
+
+        <h3>
+            Past Events
+        </h3>
+
+        <div class="history-item">
+
+            <div>
+
+                <h4>Drone Mapping Essentials</h4>
+
+                <span>
+                    Completed June 18, 2026
+                </span>
+
+            </div>
+
+            <button>
+                Certificate
+            </button>
+
+        </div>
+
+        <div class="history-item">
+
+            <div>
+
+                <h4>UAV Regulations</h4>
+
+                <span>
+                    Completed May 30, 2026
+                </span>
+
+            </div>
+
+            <button>
+                Certificate
+            </button>
+
+        </div>
+
+    </section>
+
+</div>

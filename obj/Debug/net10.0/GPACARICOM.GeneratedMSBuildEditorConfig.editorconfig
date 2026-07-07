@@ -31,6 +31,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBdXRoTW9uaXRvci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Mac/Home/Documents/dev/Components/Calendar.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDYWxlbmRhci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Mac/Home/Documents/dev/Components/Carosel.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDYXJvc2VsLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
@@ -98,6 +102,14 @@ build_metadata.AdditionalFiles.CssScope = b-hlqgz1m7fz
 [C:/Mac/Home/Documents/dev/Components/Pages/ProgramScreen.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9ncmFtU2NyZWVuLnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-f8q90czt1f
+
+[C:/Mac/Home/Documents/dev/Components/Pages/SignUp.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTaWduVXAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-1vu3ufe3df
+
+[C:/Mac/Home/Documents/dev/Components/Pages/UserDashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2VyRGFzaGJvYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-9pf657u9ce
 
 [C:/Mac/Home/Documents/dev/Components/Pages/WhoWeAre.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xXaG9XZUFyZS5yYXpvcg==

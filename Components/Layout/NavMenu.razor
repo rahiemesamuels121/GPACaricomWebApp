@@ -44,7 +44,6 @@
                 <li class="nav-item">
                     <NavLink class="nav-link"
                              href=""
-                             style="text-size-a:2rem;"
                              Match="NavLinkMatch.All">
 
                         <i class="bi bi-house-door-fill"></i>
@@ -55,7 +54,7 @@
 
                 <li class="nav-item">
                     <NavLink class="nav-link"
-                             href="whoweare">
+                             href="who-we-are">
 
                         <i class="bi bi-people-fill"></i>
                         Who We Are
@@ -65,7 +64,7 @@
 
                 <li class="nav-item">
                     <NavLink class="nav-link"
-                             href="ourprograms">
+                             href="our-programs">
 
                         <i class="bi bi-mortarboard-fill"></i>
                         Programs
@@ -75,7 +74,7 @@
 
                 <li class="nav-item">
                     <NavLink class="nav-link"
-                             href="ourservices">
+                             href="our-services">
 
                         <i class="bi bi-briefcase-fill"></i>
                         Our Services
@@ -85,7 +84,7 @@
 
                 <li class="nav-item">
                     <NavLink class="nav-link"
-                             href="contactus">
+                             href="contact-us">
 
                         <i class="bi bi-envelope-fill"></i>
                         Contact
@@ -97,25 +96,28 @@
 
             <div class="d-flex">
 
-                <a href="/ourprograms"
+                <a href="/our-programs"
                    class="btn btn-outline-light me-2">
                     Join a Program
                 </a>
-                
-                @if (isLoggedin)
-                {
-                    <RadzenGravatar Email="info@radzen.com" />
-                    <p>@userid
-                    </p>
-                }
-                else
-                {
+                <AuthorizeView>
+                    <Authorized>
+                        <a href="/dashboard">
+                    <RadzenGravatar Email="@userid" />
+                            </a>
+                    </Authorized>
+                    <NotAuthorized>
+                        <a href="/login"
+                           class="btn login-btn">
+                            Log In
+                        </a>
+                    </NotAuthorized>
+                   
                     
-                <a href="/login"
-                   class="btn login-btn">
-                    Log In
-                </a>
-                }
+
+                </AuthorizeView>
+
+              
 
             </div>
 
@@ -167,7 +169,6 @@
 </style>
 @code{
 
-    bool isLoggedin;
     string userid;
     protected override async Task OnInitializedAsync()
     {
@@ -178,14 +179,10 @@
         var user = authState.User;
         if (user.Identity?.IsAuthenticated ?? false == true)
         {
-            isLoggedin = true;
+            
             userid = user.FindFirst(ClaimTypes.Name)?.Value??"BOM";
         }
-        else
-        {
-            isLoggedin = false;
-
-        }
+    
     }
 
 }

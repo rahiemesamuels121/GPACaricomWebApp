@@ -1,0 +1,71 @@
+﻿@using System.Globalization
+
+<div class="card calendar-card">
+
+    <div class="card-header">
+        <h3>@CurrentMonth.ToString("MMMM yyyy")</h3>
+    </div>
+
+    <div class="calendar">
+
+        @foreach (var day in DayNames)
+        {
+            <div class="day-name">@day</div>
+        }
+
+        @for (int i = 0; i < Offset; i++)
+        {
+            <div></div>
+        }
+
+        @for (int day = 1; day <= DaysInMonth; day++)
+        {
+            bool hasEvent = EventDays.Contains(day);
+
+            <div class="day @(hasEvent ? "event-day" : "")">
+                @day
+            </div>
+        }
+
+    </div>
+
+</div>
+
+@code {
+
+    [Parameter]
+    public IEnumerable<dynamic>? Events { get; set; }
+
+    DateTime CurrentMonth = DateTime.Today;
+
+    int DaysInMonth =>
+        DateTime.DaysInMonth(CurrentMonth.Year, CurrentMonth.Month);
+
+    int Offset =>
+        (int)new DateTime(CurrentMonth.Year, CurrentMonth.Month, 1).DayOfWeek;
+
+    string[] DayNames =
+        CultureInfo.CurrentCulture.DateTimeFormat.AbbreviatedDayNames;
+
+    HashSet<int> EventDays = new();
+
+    protected override void OnParametersSet()
+    {
+        EventDays.Clear();
+
+        if (Events == null)
+            return;
+
+        foreach (dynamic item in Events)
+        {
+            DateTime date = item.Date;
+
+            if (date.Month == CurrentMonth.Month &&
+                date.Year == CurrentMonth.Year)
+            {
+                EventDays.Add(date.Day);
+            }
+        }
+    }
+
+}
