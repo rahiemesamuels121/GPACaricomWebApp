@@ -41,7 +41,7 @@ builder.Services.AddScoped<ProgramApiService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient<ApiClient>(client =>
 {
-    client.BaseAddress = new Uri("http://192.64.83.112/");
+    client.BaseAddress = new Uri("https://api.ourgpa.com");
 });
 
 

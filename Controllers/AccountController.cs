@@ -1,9 +1,11 @@
 ﻿using GPACARICOM.Models;
 using GPACARICOM.Services.API;
+using GPACARICOMAPI.Models.DTO;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Drawing.Printing;
 using System.Security.Claims;
 
 namespace GPACARICOM.Controllers;
@@ -23,9 +25,11 @@ public class AccountController : Controller
     public async Task<IActionResult> Login([FromForm] UserLoginRequest request)
     {
         var result = await _authApiService.Login(request);
+      
 
         if (result == null || string.IsNullOrWhiteSpace(result.jwt))
-            return Unauthorized();
+
+            return Redirect("/login");
 
         var claims = new List<Claim>
         {
@@ -58,17 +62,42 @@ public class AccountController : Controller
     CookieAuthenticationDefaults.AuthenticationScheme,
     principal,
     authProperties);
-
-        Console.WriteLine(result.jwt);
         return Redirect("/dashboard");
     }
+
+    [HttpPost("register")]
+    public async Task<IActionResult> Register([FromForm] AppUserDTO request) { 
+
+        var userToRegister = new AppUserDTO()
+        {
+            Firstname = request.Firstname,
+            Lastname = request.Lastname,
+            Telephone = request.Telephone,
+            Address = request.Address,
+            Organization = request.Organization,
+            RoleId = request.RoleId,
+            Password = request.Password,
+            Email  = request.Email,
+        };
+
+        var response = await _authApiService.Register(userToRegister);
+        Console.WriteLine(response);
+
+        if (!response)
+        {
+            return BadRequest();
+        }
+        return Redirect("/");
+    }
+
 
     [HttpPost("logout")]
     public async Task<IActionResult> Logout()
     {
         await HttpContext.SignOutAsync(
-            CookieAuthenticationDefaults.AuthenticationScheme);
-        return Ok();
+            CookieAuthenticationDefaults.AuthenticationScheme
+            );
+        return Redirect("/");
     }
 
     [Authorize]

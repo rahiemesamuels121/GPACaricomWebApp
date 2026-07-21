@@ -1,6 +1,8 @@
 ﻿@using System.Security.Claims
 @using Microsoft.AspNetCore.Components.Authorization
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject HttpClient Http
+@inject NavigationManager Navigation
 
 <nav class="navbar navbar-expand-lg  custom-navbar ">
 
@@ -14,9 +16,7 @@
                  class="navbar-logo" />
 
             <div class="ms-3">
-                <div class="brand-title">
-                    GPA Caribbean
-                </div>
+              
 
                 <div class="brand-subtitle">
                     Youth • Leadership • Opportunity
@@ -38,9 +38,7 @@
         <!-- Navigation -->
         <div class="collapse navbar-collapse"
              id="mainNav">
-
             <ul class="navbar-nav mx-auto">
-
                 <li class="nav-item">
                     <NavLink class="nav-link"
                              href=""
@@ -48,30 +46,22 @@
 
                         <i class="bi bi-house-door-fill"></i>
                         Home
-
                     </NavLink>
                 </li>
-
                 <li class="nav-item">
                     <NavLink class="nav-link"
                              href="who-we-are">
-
                         <i class="bi bi-people-fill"></i>
                         Who We Are
-
                     </NavLink>
                 </li>
-
                 <li class="nav-item">
                     <NavLink class="nav-link"
-                             href="our-programs">
-
+                          href="our-programs">
                         <i class="bi bi-mortarboard-fill"></i>
                         Programs
-
                     </NavLink>
                 </li>
-
                 <li class="nav-item">
                     <NavLink class="nav-link"
                              href="our-services">
@@ -81,7 +71,6 @@
 
                     </NavLink>
                 </li>
-
                 <li class="nav-item">
                     <NavLink class="nav-link"
                              href="contact-us">
@@ -91,9 +80,7 @@
 
                     </NavLink>
                 </li>
-
             </ul>
-
             <div class="d-flex">
 
                 <a href="/our-programs"
@@ -102,30 +89,30 @@
                 </a>
                 <AuthorizeView>
                     <Authorized>
-                        <a href="/dashboard">
-                    <RadzenGravatar Email="@userid" />
-                            </a>
+                        <div class="dropdown">
+                            <button class="dropbtn">My Profile</button>
+
+                            <div class="dropdown-content">
+                                <a href="/dashboard">Dashboard</a>
+
+                                <form method="post" action="/account/logout">
+                                    <button type="submit" class="dropdown-link">
+                                        Logout
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
                     </Authorized>
                     <NotAuthorized>
                         <a href="/login"
-                           class="btn login-btn">
+                            class="btn login-btn">
                             Log In
                         </a>
                     </NotAuthorized>
-                   
-                    
-
                 </AuthorizeView>
-
-              
-
             </div>
-
-
         </div>
-
     </div>
-
 </nav>
 <style>
     .custom-navbar .nav-link {
@@ -139,7 +126,6 @@
         text-decoration: none;
         transition: color .35s ease, background-color .35s ease, transform .35s ease, box-shadow .35s ease;
     }
-
         .custom-navbar .nav-link::after {
             content: "";
             position: absolute;
@@ -166,23 +152,38 @@
             font-weight: 700;
             transform: translateY(-2px);
         }
+
 </style>
 @code{
 
-    string userid;
-    protected override async Task OnInitializedAsync()
+    string userId; 
+
+    bool showContextMenu = false;
+
+    void setShowContextMenu()
     {
-        await checkLoginStatus();
-    }
-    public async Task checkLoginStatus(){
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-        if (user.Identity?.IsAuthenticated ?? false == true)
+        if (showContextMenu)
         {
-            
-            userid = user.FindFirst(ClaimTypes.Name)?.Value??"BOM";
+            showContextMenu = false;
         }
-    
+        else
+        {
+            showContextMenu = true;    
+        }
     }
 
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     await checkLoginStatus();
+    // }
+    // public async Task checkLoginStatus(){
+    //     var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+    //     var user = authState.User;
+    //     if (user.Identity?.IsAuthenticated ?? false == true)
+    //     {
+
+    //         userId = user.FindFirst(ClaimTypes.Name)?.Value ?? "No User";
+    //     }
+
+    // }
 }

@@ -496,8 +496,6 @@ C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\73n8yeon2h-{0}-h1s4sie4z3
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\hkvsdadb7q-{0}-4d85u1mtcx-4d85u1mtcx.gz
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\3f6dp0f5hr-{0}-0j3bgjxly4-0j3bgjxly4.gz
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\yn3qbntaig-{0}-abdmv1u4y3-abdmv1u4y3.gz
-C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\rf1d692886-{0}-ne14ti1q68-ne14ti1q68.gz
-C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\63ov3qor6m-{0}-ig5xotzpx5-ig5xotzpx5.gz
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\staticwebassets.build.json
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\staticwebassets.build.json.cache
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\staticwebassets.development.json
@@ -699,5 +697,9 @@ C:\Mac\Home\Documents\dev\obj\Debug\net10.0\scopedcss\Components\Pages\ProgramRe
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\0kflhpufn0-{0}-zxaf3xugol-zxaf3xugol.gz
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\scopedcss\Components\Pages\signUp.razor.rz.scp.css
 C:\Mac\Home\Documents\dev\obj\Debug\net10.0\scopedcss\Components\Pages\UserDashboard.razor.rz.scp.css
-C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\mofdwdf3u9-{0}-jcvkx7zfl0-jcvkx7zfl0.gz
-C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\3f5mrt8af5-{0}-jcvkx7zfl0-jcvkx7zfl0.gz
+C:\Mac\Home\Documents\dev\obj\Debug\net10.0\scopedcss\Components\Certificate.razor.rz.scp.css
+C:\Mac\Home\Documents\dev\obj\Debug\net10.0\scopedcss\Components\Pages\VerifyEmailPending.razor.rz.scp.css
+C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\mofdwdf3u9-{0}-ac62mhrdmg-ac62mhrdmg.gz
+C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\3f5mrt8af5-{0}-ac62mhrdmg-ac62mhrdmg.gz
+C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\rf1d692886-{0}-f7fxoh55ae-f7fxoh55ae.gz
+C:\Mac\Home\Documents\dev\obj\Debug\net10.0\compressed\63ov3qor6m-{0}-68qhiysw0j-68qhiysw0j.gz
