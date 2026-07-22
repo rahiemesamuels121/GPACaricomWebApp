@@ -1,0 +1,80 @@
+﻿@page "/certificate"
+
+<div class="certificate">
+
+    <img src="images/certificate-background.png"
+         class="background" />
+
+    <div class="content">
+
+        <h1>Certificate of Completion</h1>
+
+        <p>This certifies that</p>
+
+        <h2>@Model.UserName</h2>
+
+        <p>has successfully completed</p>
+
+        <h3>@Model.CourseName</h3>
+
+        <p>@Model.CompletionDate.ToString("MMMM dd, yyyy")</p>
+
+        <p>Certificate #: @Model.CertificateNumber</p>
+
+    </div>
+
+</div>
+<style>
+
+
+    .certificate {
+        position: relative;
+        width: 1123px;
+        height: 794px;
+        overflow: hidden;
+    }
+
+    .background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+    .content {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        top: 180px;
+    }
+
+    h2 {
+        font-size: 54px;
+        font-family: 'Great Vibes';
+    }
+
+    h3 {
+        margin-top: 30px;
+        font-size: 36px;
+    }
+
+</style>
+
+@code {
+
+    CertificateModel Model = new()
+    {
+        UserName = "John Smith",
+        CourseName = "Drone Training & Basic Operations",
+        CompletionDate = DateTime.Today,
+        CertificateNumber = "GPA-2026-00015"
+    };
+
+    public class CertificateModel
+    {
+        public string UserName { get; set; } = "";
+        public string CourseName { get; set; } = "";
+        public DateTime CompletionDate { get; set; }
+        public string CertificateNumber { get; set; } = "";
+    }
+
+}

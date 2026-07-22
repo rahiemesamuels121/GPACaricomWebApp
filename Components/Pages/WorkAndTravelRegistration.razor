@@ -1,0 +1,220 @@
+@page "/work-and-travel-registration"
+@rendermode InteractiveServer
+@using GPACARICOM.Models
+@implements IAsyncDisposable
+@inject IJSRuntime JS
+@inject GPACARICOM.Services.API.WATApplicationApiService ApplicationApi
+
+<PageTitle>Work and Travel Registration 2027</PageTitle>
+<div class="wat-page" @ref="pageRoot">
+<header><p>GPA Caribbean</p><h1>Summer Work and Travel<br>Registration 2027</h1><p>Applicant registration · Updated June 2026</p></header>
+<main>
+<p class="intro">Complete each step, then review your application. Your entries are kept as you move Back and Next. This form can be printed or saved as a PDF using your browser.</p>
+<nav class="step-progress" aria-label="Application progress">
+    <ol>
+        @for (var index = 0; index < StepNames.Length; index++)
+        {
+            var step = index;
+            <li aria-current="@(currentStep == step ? "step" : null)">
+                <button type="button" class="step-button" disabled="@(step > currentStep || isSubmitting)" @onclick="() => GoToStep(step)">
+                    <span class="step-number">@(step + 1)</span> @StepNames[step]
+                </button>
+            </li>
+        }
+    </ol>
+</nav>
+<h2 class="step-heading" tabindex="-1" @ref="stepHeading">Step @(currentStep + 1) of @StepNames.Length: @StepNames[currentStep]</h2>
+@if (currentStep == 5)
+{
+    <p class="review-note">Review your details below. Use the steps above or Back to make changes before submitting.</p>
+}
+<EditForm novalidate EditContext="editContext" @key="application" id="registration" OnSubmit="HandleSubmit">
+<DataAnnotationsValidator />
+<ValidationSummary />
+<fieldset class="submission-fields" disabled="@(isSubmitting || submitted)">
+<fieldset class="@StepClass(0)" data-step="0" disabled="@(currentStep == 5)"><legend>01 · Personal information</legend><div class="grid">
+<label>First name<input name="first_name" autocomplete="given-name" @bind="application.FirstName" @bind:event="oninput"></label><label>Middle name<input name="middle_name" autocomplete="additional-name" @bind="application.MiddleName" @bind:event="oninput"></label>
+<label>Last name<input name="last_name" autocomplete="family-name" @bind="application.LastName" @bind:event="oninput"></label><label>Date of birth<input type="date" name="date_of_birth" autocomplete="bday" @bind="application.DateOfBirth" @bind:event="oninput"><small>PDF format: day / month / year</small></label>
+<label>Parish of birth<input name="parish_of_birth" @bind="application.ParishOfBirth" @bind:event="oninput"></label><label>Home address<textarea name="home_address" autocomplete="street-address" @bind="application.HomeAddress" @bind:event="oninput"></textarea></label>
+<label>Email<input type="email" name="email" autocomplete="email" @bind="application.Email" @bind:event="oninput"></label><label>Phone (cell)<input type="tel" name="cell_phone" autocomplete="tel" @bind="application.CellPhone" @bind:event="oninput"></label><label>Phone (home)<input type="tel" name="home_phone" @bind="application.HomePhone" @bind:event="oninput"></label>
+<div><span id="gender-label">Gender</span><div class="choices" role="group" aria-labelledby="gender-label"><label><input type="radio" name="gender" value="F" checked='@(application.Gender == "F")' @onchange='() => application.Gender = "F"' >Female</label><label><input type="radio" name="gender" value="M" checked='@(application.Gender == "M")' @onchange='() => application.Gender = "M"' >Male</label></div></div>
+<label>Instagram<input name="instagram" @bind="application.Instagram" @bind:event="oninput"></label><label>Facebook<input name="facebook" @bind="application.Facebook" @bind:event="oninput"></label><label>TikTok<input name="tiktok" @bind="application.TikTok" @bind:event="oninput"></label><label>Other social media<input name="other_social_media" @bind="application.OtherSocialMedia" @bind:event="oninput"></label>
+</div></fieldset>
+<fieldset class="@StepClass(1)" data-step="1" disabled="@(currentStep == 5)"><legend>02 · University information</legend><div class="grid">
+<label>University/College<input name="university" @bind="application.University" @bind:event="oninput"></label><label>School address<textarea name="school_address" @bind="application.SchoolAddress" @bind:event="oninput"></textarea></label><label>Programme of study<input name="programme_of_study" @bind="application.ProgrammeOfStudy" @bind:event="oninput"></label>
+<label>Current academic year<select name="academic_year" @bind="application.AcademicYear"><option value="">Select year</option><option>1</option><option>2</option><option>3</option><option>4</option></select></label>
+<label>When can you leave for the USA?<input type="date" name="departure_date" id="departure" @bind="application.DepartureDate" @bind:event="oninput"></label><label>Return date<input type="date" name="return_date" id="return" @bind="application.ReturnDate" @bind:event="oninput"></label>
+</div></fieldset>
+<fieldset class="@StepClass(2)" data-step="2" disabled="@(currentStep == 5)"><legend>03 · Emergency contacts</legend>
+<h3>Emergency contact 1</h3><div class="grid">
+<label>Name<input name="emergency_1_name" @bind="application.Emergency1Name" @bind:event="oninput"></label><label>Relation<input name="emergency_1_relation" @bind="application.Emergency1Relation" @bind:event="oninput"></label><label class="wide">Address<textarea name="emergency_1_address" @bind="application.Emergency1Address" @bind:event="oninput"></textarea></label><label>Phone (cell)<input type="tel" name="emergency_1_phone" @bind="application.Emergency1Phone" @bind:event="oninput"></label><label>Email address<input type="email" name="emergency_1_email" @bind="application.Emergency1Email" @bind:event="oninput"></label></div>
+<h3 style="margin-top:28px">Emergency contact 2</h3><div class="grid">
+<label>Name<input name="emergency_2_name" @bind="application.Emergency2Name" @bind:event="oninput"></label><label>Relation<input name="emergency_2_relation" @bind="application.Emergency2Relation" @bind:event="oninput"></label><label class="wide">Address<textarea name="emergency_2_address" @bind="application.Emergency2Address" @bind:event="oninput"></textarea></label><label>Phone (cell)<input type="tel" name="emergency_2_phone" @bind="application.Emergency2Phone" @bind:event="oninput"></label><label>Email address<input type="email" name="emergency_2_email" @bind="application.Emergency2Email" @bind:event="oninput"></label>
+</div></fieldset>
+<fieldset class="@StepClass(3)" data-step="3" disabled="@(currentStep == 5)"><legend>04 · Programme information</legend><div class="grid">
+<div><span id="j1-label">Have you been on a J1 program before?</span><div class="choices" role="group" aria-labelledby="j1-label"><label><input type="radio" name="previous_j1" value="yes" checked="@(application.PreviousJ1 == true)" @onchange="() => application.PreviousJ1 = true">Yes</label><label><input type="radio" name="previous_j1" value="no" checked="@(application.PreviousJ1 == false)" @onchange="() => application.PreviousJ1 = false">No</label></div></div>
+<label>Please indicate<input name="previous_j1_details" @bind="application.PreviousJ1Details" @bind:event="oninput"></label><label>If so, how many times?<input type="number" min="0" step="1" name="previous_j1_count" @bind="application.PreviousJ1Count" @bind:event="oninput"></label><label>Overseas sponsor(s)<input name="overseas_sponsors" @bind="application.OverseasSponsors" @bind:event="oninput"></label><label>Local agency<input name="local_agency" @bind="application.LocalAgency" @bind:event="oninput"></label><label>Passport number<input name="passport_number" autocomplete="off" spellcheck="false" @bind="application.PassportNumber" @bind:event="oninput"></label><label>SSN<input name="ssn" autocomplete="off" spellcheck="false" @bind="application.Ssn" @bind:event="oninput"></label>
+<label>Have you ever been refused a visa?<select name="visa_refused" @bind="application.VisaRefused"><option value="">Select an answer</option><option value="true">Yes</option><option value="false">No</option></select></label><label>If yes, which visa category?<input name="visa_refused_category" @bind="application.VisaRefusedCategory" @bind:event="oninput"></label>
+<label class="wide">Why do you want to participate in the program?<textarea name="participation_summary" rows="4" @bind="application.ParticipationSummary" @bind:event="oninput"></textarea></label>
+</div></fieldset>
+<fieldset class="@StepClass(4)" data-step="4" disabled="@(currentStep == 5)"><legend>05 · Programme acknowledgements</legend><p class="hint">Read each statement and enter your initials in the adjacent box. Statements are adapted from the registration form for GPA Caribbean.</p>
+<div class="ack"><input id="ack1" name="initials_1" aria-label="Initials for acknowledgement 1" maxlength="12" @bind="initials[0]" @bind:event="oninput" @bind:after="UpdateAcknowledgements"><label for="ack1">I understand that the Exchange Visitor program is a cultural exchange program for university and college students that allows me to experience other cultures, lifestyles, and work. I also understand that the work is incidental to my holiday and provides me with funds to sustain me whilst on the program.</label></div>
+<div class="ack"><input id="ack2" name="initials_2" aria-label="Initials for acknowledgement 2" maxlength="12" @bind="initials[1]" @bind:event="oninput" @bind:after="UpdateAcknowledgements"><label for="ack2">I can work legally in the USA for up to 4 months. I must be 18 years or older and a full-time university student.</label></div>
+<div class="ack"><input id="ack3" name="initials_3" aria-label="Initials for acknowledgement 3" maxlength="12" @bind="initials[2]" @bind:event="oninput" @bind:after="UpdateAcknowledgements"><label for="ack3">I acknowledge and understand that if my documents are not submitted by the specified date and are incomplete, my application will not be processed and a late fee will apply.</label></div>
+<div class="ack"><input id="ack4" name="initials_4" aria-label="Initials for acknowledgement 4" maxlength="12" @bind="initials[3]" @bind:event="oninput" @bind:after="UpdateAcknowledgements"><label for="ack4">Registration, orientation, and administrative fees are non-refundable and non-transferable.</label></div>
+<div class="ack"><input id="ack5" name="initials_5" aria-label="Initials for acknowledgement 5" maxlength="12" @bind="initials[4]" @bind:event="oninput" @bind:after="UpdateAcknowledgements"><label for="ack5">The program fee does not cover airfare, visa application fees, travelling, or any other miscellaneous charges that may apply.</label></div>
+<div class="ack"><input id="ack6" name="initials_6" aria-label="Initials for acknowledgement 6" maxlength="12" @bind="initials[5]" @bind:event="oninput" @bind:after="UpdateAcknowledgements"><label for="ack6">All visa arrangements must be made through GPA Caribbean</label></div>
+<div class="ack"><input id="ack7" name="initials_7" aria-label="Initials for acknowledgement 7" maxlength="12" @bind="initials[6]" @bind:event="oninput" @bind:after="UpdateAcknowledgements"><label for="ack7">The program fee is subject to change without notice.</label></div>
+<div class="grid" style="margin-top:24px"><label>Applicant signature (type name or sign printed copy)<input name="applicant_signature" autocomplete="off" @bind="applicantSignature" @bind:event="oninput" @bind:after="UpdateAcknowledgements"></label><label>Date<input type="date" name="signature_date" @bind="signatureDate" @bind:event="oninput" @bind:after="UpdateAcknowledgements"></label></div>
+</fieldset>
+<fieldset class="@StepClass(5)" data-step="5"><legend>For office use only</legend><div class="grid"><label>Application received by<input name="received_by" @bind="application.ReceivedBy" @bind:event="oninput"></label><label>Date<input type="date" name="received_date" @bind="application.ReceivedDate" @bind:event="oninput"></label></div></fieldset>
+</fieldset>
+<p class="privacy hint">Your entries are not automatically saved. A submission is complete only when confirmation appears below. A typed name is provided for convenience; confirm signature requirements with the agency.</p>
+@if (!ApplicationApi.IsConfigured)
+{
+    <p class="hint">Online submission is not available yet. You can complete and print this form.</p>
+}
+<div class="actions wizard-actions">
+    @if (currentStep > 0)
+    {
+        <button type="button" class="secondary" @onclick="() => GoToStep(currentStep - 1)" disabled="@isSubmitting">Back</button>
+    }
+    @if (currentStep < 5)
+    {
+        <button type="button" @onclick="NextAsync" disabled="@isSubmitting">@(currentStep == 4 ? "Review application" : "Next")</button>
+    }
+    else
+    {
+        <button type="submit" disabled="@(isSubmitting || submitted || !ApplicationApi.IsConfigured)">@(isSubmitting ? "Submitting…" : submitted ? "Application submitted" : "Submit application")</button>
+    }
+    <button type="button" class="secondary" id="print" @onclick="PrintAsync" disabled="@isSubmitting">Print / save as PDF</button>
+    <button type="button" class="secondary" id="clear" @onclick="ClearAsync" disabled="@isSubmitting">Clear form</button>
+</div><p id="status" role="status" aria-live="polite">@status</p>
+</EditForm><footer>Based on WAT Registration form 2026–27 · Summer Work and Travel Registration 2027 · Source updated June 2026</footer>
+</main>
+</div>
+
+@code {
+    private static readonly string[] StepNames = ["Personal", "University", "Emergency contacts", "Programme", "Acknowledgements", "Review"];
+    private int currentStep;
+    private ElementReference stepHeading;
+    private bool focusStep;
+    private string StepClass(int step) => currentStep == step || currentStep == 5 ? "form-step" : "form-step inactive-step";
+
+    private void GoToStep(int step)
+    {
+        if (isSubmitting) return;
+        currentStep = Math.Clamp(step, 0, StepNames.Length - 1);
+        status = null;
+        focusStep = true;
+    }
+
+    private async Task NextAsync()
+    {
+        if (isSubmitting || currentStep >= 5 || module is null) return;
+        if (!await module.InvokeAsync<bool>("validateStep", pageRoot, currentStep)) return;
+        if (currentStep == 1 && application.DepartureDate.HasValue && application.ReturnDate < application.DepartureDate)
+        {
+            status = "Return date must be on or after the departure date.";
+            return;
+        }
+        UpdateAcknowledgements();
+        if (currentStep == 4 && !application.AllAcknowledgementsApproved)
+        {
+            status = "Please initial all seven acknowledgements and complete the applicant signature and date.";
+            return;
+        }
+        GoToStep(currentStep + 1);
+    }
+
+    private ElementReference pageRoot;
+    private IJSObjectReference? module;
+    private WATApplications application = new();
+    private EditContext editContext = default!;
+    private string?[] initials = new string?[7];
+    private string? applicantSignature;
+    private DateOnly? signatureDate;
+    private string? status;
+    private bool isSubmitting;
+    private bool submitted;
+
+    protected override void OnInitialized() => editContext = new EditContext(application);
+
+    // Section-five entries remain UI state; the model stores only the combined approval.
+    private void UpdateAcknowledgements()
+    {
+        application.AllAcknowledgementsApproved =
+            initials.All(value => !string.IsNullOrWhiteSpace(value)) &&
+            !string.IsNullOrWhiteSpace(applicantSignature) && signatureDate.HasValue;
+    }
+
+    private async Task HandleSubmit(EditContext context)
+    {
+        if (isSubmitting || submitted) return;
+        if (currentStep < 5) { await NextAsync(); return; }
+        UpdateAcknowledgements();
+        if (!context.Validate())
+        {
+            status = "Please correct the highlighted validation errors.";
+            return;
+        }
+        if (!application.AllAcknowledgementsApproved)
+        {
+            status = "Please initial all seven acknowledgements and complete the applicant signature and date.";
+            return;
+        }
+        isSubmitting = true;
+        status = "Submitting your application…";
+        try
+        {
+            var result = await ApplicationApi.SubmitAsync(application);
+            submitted = result.success;
+            status = result.message;
+        }
+        finally { isSubmitting = false; }
+    }
+
+    private async Task PrintAsync()
+    {
+        UpdateAcknowledgements();
+        if (module is not null)
+            await module.InvokeVoidAsync("printForm", pageRoot);
+    }
+
+    private async Task ClearAsync()
+    {
+        if (isSubmitting) return;
+        if (!await JS.InvokeAsync<bool>("confirm", "Clear all information entered in this form?"))
+            return;
+
+        application = new WATApplications();
+        editContext = new EditContext(application);
+        initials = new string?[7];
+        applicantSignature = null;
+        signatureDate = null;
+        submitted = false;
+        currentStep = 0;
+        focusStep = true;
+        status = "Form cleared.";
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+            module = await JS.InvokeAsync<IJSObjectReference>("import", "./Components/Pages/WorkAndTravelRegistration.razor.js");
+        if (focusStep)
+        {
+            focusStep = false;
+            await stepHeading.FocusAsync();
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (module is not null)
+        {
+            try { await module.DisposeAsync(); }
+            catch (JSDisconnectedException) { }
+        }
+    }
+}

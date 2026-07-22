@@ -1,0 +1,257 @@
+﻿@page "/register"
+@layout LogInLayout
+@rendermode InteractiveServer
+
+<div class="signup-page">
+
+    <!-- Left Side -->
+    <div class="signup-left">
+
+        <div class="brand-content">
+
+            <img src="images/logomain.png"
+                 class="brand-logo"
+                 alt="Logo" />
+
+            <h1>Create Your Account</h1>
+
+            <p>
+                Register to access training programs,
+                certifications, courses and your personal dashboard.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Right Side -->
+    <div class="signup-right">
+        <button type="button"
+                class="signup-close-btn"
+                aria-label="Close login"
+                onclick="goBackToPreviousPage()">
+            <i class="bi bi-x-lg"></i>
+        </button>
+
+        <div class="signup-card">
+
+            <h2>Create Account</h2>
+
+            <p class="text-muted mb-4">
+                Fill in your information below
+            </p>
+
+            <form method="post" action="/account/register">
+
+                <!-- Account Type -->
+                <div class="mb-3">
+
+                    <label class="form-label">Register As</label>
+
+                    <select class="form-select" name="RoleId" >
+
+                        <option value="">Select Account Type</option>
+                        <option value=2>Individual</option>
+                        <option value=1>Organization</option>
+
+                    </select>
+
+                </div>
+                @if (AccountType == "Individual")
+                {
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            First Name 
+                        </label>
+
+                        <input class="form-control"
+                               type="text"
+                               name="Firstname"
+                               placeholder="Enter your first name" />
+                    </div>
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Last Name
+                        </label>
+
+                        <input class="form-control"
+                               type="text"
+                               name="Lastname"
+                               placeholder="Enter your last name" />
+                    </div>
+                }
+
+                @if (AccountType == "Organization")
+                {
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Organization Name
+                        </label>
+
+                        <input class="form-control"
+                               type="text"
+                               name="Organization"
+                               placeholder="Enter your Organization's' Name" />
+
+                    </div>
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Firstname  
+                        </label>
+
+                        <input class="form-control"
+                               type="text"
+                               name="Firstname"
+                               placeholder="Enter your Name" />
+
+                    </div>
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Lastname
+                        </label>
+
+                        <input class="form-control"
+                               type="text"
+                               name="Lastname"
+                               placeholder="Enter your Name" />
+
+                    </div>
+                }
+
+                <!-- Name -->
+                
+
+                <!-- Email -->
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Email Address
+                    </label>
+
+                    <input class="form-control"
+                           type="email"
+                           name="Email"
+                           placeholder="example@email.com" />
+
+                </div>
+
+                <!-- Contact -->
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Contact Number
+                    </label>
+
+                    <input class="form-control"
+                           type="tel"
+                           name="Telephone"
+                           placeholder="+1 (876) 555-1234" />
+
+                </div>
+
+                <!-- Address -->
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Address
+                    </label>
+
+                    <textarea class="form-control"
+                              rows="3"
+                              name="Address"
+                              placeholder="Enter your address"></textarea>
+
+                </div>
+
+                <!-- Password -->
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Password
+                    </label>
+
+                    <input class="form-control"
+                           type="password"
+                           name="Password"
+                           placeholder="Create a password" />
+
+                </div>
+
+                <!-- Confirm Password -->
+                @* <div class="mb-3">
+
+                    <label class="form-label">
+                        Confirm Password
+                    </label>
+
+                    <input class="form-control"
+                           type="password"
+                           name="ConfirmPassword"
+                           placeholder="Confirm your password" />
+
+                </div> *@
+
+                <button class="btn signup-btn w-100 mt-3"
+                        type="submit">
+
+                    Create Account
+
+                </button>
+
+            </form>
+
+            @* <div class="divider">
+                <span>or</span>
+            </div> *@
+
+          @*   <div class="social-buttons">
+
+                <button class="btn social-btn">
+
+                    <i class="bi bi-google"></i>
+                    Google
+
+                </button>
+
+                <button class="btn social-btn">
+
+                    <i class="bi bi-microsoft"></i>
+                    Microsoft
+
+                </button>
+
+            </div> *@
+
+            <div class="signup-text">
+
+                Already have an account?
+
+                <a href="/login">
+                    Sign In
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<script>
+    function goBackToPreviousPage() {
+        if (window.history.length > 2) {
+            window.history.back();
+        } else {
+            window.location.href = "/";
+        }
+    }
+</script>
+@code {
+    private string? AccountType;
+    
+}

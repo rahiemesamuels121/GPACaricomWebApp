@@ -1,0 +1,76 @@
+﻿.programs-hero {
+    background: linear-gradient( 135deg, var(--primary-blue));
+    color: white;
+    text-align: center;
+    padding: 120px 20px 80px;
+}
+
+    .programs-hero h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    .programs-hero p {
+        max-width: 700px;
+        margin: auto;
+        font-size: 1.1rem;
+        opacity: .9;
+    }
+
+.program-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 100%;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+    transition: all .3s ease;
+}
+
+    .program-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 40px rgba(0,0,0,.15);
+    }
+
+.program-accent {
+    height: 8px;
+}
+
+.program-content {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 8px);
+}
+
+.program-logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+}
+
+.program-content h3 {
+    color: var(--primary-blue);
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.program-content p {
+    flex-grow: 1;
+    color: #666;
+    line-height: 1.7;
+}
+
+.program-btn {
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    padding: .75rem 1.5rem;
+    color: #05163D;
+    margin-top: 1rem;
+}
+
+    .program-btn:hover {
+        transform: scale(1.03);
+    }

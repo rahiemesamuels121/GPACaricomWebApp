@@ -1,48 +1,83 @@
-﻿@page "/ourprograms"
+﻿@page "/our-programs"
 @attribute [StreamRendering]
 @using GPACARICOM.Models
-@using GPACARICOM.Services.Interfaces
-@inject IProgramService ProgramService;
+@using GPACARICOM.Services.API
+@inject ProgramApiService programApiService;
+@inject NavigationManager NavigationManager;
+@rendermode InteractiveServer
+@* @attribute [Authorize] *@
 
 <PageTitle>Our Programs</PageTitle>
 
-<div style="padding-left:200px; padding-right:200px;">
-    <div>
-        <h1>Our Programs</h1>
-    </div>
 
-    <div class="row" sty>
-@if (isLoadingPrograms)
-        {
-            <div class="center-div">
-                <RadzenProgressBarCircular ShowValue="true" Mode="ProgressBarMode.Indeterminate" Size="ProgressBarCircularSize.Large" AriaLabel="Loading, large">
-                    <Template>Loading</Template>
-                </RadzenProgressBarCircular>
-            </div>
-        }
-        else
-        {
-           
-            @for (int i = 0; i<programlist.Count; i++)
+<!-- Hero Section -->
+<div class="programs-hero">
+    <h1>Our Programs</h1>
+    <p>
+        Empowering Caribbean youth through education,
+        leadership development, entrepreneurship, and community engagement.
+    </p>
+</div>
+
+<div class="container py-5">
+
+    @if (isLoadingPrograms)
+    {
+        <div class="center-div">
+            <RadzenProgressBarCircular    style="color: var(--primary-blue)"
+                                       Mode="ProgressBarMode.Indeterminate"
+                                       Size="ProgressBarCircularSize.Large">
+                <Template>Loading</Template>
+            </RadzenProgressBarCircular>
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+
+            @for (int i = 0; i < programlist.Count; i++)
             {
                 var program = programlist[i];
-                var backgroundColor = cardColors[i % cardColors.Length];
+                var accentColor = cardColors[i % cardColors.Length];
 
-                <div class="col-md-4 mb-3" >
-                    <div class="custom-card" style=" height:400px; overflow:clip 
-                         background:white;
-                         border-top:20px solid @backgroundColor;
-                         border-radius:20px;
-                         height:400px;"">
-                        <img src="images/logomain.png" style="height: 100px ; width : 100px" class="catalog-image" />
-                        <h3>@program.programName</h3>
-                        <p> @program.programDescription</p>
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="program-card">
+
+                        <div class="program-accent"
+                             style="background:@accentColor;">
+                        </div>
+
+                        <div class="program-content">
+
+                            <div class="program-icon">
+                                <img src="/images/logomain.png"
+                                     alt="Program"
+                                     class="program-logo" />
+                            </div>
+
+                            <h3 style="color:var(--secondary-blue)">@program.programName</h3>
+
+                            <p>
+                                @program.programDescription
+                            </p>
+                        
+                            <button class="btn program-btn"
+                                    style="background:@accentColor;"
+                                    @onclick="()=>ViewProgram(program.programid)">
+                                Learn More
+                            </button>
+
+                        </div>
+
                     </div>
+
                 </div>
             }
-        }
-       
-    </div>
+
+        </div>
+    }
+
 </div>
 
 @code{
@@ -50,7 +85,7 @@
 {
     "#E8F4FD", // Blue
     "#FFF8E1", // Yellow
-    "#E3FCEF", // Green
+    "#E3FCEF", // Green 
     "#FDEDED", // Red
 };
 
@@ -58,17 +93,18 @@
     private bool isLoadingPrograms = true;
     protected override async Task OnInitializedAsync()
     {
-        programlist = await ProgramService.GetProgramsAsync();
+        var results = await programApiService.GetAllPrograms();
+        programlist = results.data!;
         isLoadingPrograms = false;
     }
 
+    private void ViewProgram(int programId)
+    {
+        NavigationManager.NavigateTo($"/program-details/{programId}");
+    }
+
+
 }
 
-<style>
-    .catalog-image {
-        width: 100%;
-        height: 250px;
-        object-fit: cover;
-    }
-</style>
+
 

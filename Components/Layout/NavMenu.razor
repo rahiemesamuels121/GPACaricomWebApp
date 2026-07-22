@@ -1,108 +1,154 @@
-﻿<nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm"
-     style="background-color:var(--primary-blue); transition: background 0.5s ease;">
+﻿
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject HttpClient Http
+@inject NavigationManager Navigation
 
-    <div class="container-fluid">
+<div class="navbar-top-banner">
+    Youth • Leadership • Opportunity
+</div>
 
-        <!-- Left Spacer -->
-        <div class="flex-grow-1"></div>
+<nav class="navbar navbar-expand-lg  custom-navbar ">
 
-        <!-- Center Content -->
-        <div class="d-flex align-items-center justify-content-center">
+    <div class="container">
 
-            <a class="navbar-brand mx-4 mb-0" href="">
-                <img src="/images/logomain.png"
-                     alt="Logo"
-                     style="height:70px;" />
-            </a>
+        <!-- Logo -->
+        <a class="navbar-brand d-flex align-items-center" href="/">
 
-            <button class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <img src="/images/logomain.png"
+                 alt="GPA Caribbean"
+                 class="navbar-logo" />
 
-            <div class="collapse navbar-collapse"
-                 id="navbarNav">
+            <div class="ms-3">
+              
 
-                <ul class="navbar-nav gap-4 align-items-center">
-
-                    <li class="nav-item">
-                        <NavLink class="nav-link nav-icon-link text-white"
-                                 href=""
-                                 Match="NavLinkMatch.All">
-                            <RadzenStack style="align-content:center">
-
-                            <i class="bi bi-house-door-fill nav-icon text-white"></i>
-                            <span>Home</span>
-                            </RadzenStack>
-                        </NavLink>
-                    </li>
-
-                    <li class="nav-item center-div">
-                        <NavLink class="nav-link nav-icon-link text-white"
-                                 href="whoweare">
-                                <RadzenStack style="align-content:center">
-                            <i class="bi bi-people-fill nav-icon"></i>
-                            <span>Who We Are</span>
-
-                                </RadzenStack>
-                        </NavLink>
-                    </li>
-
-                    <li class="nav-item">
-                        <NavLink class="nav-link nav-icon-link text-white"
-                                 href="ourprograms">
-                                  <RadzenStack style="align-content:center">
-
-                            <i class="bi bi-list-task nav-icon text-white"></i>
-                            <span>Our Programmes</span>
-                                  </RadzenStack>
-                        </NavLink>
-                    </li>
-
-                    <li class="nav-item">
-                     
-
-                        <NavLink class="nav-link nav-icon-link text-white"
-                                 href="youthinbusiness">
-                                    <RadzenStack style="align-content:center">
-
-                            <i class="bi bi-briefcase-fill nav-icon text-white"></i>
-                            <span>Youth in Business</span>
-                                    </RadzenStack>
-                        </NavLink>
-                     
-                    </li>
-
-                    <li class="nav-item">
-                     ">
-
-                        <NavLink class="nav-link nav-icon-link text-white"
-                                 href="ContactUs">
-                                    <RadzenStack style="align-content:center">
-
-                            <i class="bi bi-envelope-fill nav-icon text-white"></i>
-                            <span>Contact Us</span>
-                                    </RadzenStack>
-                        </NavLink>
-                     
-                    </li>
-
-                </ul>
-
+                <div class="brand-subtitle">
+                    Youth • Leadership • Opportunity
+                </div>
             </div>
 
-        </div>
+        </a>
 
-        <!-- Login Button -->
-        <div class="flex-grow-1 d-flex justify-content-end pe-4">
-            <a href="/login"
-               class="btn btn-warning fw-bold px-4 py-2 rounded-pill">
-                Log In
-            </a>
-        </div>
+        <!-- Mobile Toggle -->
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNav">
 
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <!-- Navigation -->
+        <div class="collapse navbar-collapse"
+             id="mainNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <NavLink class="nav-link"
+                             href=""
+                             Match="NavLinkMatch.All">
+
+                        <i class="bi bi-house-door-fill"></i>
+                        Home
+                    </NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link"
+                             href="who-we-are">
+                        <i class="bi bi-people-fill"></i>
+                        Who We Are
+                    </NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link"
+                          href="our-programs">
+                        <i class="bi bi-mortarboard-fill"></i>
+                        Programs
+                    </NavLink>
+                </li>
+                @* <li class="nav-item">
+                    <NavLink class="nav-link"
+                             href="our-services">
+
+                        <i class="bi bi-briefcase-fill"></i>
+                        Our Services
+
+                    </NavLink>
+                </li> *@
+                <li class="nav-item">
+                    <NavLink class="nav-link"
+                             href="contact-us">
+
+                        <i class="bi bi-envelope-fill"></i>
+                        Contact
+
+                    </NavLink>
+                </li>
+            </ul>
+            <div class="d-flex">
+
+                <a href="/our-programs"
+                   class="btn btn-outline-light me-2">
+                    Join a Program
+                </a>
+                <AuthorizeView>
+                    <Authorized>
+                        <div class="dropdown">
+                            <button class="dropbtn">My Profile</button>
+
+                            <div class="dropdown-content">
+                                <a href="/dashboard">Dashboard</a>
+
+                                <form method="post" action="/account/logout">
+                                    <button type="submit" class="dropdown-link">
+                                        Logout
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </Authorized>
+                    <NotAuthorized>
+                        <a href="/login"
+                            class="btn login-btn">
+                            Log In
+                        </a>
+                    </NotAuthorized>
+                </AuthorizeView>
+            </div>
+        </div>
     </div>
-
 </nav>
+
+@code{
+
+    string userId = string.Empty; 
+
+    bool showContextMenu = false;
+
+    void setShowContextMenu()
+    {
+        if (showContextMenu)
+        {
+            showContextMenu = false;
+        }
+        else
+        {
+            showContextMenu = true;    
+        }
+    }
+
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     await checkLoginStatus();
+    // }
+    // public async Task checkLoginStatus(){
+    //     var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+    //     var user = authState.User;
+    //     if (user.Identity?.IsAuthenticated ?? false == true)
+    //     {
+
+    //         userId = user.FindFirst(ClaimTypes.Name)?.Value ?? "No User";
+    //     }
+
+    // }
+}

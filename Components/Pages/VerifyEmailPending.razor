@@ -1,0 +1,66 @@
+﻿@page "/verify-email"
+
+<div class="verify-container">
+
+    <div class="verify-card">
+
+        <img src="images/logomain.png" class="logo" />
+
+        <div class="icon">
+            📧
+        </div>
+
+        <h1>Check Your Email</h1>
+
+        <p class="lead">
+            We've sent a verification link to
+        </p>
+
+        <h4>@Email</h4>
+
+        <p>
+            Click the verification link in your email to activate your account.
+        </p>
+
+        <div class="tips">
+
+            <div>✔ Verification emails usually arrive within one minute.</div>
+
+            <div>✔ Check your Spam or Junk folder.</div>
+
+            <div>✔ Leave this page open while you verify your account.</div>
+
+        </div>
+
+        <button class="btn btn-primary w-100 mb-3"
+                @onclick="ResendEmail">
+            Resend Verification Email
+        </button>
+
+        <a href="/register">
+            Use a different email address
+        </a>
+
+        <hr />
+
+        <a class="btn btn-outline-secondary w-100"
+           href="/login">
+            I've Verified My Email
+        </a>
+
+    </div>
+
+</div>
+
+@code {
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string? Email { get; set; }
+
+    private async Task ResendEmail()
+    {
+        // Call your API
+    }
+
+}
