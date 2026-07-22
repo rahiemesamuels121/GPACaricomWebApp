@@ -1,27 +1,26 @@
-
+/* =========================
+   NAVBAR LAYOUT
+   ========================= */
 
 .navbar-nav[b-9jp7j3w9be] {
-    gap: .25rem;
-}
-
-.login-btn[b-9jp7j3w9be] {
-    width: 100%;
-    margin-top: 1rem;
-}
-
-.brand-subtitle[b-9jp7j3w9be] {
-    display: none;
+    gap: 0.5rem;
 }
 
 .custom-navbar[b-9jp7j3w9be] {
-    background: linear-gradient( 135deg, white,white,white,var(--primary-blue),var(--primary-blue),var(--primary-blue),var(--primary-blue) );
-    padding: 0.75rem 0;
-    box-shadow: 0 4px 5px rgba(0,0,0,.12);
+    padding: 0.75rem 1.25rem;
+    background-color : white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
+
+/* =========================
+   BRAND
+   ========================= */
+
 .navbar-logo[b-9jp7j3w9be] {
-    height: 65px;
     width: auto;
+    height: 65px;
+    object-fit: contain;
 }
 
 .brand-title[b-9jp7j3w9be] {
@@ -30,57 +29,140 @@
     font-weight: 700;
     line-height: 1.1;
 }
+
 .brand-subtitle[b-9jp7j3w9be] {
+    display: none;
     color: var(--secondary-blue);
-    font-size: .8rem;
+    font-size: 0.8rem;
 }
 
-.navbar-nav[b-9jp7j3w9be] {
-    color: var(--secondary-blue);
-    gap: .75rem;
-}
-   
 
-    .nav-item .nav-link[b-9jp7j3w9be] {
-        color: darkred !important;
-        font-weight: 500;
-        padding: .75rem 1rem !important;
-        border-radius: 12px;
-        transition: all .3s ease;
+/* =========================
+   NAVIGATION LINKS
+   NavLink generates the <a>,
+   so ::deep is required
+   ========================= */
+
+.custom-navbar[b-9jp7j3w9be]  .nav-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    color: var(--secondary-blue);
+    background-color: transparent;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 12px;
+    transition: color 0.25s ease, background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+    .custom-navbar[b-9jp7j3w9be]  .nav-link i {
+        margin: 0;
+        color: inherit;
     }
 
-.custom-navbar .nav-link i[b-9jp7j3w9be] {
-    text-align: center;
-    justify-content: center;
-    margin-right: .5rem;
-    color: var(--secondary-blue);
-}
 
-    .nav-link:hover[b-9jp7j3w9be] {
-        color: var(--secondary-blue);
-        background: rgba(255,255,255,.12);
+    /* Hover */
+
+    .custom-navbar[b-9jp7j3w9be]  .nav-link:hover {
+        color: var(--primary-blue);
+        background-color: rgba(255, 255, 255, 0.18);
         transform: translateY(-2px);
     }
 
-    .nav-link.active[b-9jp7j3w9be] {
-        background: var(--secondary-yellow);
-        color: #05163D !important;
+
+    /* Active link */
+
+    .custom-navbar[b-9jp7j3w9be]  .nav-link.active {
+        color: #05163d;
+        background-color: var(--secondary-yellow);
         font-weight: 700;
+        box-shadow: 0 5px 14px rgba(0, 0, 0, 0.15);
+        transform: translateY(-2px);
     }
 
-.login-btn[b-9jp7j3w9be] {
-    background: var(--primary-yellow);
-    color: #05163D;
-    font-weight: 700;
+        .custom-navbar[b-9jp7j3w9be]  .nav-link.active i {
+            color: inherit;
+        }
+
+
+    /* Animated underline */
+
+    .custom-navbar[b-9jp7j3w9be]  .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: -4px;
+        width: 0;
+        height: 3px;
+        background-color: var(--primary-yellow);
+        border-radius: 999px;
+        transform: translateX(-50%);
+        transition: width 0.35s ease;
+    }
+
+    .custom-navbar[b-9jp7j3w9be]  .nav-link:hover::after {
+        width: 70%;
+    }
+
+    .custom-navbar[b-9jp7j3w9be]  .nav-link.active::after {
+        width: 90%;
+    }
+
+
+/* =========================
+   JOIN PROGRAM BUTTON
+   ========================= */
+
+.custom-navbar[b-9jp7j3w9be]  .btn-outline-light {
+    padding: 0.65rem 1.25rem;
+    color: var(--secondarys-blue);
+    border-color: #ffffff;
     border-radius: 50px;
-    padding: .75rem 1.75rem;
-    transition: .3s;
+    font-weight: 600;
+    background-color: var(--primary-blue);
+    transition: color 0.25s ease, background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+    .custom-navbar[b-9jp7j3w9be]  .btn-outline-light:hover {
+        color: #05163d;
+        background-color: var(--secondarys-blue 30%);
+        border-color: #ffffff;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16);
+    }
+
+
+/* =========================
+   LOGIN BUTTON
+   ========================= */
+
+.login-btn[b-9jp7j3w9be] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.75rem;
+    color: #05163d;
+    background-color: var(--primary-yellow);
+    font-weight: 700;
+    text-decoration: none;
+    border: none;
+    border-radius: 50px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
     .login-btn:hover[b-9jp7j3w9be] {
+        color: #05163d;
         transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(0,0,0,.2);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     }
+
+
+/* =========================
+   NAVBAR TOGGLER
+   ========================= */
 
 .navbar-toggler[b-9jp7j3w9be] {
     border: none;
@@ -90,16 +172,10 @@
         box-shadow: none;
     }
 
-@media (max-width: 991px) {
 
-    .navbar-collapse[b-9jp7j3w9be] {
-        margin-top: 1rem;
-        padding: 1rem;
-        border-radius: 20px;
-        background: rgba(255,255,255,.05);
-        backdrop-filter: blur(10px);
-    }
-}
+/* =========================
+   PROFILE DROPDOWN
+   ========================= */
 
 .dropdown[b-9jp7j3w9be] {
     position: relative;
@@ -107,53 +183,123 @@
 }
 
 .dropbtn[b-9jp7j3w9be] {
-    padding: 10px 18px;
+    padding: 0.75rem 1.25rem;
+    color: #05163d;
+    background-color: var(--primary-yellow);
+    font-weight: 700;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
+
+    .dropbtn:hover[b-9jp7j3w9be] {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
 
 .dropdown-content[b-9jp7j3w9be] {
     display: none;
     position: absolute;
-    min-width: 180px;
-    background: white;
-    box-shadow: 0 5px 20px rgba(0,0,0,.25);
-    border-radius: 8px;
+    top: calc(100% + 8px);
+    right: 0;
+    z-index: 1050;
+    min-width: 190px;
     overflow: hidden;
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-    .dropdown-content a[b-9jp7j3w9be] {
+    .dropdown-content a[b-9jp7j3w9be],
+    .dropdown-link[b-9jp7j3w9be] {
         display: block;
-        padding: 12px;
+        width: 100%;
+        padding: 12px 16px;
+        color: #05163d;
+        background: none;
+        font: inherit;
+        text-align: left;
         text-decoration: none;
-        color: black;
+        border: none;
+        cursor: pointer;
+        transition: color 0.2s ease, background-color 0.2s ease;
     }
 
-        .dropdown-content a:hover[b-9jp7j3w9be] {
-            background: var(--primary-blue);
-            color: white;
+        .dropdown-content a:hover[b-9jp7j3w9be],
+        .dropdown-link:hover[b-9jp7j3w9be] {
+            color: #ffffff;
+            background-color: var(--primary-blue);
         }
+
+    .dropdown-content form[b-9jp7j3w9be] {
+        margin: 0;
+    }
 
 .dropdown:hover .dropdown-content[b-9jp7j3w9be] {
     display: block;
 }
 
-.dropdown-content form[b-9jp7j3w9be] {
-    margin: 0;
-}
 
-.dropdown-link[b-9jp7j3w9be] {
-    width: 100%;
-    display: block;
-    padding: 12px 16px;
-    text-align: left;
-    background: none;
-    border: none;
-    color: black;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: inherit;
-}
+/* =========================
+   MOBILE
+   ========================= */
 
-    .dropdown-link:hover[b-9jp7j3w9be] {
-        background-color: var(--secondary-red);
+@media (max-width: 991.98px) {
+    .custom-navbar[b-9jp7j3w9be] {
+        background: #ffffff;
     }
 
+    .navbar-collapse[b-9jp7j3w9be] {
+        margin-top: 1rem;
+        padding: 1rem;
+        background-color: var(--primary-blue);
+        border-radius: 18px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .navbar-nav[b-9jp7j3w9be] {
+        gap: 0.35rem;
+    }
+
+    .custom-navbar[b-9jp7j3w9be]  .nav-link {
+        justify-content: flex-start;
+        width: 100%;
+        color: #ffffff;
+    }
+
+        .custom-navbar[b-9jp7j3w9be]  .nav-link.active {
+            color: #05163d;
+        }
+
+    .custom-navbar[b-9jp7j3w9be]  .navbar-collapse > .d-flex {
+        flex-direction: column;
+        gap: 0.75rem;
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    .custom-navbar[b-9jp7j3w9be]  .btn-outline-light,
+    .login-btn[b-9jp7j3w9be],
+    .dropdown[b-9jp7j3w9be],
+    .dropbtn[b-9jp7j3w9be] {
+        width: 100%;
+    }
+
+    .dropdown-content[b-9jp7j3w9be] {
+        position: static;
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+}
+.navbar-top-banner[b-9jp7j3w9be] {
+    display: flex;
+    justify-content: center; /* Horizontal */
+    align-items: center;
+    width: 100%;
+    height: 5rem;
+    background: linear-gradient(135deg,var(--primary-blue) 0%,#1E7ACB 100%);
+    color: white;
+    font-size: 1.75rem;
+}

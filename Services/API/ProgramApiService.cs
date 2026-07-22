@@ -13,7 +13,7 @@
             _apiClient = apiClient;
 
             }
-            public async Task<ApiResponse<List<ProgramModel>>> GetAllTestimonials()
+            public async Task<ApiResponse<List<ProgramModel>>> GetAllPrograms()
             {
 
             var response = await _apiClient.GetAsync("Program/getAllPrograms");

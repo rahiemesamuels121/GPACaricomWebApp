@@ -26,6 +26,12 @@
 
     <!-- Right Side -->
     <div class="signup-right">
+        <button type="button"
+                class="signup-close-btn"
+                aria-label="Close login"
+                onclick="goBackToPreviousPage()">
+            <i class="bi bi-x-lg"></i>
+        </button>
 
         <div class="signup-card">
 
@@ -236,6 +242,15 @@
     </div>
 
 </div>
+<script>
+    function goBackToPreviousPage() {
+        if (window.history.length > 2) {
+            window.history.back();
+        } else {
+            window.location.href = "/";
+        }
+    }
+</script>
 @code {
     private string? AccountType;
     

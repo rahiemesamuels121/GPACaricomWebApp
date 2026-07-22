@@ -93,7 +93,7 @@
     private bool isLoadingPrograms = true;
     protected override async Task OnInitializedAsync()
     {
-        var results = await programApiService.GetAllTestimonials();
+        var results = await programApiService.GetAllPrograms();
         programlist = results.data!;
         isLoadingPrograms = false;
     }

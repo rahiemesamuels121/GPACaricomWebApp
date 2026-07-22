@@ -1,1 +1,289 @@
-﻿
+﻿@using System.Globalization
+
+<div class="calendar-widget">
+
+    <div class="calendar-header">
+        <div>
+            <span class="calendar-label">Programme Schedule</span>
+            <h3>@CurrentMonth.ToString("MMMM yyyy")</h3>
+        </div>
+
+        <div class="calendar-navigation">
+            <button type="button"
+                    class="calendar-nav-button"
+                    title="Previous month"
+                    @onclick="PreviousMonth">
+                <i class="bi bi-chevron-left"></i>
+            </button>
+
+            <button type="button"
+                    class="today-button"
+                    @onclick="GoToToday">
+                Today
+            </button>
+
+            <button type="button"
+                    class="calendar-nav-button"
+                    title="Next month"
+                    @onclick="NextMonth">
+                <i class="bi bi-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="calendar-weekdays">
+        @foreach (var weekday in Weekdays)
+        {
+            <div>@weekday</div>
+        }
+    </div>
+
+    <div class="calendar-grid">
+        @foreach (var day in CalendarDays)
+        {
+            var eventsForDay = GetEventsForDate(day.Date);
+
+            <button type="button"
+                    class="@GetDayCssClass(day)"
+                    @onclick="() => SelectDate(day.Date)">
+
+                <span class="day-number">
+                    @day.Date.Day
+                </span>
+
+                @if (eventsForDay.Count > 0)
+                {
+                    <div class="event-indicators">
+                        @foreach (var calendarEvent in eventsForDay.Take(3))
+                        {
+                            <span class="event-dot"
+                                  title="@calendarEvent.Title">
+                            </span>
+                        }
+                    </div>
+
+                    @if (eventsForDay.Count > 3)
+                    {
+                        <span class="more-events">
+                            +@(eventsForDay.Count - 3)
+                        </span>
+                    }
+                }
+
+            </button>
+        }
+    </div>
+
+    <div class="selected-events">
+
+        <div class="selected-events-heading">
+            <div>
+                <span class="calendar-label">Selected date</span>
+                <h4>@SelectedDate.ToString("dddd, MMMM d")</h4>
+            </div>
+
+            <span class="event-count">
+                @SelectedDateEvents.Count
+                @(SelectedDateEvents.Count == 1 ? "Event" : "Events")
+            </span>
+        </div>
+
+        @if (SelectedDateEvents.Count == 0)
+        {
+            <div class="empty-events">
+                <div class="empty-events-icon">
+                    <i class="bi bi-calendar2-check"></i>
+                </div>
+
+                <div>
+                    <h5>No events scheduled</h5>
+                    <p>There are no programme events for this date.</p>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="calendar-event-list">
+                @foreach (var calendarEvent in SelectedDateEvents)
+                {
+                    <article class="calendar-event-item">
+
+                        <div class="calendar-event-time">
+                            <i class="bi bi-clock"></i>
+                            <span>@calendarEvent.StartDate.ToString("h:mm tt")</span>
+                        </div>
+
+                        <div class="calendar-event-details">
+                            <h5>@calendarEvent.Title</h5>
+
+                            @if (!string.IsNullOrWhiteSpace(calendarEvent.Location))
+                            {
+                                <span>
+                                    <i class="bi bi-geo-alt"></i>
+                                    @calendarEvent.Location
+                                </span>
+                            }
+                        </div>
+
+                        <button type="button"
+                                class="calendar-view-button"
+                                @onclick="() => ViewEvent(calendarEvent)">
+                            View
+                            <i class="bi bi-arrow-right"></i>
+                        </button>
+
+                    </article>
+                }
+            </div>
+        }
+
+    </div>
+
+</div>
+
+@code {
+    [Parameter]
+    public List<CalendarEvent> Events { get; set; } = new();
+
+    [Parameter]
+    public EventCallback<CalendarEvent> OnEventSelected { get; set; }
+
+    private DateTime CurrentMonth { get; set; } =
+        new(DateTime.Today.Year, DateTime.Today.Month, 1);
+
+    private DateTime SelectedDate { get; set; } = DateTime.Today;
+
+    private readonly string[] Weekdays =
+    {
+        "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
+    };
+
+    private List<CalendarDay> CalendarDays =>
+        BuildCalendarDays();
+
+    private List<CalendarEvent> SelectedDateEvents =>
+        GetEventsForDate(SelectedDate);
+
+    private List<CalendarDay> BuildCalendarDays()
+    {
+        var firstDayOfMonth =
+            new DateTime(CurrentMonth.Year, CurrentMonth.Month, 1);
+
+        var firstCalendarDate =
+            firstDayOfMonth.AddDays(-(int)firstDayOfMonth.DayOfWeek);
+
+        var days = new List<CalendarDay>();
+
+        for (var i = 0; i < 42; i++)
+        {
+            var date = firstCalendarDate.AddDays(i);
+
+            days.Add(new CalendarDay
+            {
+                Date = date,
+                IsCurrentMonth = date.Month == CurrentMonth.Month &&
+                                 date.Year == CurrentMonth.Year
+            });
+        }
+
+        return days;
+    }
+
+    private List<CalendarEvent> GetEventsForDate(DateTime date)
+    {
+        return Events
+            .Where(calendarEvent =>
+                calendarEvent.StartDate.Date == date.Date)
+            .OrderBy(calendarEvent => calendarEvent.StartDate)
+            .ToList();
+    }
+
+    private void SelectDate(DateTime date)
+    {
+        SelectedDate = date;
+
+        if (date.Month != CurrentMonth.Month ||
+            date.Year != CurrentMonth.Year)
+        {
+            CurrentMonth =
+                new DateTime(date.Year, date.Month, 1);
+        }
+    }
+
+    private void PreviousMonth()
+    {
+        CurrentMonth = CurrentMonth.AddMonths(-1);
+    }
+
+    private void NextMonth()
+    {
+        CurrentMonth = CurrentMonth.AddMonths(1);
+    }
+
+    private void GoToToday()
+    {
+        SelectedDate = DateTime.Today;
+        CurrentMonth =
+            new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+    }
+
+    private async Task ViewEvent(CalendarEvent calendarEvent)
+    {
+        if (OnEventSelected.HasDelegate)
+        {
+            await OnEventSelected.InvokeAsync(calendarEvent);
+        }
+    }
+
+    private string GetDayCssClass(CalendarDay day)
+    {
+        var classes = new List<string>
+        {
+            "calendar-day"
+        };
+
+        if (!day.IsCurrentMonth)
+        {
+            classes.Add("outside-month");
+        }
+
+        if (day.Date.Date == DateTime.Today)
+        {
+            classes.Add("today");
+        }
+
+        if (day.Date.Date == SelectedDate.Date)
+        {
+            classes.Add("selected");
+        }
+
+        if (GetEventsForDate(day.Date).Count > 0)
+        {
+            classes.Add("has-events");
+        }
+
+        return string.Join(" ", classes);
+    }
+
+    private sealed class CalendarDay
+    {
+        public DateTime Date { get; set; }
+
+        public bool IsCurrentMonth { get; set; }
+    }
+
+    public class CalendarEvent
+    {
+        public int EventId { get; set; }
+
+        public int ProgramId { get; set; }
+
+        public string Title { get; set; } = string.Empty;
+
+        public string Location { get; set; } = string.Empty;
+
+        public DateTime StartDate { get; set; }
+
+        public DateTime? EndDate { get; set; }
+    }
+}

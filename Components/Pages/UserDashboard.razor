@@ -2,128 +2,210 @@
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.Authorization
 @using System.Security.Claims
+@using GPACARICOM.Services.API
+@using GPACARICOM.Models
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@using GPACARICOM.Services.API
+@inject NavigationManager Navigation
+@inject ProgramApiService programApiService;
 @attribute [Authorize]
 
 <PageTitle>Dashboard</PageTitle>
 
-<div class="dashboard">
+<div class="dashboard-page">
 
+    <section class="dashboard-hero">
+        <div class="hero-content">
+            <div class="hero-icon">
+                <i class="bi bi-person-circle"></i>
+            </div>
 
-    <div class="welcome-card">
-        <div>
-            <h2>Welcome Back, @userName 👋</h2>
-            <p>You have <strong>3</strong> upcoming programmes.</p>
+            <div>
+                <span class="hero-label">Personal Dashboard</span>
+                <h1>Welcome back, @userName </h1>
+                <p>
+                    You have <strong>@programs.Count upcoming programmes</strong> waiting for you.
+                </p>
+            </div>
         </div>
 
-        <button class="primary-btn">
+        <button class="browse-button"
+                @onclick='() => Navigation.NavigateTo("/our-programs")'>
+            <i class="bi bi-grid-fill"></i>
             Browse Programmes
         </button>
-    </div>
+    </section>
 
-    <div class="dashboard-grid">
+    <section class="dashboard-statistics">
 
-        <section class="calendar-card">
-
-            <h3>
-                <i class="bi bi-calendar3"></i>
-                Calendar
-            </h3>
-            <!-- Replace later with a real calendar -->
-            <div class="calendar-placeholder">
-                Calendar Component
+        <div class="stat-card">
+            <div class="stat-icon stat-icon-blue">
+                <i class="bi bi-calendar-event"></i>
             </div>
-
-        </section>
-
-        <section class="events-card">
-
-            <h3>
-                Upcoming Events
-            </h3>
-
-            <div class="event">
-
-                <div>
-                    <h4>Drone Safety Workshop</h4>
-                    <span>15 July 2026 • 9:00 AM</span>
-                </div>
-
-                <button>
-                    View
-                </button>
-
-            </div>
-
-            <div class="event">
-
-                <div>
-                    <h4>GIS Fundamentals</h4>
-                    <span>22 July 2026 • 10:00 AM</span>
-                </div>
-
-                <button>
-                    View
-                </button>
-
-            </div>
-
-            <div class="event">
-
-                <div>
-                    <h4>Remote Pilot Training</h4>
-                    <span>29 July 2026 • 1:00 PM</span>
-                </div>
-
-                <button>
-                    View
-                </button>
-
-            </div>
-
-        </section>
-
-    </div>
-
-    <section class="history-card">
-
-        <h3>
-            Past Events
-        </h3>
-
-        <div class="history-item">
 
             <div>
-
-                <h4>Drone Mapping Essentials</h4>
-
-                <span>
-                    Completed June 18, 2026
-                </span>
-
+                <span class="stat-label">Upcoming</span>
+                <strong>@programs.Count</strong>
             </div>
-
-            <button>
-                Certificate
-            </button>
-
         </div>
 
-        <div class="history-item">
-
-            <div>
-
-                <h4>UAV Regulations</h4>
-
-                <span>
-                    Completed May 30, 2026
-                </span>
-
+        <div class="stat-card">
+            <div class="stat-icon stat-icon-green">
+                <i class="bi bi-check-circle"></i>
             </div>
 
-            <button>
-                Certificate
-            </button>
+            <div>
+                <span class="stat-label">Completed</span>
+                <strong>2</strong>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon stat-icon-yellow">
+                <i class="bi bi-award"></i>
+            </div>
+
+            <div>
+                <span class="stat-label">Certificates</span>
+                <strong>2</strong>
+            </div>
+        </div>
+
+    </section>
+
+    <div class="dashboard-main-grid">
+
+        <section class="dashboard-card calendar-card">
+
+            <div class="card-heading">
+                <div>
+                    <span class="section-label">Schedule</span>
+
+                    <h2>
+                        <i class="bi bi-calendar3"></i>
+                        Calendar
+                    </h2>
+                </div>
+
+                <button class="icon-button" title="Calendar options">
+                    <i class="bi bi-three-dots"></i>
+                </button>
+            </div>
+
+            <div class="calendar-placeholder">
+                <div class="calendar-placeholder-icon">
+                    <i class="bi bi-calendar-week"></i>
+                </div>
+
+                <h3>Calendar Component</h3>
+            <Calendar/>
+            </div>
+
+        </section>
+
+        <section class="dashboard-card events-card">
+
+            <div class="card-heading">
+                <div>
+                    <span class="section-label">Next on your schedule</span>
+                    <h2>Upcoming Events</h2>
+                </div>
+
+                <span class="count-badge">@programs.Count Events</span>
+            </div>
+
+            <div class="event-list">
+
+                @for(var i = 0; i < programs.Count; i++){
+                    var temp_program = programs[i];
+
+                    <article class="event-item">
+                    <div class="event-date">
+                            <span> @temp_program.programDate.ToString("MMM")</span>
+                            <strong>@temp_program.programDate.Day</strong>
+                    </div>
+
+                    <div class="event-details">
+                            <h3> @temp_program.programName </h3>
+
+                        <span>
+                            <i class="bi bi-clock"></i>
+                                @temp_program.programDate.ToString("HH:mm")
+                        </span>
+                    </div>
+
+                    <button class="view-button">
+                        View
+                        <i class="bi bi-arrow-right"></i>
+                    </button>
+                </article>
+                
+                }
+
+
+                
+            </div>
+
+        </section>
+
+    </div>
+
+    <section class="dashboard-card history-card">
+
+        <div class="card-heading">
+            <div>
+                <span class="section-label">Your activity</span>
+                <h2>Past Events</h2>
+            </div>
+
+            <span class="count-badge">2 Completed</span>
+        </div>
+
+        <div class="history-list">
+
+            <article class="history-item">
+
+                <div class="history-status-icon">
+                    <i class="bi bi-check-lg"></i>
+                </div>
+
+                <div class="history-details">
+                    <h3>Drone Mapping Essentials</h3>
+
+                    <span>
+                        <i class="bi bi-calendar-check"></i>
+                        Completed June 18, 2026
+                    </span>
+                </div>
+
+                <button class="certificate-button">
+                    <i class="bi bi-award"></i>
+                    Certificate
+                </button>
+
+            </article>
+
+            <article class="history-item">
+
+                <div class="history-status-icon">
+                    <i class="bi bi-check-lg"></i>
+                </div>
+
+                <div class="history-details">
+                    <h3>UAV Regulations</h3>
+
+                    <span>
+                        <i class="bi bi-calendar-check"></i>
+                        Completed May 30, 2026
+                    </span>
+                </div>
+
+                <button class="certificate-button">
+                    <i class="bi bi-award"></i>
+                    Certificate
+                </button>
+
+            </article>
 
         </div>
 
@@ -131,26 +213,39 @@
 
 </div>
 
-@code{
-    string userName;
+@code {
+    private string userName = "User";
+    private List<ProgramModel> programs = new List<ProgramModel>();
 
     protected override async Task OnInitializedAsync()
-     {
-         await checkLoginStatus();
-     }
-
-    public async Task checkLoginStatus()
     {
-
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-        if (user.Identity?.IsAuthenticated ?? false == true)
-        {
-
-            userName = user.FindFirst(ClaimTypes.Name)?.Value ?? "No User";
-        }
-
+        await CheckLoginStatus();
+        await getAllPrograms();
+      
     }
 
+
+    private async Task CheckLoginStatus()
+    {
+        var authState =
+            await AuthenticationStateProvider.GetAuthenticationStateAsync();
+
+        var user = authState.User;
+
+        if (user.Identity?.IsAuthenticated == true)
+        {
+            userName =
+                user.FindFirst(ClaimTypes.Name)?.Value
+                ?? "User";
+        }
+    }
+
+    private async Task getAllPrograms(){
+     
+        var results  = await programApiService.GetAllPrograms();
+        programs = results.data
+         .Where(p => p.programDate.Date >= DateTime.Today)
+         .ToList();
+    }
 
 }
