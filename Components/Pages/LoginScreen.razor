@@ -1,35 +1,130 @@
-﻿@page "/Login"
-<RadzenCard class="rz-my-12 rz-mx-auto rz-p-4 rz-p-md-12" style="max-width: 600px;">
-    <RadzenTemplateForm Data=@("LoginWithDefaultValues")>
-        <RadzenLogin AllowRegister="true" AllowResetPassword="true" Username=@userName Password=@password
-                    AllowRememberMe="true" RememberMe="@rememberMe"
-                    Login=@(args => OnLogin(args, "Login with default values"))
-                    ResetPassword=@(args => OnResetPassword(args, "Login with default values"))
-                    Register=@(args => OnRegister("Login with default values")) />
-    </RadzenTemplateForm>
-</RadzenCard>
+﻿@page "/login"
+@layout LogInLayout
+@rendermode InteractiveServer
 
+<div class="login-page">
 
-@code {
-    string userName = "admin";
-    string password = "admin";
-    bool rememberMe = true;
+    <!-- Left Side -->
+    <div class="login-left">
 
-    
+        <div class="brand-content">
 
-    void OnLogin(LoginArgs args, string name)
-    {
+            <img src="images/logomain.png"
+                 class="brand-logo"
+                 alt="Logo" />
+
+            <h1>Welcome Back</h1>
+
+            <p>
+                Sign in to access your training programs,
+                certifications, courses and account dashboard.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Right Side -->
+    <div class="login-right">
        
-    }
-
-    void OnRegister(string name)
-    {
         
-    }
+        <div class="login-card">
+            <button type="button"
+                    class="login-close-btn"
+                    aria-label="Close login"
+                    onclick="goBackToPreviousPage()">
+                <i class="bi bi-x-lg"></i>
+            </button>
 
-    void OnResetPassword(string value, string name)
-    {
-       
-    }
-}
+            <h2>Sign In</h2>
 
+            <p class="text-muted mb-4">
+                Enter your credentials below
+            </p>
+
+            <form method="post" action="/account/login">
+
+                <div class="mb-3">
+                    <label>Email Address</label>
+                    <input class="form-control"
+                           type="email"
+                           name="Username"
+                           placeholder="john@email.com" />
+                </div>
+                <div class="mb-2">
+
+                    <label>Password</label>
+
+                    <input class="form-control"
+                           type="password"
+                           name="Password"
+                           placeholder="••••••••" />
+                </div>
+                <div class="login-options">
+                    <div>
+                        <input type="checkbox"
+                               id="remember" />
+
+                        <label for="remember">
+                            Remember Me
+                        </label>
+
+                    </div>
+
+                    <a href="/forgot-password">
+                        Forgot Password?
+                    </a>
+
+                </div>
+
+                <button class="btn login-btn w-100 mt-3"
+                        type="submit">
+
+                    Sign In
+
+                </button>
+
+            </form>
+
+            @* <div class="divider">
+                <span>or continue with</span>
+            </div> *@
+
+          @*   <div class="social-buttons">
+
+                <button class="btn social-btn">
+                    <i class="bi bi-google"></i>
+                    Google
+                </button>
+
+                <button class="btn social-btn">
+                    <i class="bi bi-microsoft"></i>
+                    Microsoft
+                </button>
+
+            </div> *@
+
+            <div class="signup-text">
+
+                Don't have an account?
+
+                <a href="/register">
+                    Create Account
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<script>
+    function goBackToPreviousPage() {
+        if (window.history.length > 1) {
+            window.history.back();
+        } else {
+            window.location.href = "/";
+        }
+    }
+</script>

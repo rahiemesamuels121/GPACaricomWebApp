@@ -1,0 +1,49 @@
+﻿@implements IDisposable
+
+@inject ApiClient ApiClient
+@inject NavigationManager Navigation
+
+@code {
+
+    private PeriodicTimer? timer;
+    private CancellationTokenSource cts = new();
+
+    protected override void OnInitialized()
+    {
+        timer = new PeriodicTimer(TimeSpan.FromSeconds(30));
+
+        _ = MonitorAuthentication();
+    }
+
+    private async Task MonitorAuthentication()
+    {
+        try
+        {
+            while (await timer!.WaitForNextTickAsync(cts.Token))
+            {
+                var authenticated = await ApiClient.IsAuthenticatedAsync();
+
+                if (!authenticated)
+                {
+                    Navigation.NavigateTo("/login", true);
+                    return;
+                }
+            }
+        }
+        catch (OperationCanceledException)
+        {
+        }
+        catch
+        {
+         //   Navigation.NavigateTo("/login", true);
+        }
+    }
+
+    public void Dispose()
+    {
+        cts.Cancel();
+        timer?.Dispose();
+        cts.Dispose();
+    }
+
+}

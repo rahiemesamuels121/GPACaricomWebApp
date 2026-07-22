@@ -27,40 +27,28 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Mac/Home/Documents/dev/Components/AuthMonitor.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBdXRoTW9uaXRvci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Mac/Home/Documents/dev/Components/Carosel.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDYXJvc2VsLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Mac/Home/Documents/dev/Components/Pages/ContactUs.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250YWN0VXMucmF6b3I=
+[C:/Mac/Home/Documents/dev/Components/Layout/LogInLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTG9nSW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Mac/Home/Documents/dev/Components/Pages/Error.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Mac/Home/Documents/dev/Components/Pages/Home.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Mac/Home/Documents/dev/Components/Pages/LoginScreen.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xMb2dpblNjcmVlbi5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Mac/Home/Documents/dev/Components/Pages/NotFound.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xOb3RGb3VuZC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Mac/Home/Documents/dev/Components/Pages/ProgramScreen.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9ncmFtU2NyZWVuLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Mac/Home/Documents/dev/Components/Pages/WhoWeAre.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xXaG9XZUFyZS5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Mac/Home/Documents/dev/Components/Pages/YouthInBusiness.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xZb3V0aEluQnVzaW5lc3MucmF6b3I=
+[C:/Mac/Home/Documents/dev/Components/Pages/OurServices.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xPdXJTZXJ2aWNlcy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Mac/Home/Documents/dev/Components/Routes.razor]
@@ -70,6 +58,18 @@ build_metadata.AdditionalFiles.CssScope =
 [C:/Mac/Home/Documents/dev/Components/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xfSW1wb3J0cy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Mac/Home/Documents/dev/Components/Calendar.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDYWxlbmRhci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-7ej0boo1d6
+
+[C:/Mac/Home/Documents/dev/Components/Certificate.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDZXJ0aWZpY2F0ZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-cz15jgopv4
+
+[C:/Mac/Home/Documents/dev/Components/Layout/Footer.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcRm9vdGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-kew54ys61a
 
 [C:/Mac/Home/Documents/dev/Components/Layout/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbkxheW91dC5yYXpvcg==
@@ -82,3 +82,43 @@ build_metadata.AdditionalFiles.CssScope = b-9jp7j3w9be
 [C:/Mac/Home/Documents/dev/Components/Layout/ReconnectModal.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcUmVjb25uZWN0TW9kYWwucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-9n3jbv530q
+
+[C:/Mac/Home/Documents/dev/Components/Pages/ContactUs.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb250YWN0VXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-cfv9761kuw
+
+[C:/Mac/Home/Documents/dev/Components/Pages/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-8ly43kkbhr
+
+[C:/Mac/Home/Documents/dev/Components/Pages/LoginScreen.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xMb2dpblNjcmVlbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-7gorfqn6y2
+
+[C:/Mac/Home/Documents/dev/Components/Pages/ProgramDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9ncmFtRGV0YWlscy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-gv0qu3q0yo
+
+[C:/Mac/Home/Documents/dev/Components/Pages/ProgramRegistration.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9ncmFtUmVnaXN0cmF0aW9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-hlqgz1m7fz
+
+[C:/Mac/Home/Documents/dev/Components/Pages/ProgramScreen.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9ncmFtU2NyZWVuLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-f8q90czt1f
+
+[C:/Mac/Home/Documents/dev/Components/Pages/SignUp.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTaWduVXAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-1vu3ufe3df
+
+[C:/Mac/Home/Documents/dev/Components/Pages/UserDashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc2VyRGFzaGJvYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-9pf657u9ce
+
+[C:/Mac/Home/Documents/dev/Components/Pages/VerifyEmailPending.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xWZXJpZnlFbWFpbFBlbmRpbmcucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-93cxpviyh6
+
+[C:/Mac/Home/Documents/dev/Components/Pages/WhoWeAre.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xXaG9XZUFyZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-z7fh4v8k9x

@@ -1,11 +1,13 @@
 @import url('https://googleapis.com');
 :root {
-    --primary-blue: #023e8a;
+    --primary-blue: #00A9CE;
     --primary-red: #CE1126;
-    --primary-yellow: #FCD115;
-    --secondary-blue: #caf0f8;
-    --secondary-red: #fff0f3;
+    --primary-yellow: #FDB813;
+    --primary-green: #A7C957;
+    --secondary-blue: #1A2E3B;
+    --secondary-red: #FDEDED;
     --secondary-yellow: #fffae5;
+    --secondary-green: #E3FCEF;
     --gold: #D4A017;
     --background: #F5F7FA;
     --surface: #FFFFFF;
@@ -76,9 +78,9 @@ html, body {
         text-align: start;
     }
 
-    .navbar {
-        background-color: #3498db; /* Replace with your color */
-    }
+    /*.navbar {
+        background-color: #3498db;*/ /* Replace with your color */
+    /*}*/
 
     .custom-card {
         padding: 20px;

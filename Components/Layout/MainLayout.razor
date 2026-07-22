@@ -1,22 +1,20 @@
 ﻿@inherits LayoutComponentBase
+@inject IJSRuntime JS
 @inject NavigationManager NavigationManager
 
 <div class="page">
     <header>
      <NavMenu />
     </header>
+<div id="top"></div>
 
     <main class="container-fluid">
        
             @Body
     </main>
-    <footer>
-        <p>&copy; 2024 - All rights reserved</p>
-        </footer>
+   <Footer/>
 </div>
 
-<!-- Load Bootstrap Icons (CDN). Placed here so icons are available when layout renders. -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
 <div id="blazor-error-ui" data-nosnippet>
     An unhandled error has occurred.
@@ -30,5 +28,9 @@
         // Navigate using a relative path
        
         NavigationManager.NavigateTo("/Login", true);
+    }
+    private async Task ScrollToTop()
+    {
+        await JS.InvokeVoidAsync("scrollToTop");
     }
 }

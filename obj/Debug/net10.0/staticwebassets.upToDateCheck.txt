@@ -1,8 +1,11 @@
 wwwroot\app.css
 wwwroot\favicon.png
 wwwroot\images\bg.png
+wwwroot\images\login-bg.JPG
 wwwroot\images\logomain.png
+wwwroot\images\principal_officer.png
 wwwroot\js\carousel-init.js
+wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css
@@ -48,9 +51,8 @@ wwwroot\lib\bootstrap\dist\js\bootstrap.js.map
 wwwroot\lib\bootstrap\dist\js\bootstrap.min.js
 wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
 Components\Layout\ReconnectModal.razor.js
-C:\Users\webdeveloper\.nuget\packages\microsoft.aspnetcore.app.internal.assets\10.0.9\build\..\_framework\blazor.web.js
-C:\Users\webdeveloper\.nuget\packages\microsoft.aspnetcore.app.internal.assets\10.0.9\build\..\_framework\blazor.server.js
-C:\Mac\Home\Documents\dev\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css
+C:\Users\webdeveloper\.nuget\packages\microsoft.aspnetcore.app.internal.assets\10.0.10\build\..\_framework\blazor.web.js
+C:\Users\webdeveloper\.nuget\packages\microsoft.aspnetcore.app.internal.assets\10.0.10\build\..\_framework\blazor.server.js
 C:\Mac\Home\Documents\dev\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map
 C:\Mac\Home\Documents\dev\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css
 C:\Mac\Home\Documents\dev\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css.map
@@ -67,13 +69,13 @@ C:\Mac\Home\Documents\dev\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.
 C:\Mac\Home\Documents\dev\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css
 C:\Mac\Home\Documents\dev\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
 C:\Mac\Home\Documents\dev\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
-C:\Mac\Home\Documents\dev\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
+C:\Mac\Home\Documents\dev\wwwroot\js\site.js
+C:\Mac\Home\Documents\dev\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js
 C:\Mac\Home\Documents\dev\wwwroot\app.css
 C:\Mac\Home\Documents\dev\wwwroot\js\carousel-init.js
-C:\Users\webdeveloper\.nuget\packages\microsoft.aspnetcore.app.internal.assets\10.0.9\_framework\blazor.server.js
-C:\Users\webdeveloper\.nuget\packages\microsoft.aspnetcore.app.internal.assets\10.0.9\_framework\blazor.web.js
+C:\Users\webdeveloper\.nuget\packages\microsoft.aspnetcore.app.internal.assets\10.0.10\_framework\blazor.web.js
+C:\Users\webdeveloper\.nuget\packages\microsoft.aspnetcore.app.internal.assets\10.0.10\_framework\blazor.server.js
 C:\Mac\Home\Documents\dev\Components\Layout\ReconnectModal.razor.js
-C:\Mac\Home\Documents\dev\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js
 C:\Mac\Home\Documents\dev\wwwroot\lib\bootstrap\dist\js\bootstrap.js.map
 C:\Mac\Home\Documents\dev\wwwroot\lib\bootstrap\dist\js\bootstrap.js
 C:\Mac\Home\Documents\dev\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js.map
@@ -99,3 +101,5 @@ C:\Mac\Home\Documents\dev\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl
 C:\Mac\Home\Documents\dev\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css.map
 C:\Mac\Home\Documents\dev\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css
 C:\Mac\Home\Documents\dev\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css.map
+C:\Mac\Home\Documents\dev\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css
+C:\Mac\Home\Documents\dev\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map

@@ -2,117 +2,201 @@
 @rendermode InteractiveServer
 @using GPACARICOM.Models
 @using GPACARICOM.Components
-@using GPACARICOM.Services.Interfaces
+@using GPACARICOM.Services.API
 @inject NavigationManager NavigationManager
-@inject IArticleService ArticleService;
-@inject ItestimonialService TestimonialService;
+
+@inject ArticleApiService articleapiservice;
+@inject TestimonialApiService testimonialApiService;
 
 
 <PageTitle>Home</PageTitle>
 <!-- Infinite Carousel -->
-<RadzenStack>
-   
+
      <div style="padding : 0px">
         <Carosel></Carosel>
 
      </div>
-  
+    <div class="homepage-hero">
+        <div class="container">
 
-    <div style="padding-left:200px; padding-right:200px;">
-      
-            <h1 style="padding:20px">
-                <b>
-
-                Things to Know
-                </b>
+            <h1>
+                Empowering Caribbean Youth Through
+                Education, Leadership & Opportunity
             </h1>
 
-            <RadzenStack Gap="1rem" Orientation="Orientation.Horizontal" Wrap="FlexWrap.Wrap">
+            <p>
+                GPA Caribbean provides programs,
+                mentorship, and opportunities that help
+                young people achieve academic and professional success.
+            </p>
 
-    
-                @if (isLoadingArticles)
-                {
-                    <div class="center-div">
-                        <RadzenProgressBarCircular ShowValue="true" Mode="ProgressBarMode.Indeterminate" Size="ProgressBarCircularSize.Large" AriaLabel="Loading, large">
-                            <Template>Loading</Template>
-                        </RadzenProgressBarCircular>
-                    </div>
-                }
-                else
-                {
-                    @for (int i = 0; i < articleList.Count; i++)
-                    {
-                        <div class="custom-card" style=" width: 20rem;  background-color: var(--secondary-yellow);">
-                            <h3 style="color:#05163D"> @articleList[i].title</h3>
-                            <p>@articleList[i].CreatedDate</p>
-                            <hr />
-                            <p>@articleList[i].shortDescription</p>
-                            <div style="justify-content:flex-end">
-                                <a href=datalist[i].hyperlink target="_blank"> Read More</a>
-                            </div>
+            <div class="hero-buttons">
+                <a href="/our-programs" class="btn btn-warning">
+                    Explore Programs
+                </a>
 
-                        </div>
-                    }
-                }
+            <a href="/verify-email" class="btn btn-outline-light">
+                    Learn About Us
+                </a>
+            </div>
 
-   
-            </RadzenStack>
- 
-     
+        </div>
+    </div>
+<section class="section-spacing">
 
-        <h1 style="padding:20px">
-            <b>
-                Testimonials
-
-            </b>
-            </h1>
-
-        
-
-            @if (isLoadingTestimonials)
-            {
-                <div class="center-div">
-                    <RadzenProgressBarCircular ShowValue="true" Mode="ProgressBarMode.Indeterminate" Size="ProgressBarCircularSize.Large" AriaLabel="Loading, large">
-                        <Template>Loading</Template>
-                    </RadzenProgressBarCircular>
-                </div>
-            }
-            else
-            {
-                @foreach (var testimonial in testimonialList)
-
-                {
-                    <div class="custom-card" >
-                        <RadzenStack>
-                            <RadzenGravatar Email="info@gpa.com" />
-                            <h7>@testimonial.username </h7>
-                        </RadzenStack>
-
-                        <h5> @testimonial.testimonialTitle</h5>
-                        <p>@testimonial.testimonialbody</p>
-                        <p> @testimonial.createdDate</p>
-                    </div>
-                }
-            }
+    <div class="section-header">
+        <h2>Latest News & Updates</h2>
     </div>
 
-</RadzenStack>
+    @if (isLoadingArticles)
+    {
+        <div class="center-div">
+            <RadzenProgressBarCircular ShowValue="true"
+                                       Mode="ProgressBarMode.Indeterminate">
+            </RadzenProgressBarCircular>
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+
+            @for (int i = 0; i < articleList.Count; i++)
+            {
+                var article = articleList[i];
+                var accent = cardColors[i % cardColors.Length];
+
+                <div class="col-lg-4">
+
+                    <div class="news-card">
+
+                        <div class="news-accent"
+                             style="background:var(@accent)">
+                        </div>
+
+                        <div class="p-4">
+
+                            <small>
+                                @article.CreatedDate.ToString("MMM dd, yyyy")
+                            </small>
+
+                            <h4>
+                                @article.title
+                            </h4>
+
+                            <p>
+                                @article.shortDescription
+                            </p>
+
+                            <a href="@article.hyperlink"
+                               target="_blank">
+                                Read More →
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    }
+
+</section>
+<section class="testimonial-section">
+    @* <section class="cta-section" style="background-color:grey">
+
+        <h2>
+            Ready to Get Involved?
+        </h2>
+
+        <p>
+            Join one of our programs and become part
+            of a growing Caribbean network of leaders.
+        </p>
+
+        <a href="/contact-us"
+           class="btn btn-warning btn-lg">
+            Contact Us
+        </a>
+
+    </section> *@
+    <section class="section-spacing">
+     </section>
+
+
+
+    <div class="section-header">
+        <h2>What People Are Saying</h2>
+    </div>
+
+    <div class="row g-4">
+
+        @foreach (var testimonial in testimonialList)
+        {
+            <div class="col-lg-4">
+
+                <div class="testimonial-card">
+
+                    <RadzenGravatar Email="info@gpa.com" />
+
+                    <h5>
+                        @testimonial.username
+                    </h5>
+
+                    <h6>
+                        @testimonial.testimonialTitle
+                    </h6>
+
+                    <p>
+                        "@testimonial.testimonialbody"
+                    </p>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</section>
+
 
 
 @code {
-    private List<Article> articleList;
-    private List<TestimonialModel> testimonialList;
+    private readonly string[] cardColors =
+{
+    "--primary-blue",
+    "--primary-yellow",
+    "--primary-red",
+};
+    private List<Article> articleList= new();
+    private List<TestimonialModel> testimonialList = new();
     private bool isLoadingArticles = true;
     private bool isLoadingTestimonials = true;
 
 
     protected override async Task OnInitializedAsync()
     {
-        // Simulate a delay or call an actual async API
-        articleList = await ArticleService.GetArticlesAsync();
-        isLoadingArticles = false;
-        testimonialList = await TestimonialService.GetTestimonialsAsync();
-        isLoadingTestimonials = false;
+        try
+        {
+            var articlesTask = articleapiservice.GetAllArticles();
+            var testimonialsTask = testimonialApiService.GetAllTestimonials();
+
+            await Task.WhenAll(articlesTask,testimonialsTask);
+            
+            articleList = articlesTask.Result.data!;
+           testimonialList = testimonialsTask.Result.data!;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        finally
+        {
+            isLoadingArticles = false;
+            isLoadingTestimonials = false;
+        }
 
 
        
@@ -128,96 +212,3 @@
     }
 
 }
-
-<style>
-    #catalogCarousel {
-        margin-bottom: 3rem;
-        border-radius: 0.5rem;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-    }
-
-    .carousel-image {
-        height: 500px;
-        object-fit: cover;
-    }
-
-    .carousel-caption {
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-        padding: 2rem;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        border-radius: 0 0 0.5rem 0.5rem;
-    }
-
-        .carousel-caption h3 {
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .carousel-caption p {
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .carousel-caption h4 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #ffc107;
-        }
-
-    .carousel-indicators [data-bs-target] {
-        height: 10px;
-        width: 10px;
-        border-radius: 50%;
-    }
-
-    .catalog-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-    }
-
-    .catalog-card {
-        border: 1px solid #ddd;
-        border-radius: 0.5rem;
-        overflow: hidden;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-        .catalog-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-        }
-
-    .catalog-image {
-        width: 100%;
-        height: 250px;
-        object-fit: cover;
-    }
-
-    .catalog-content {
-        padding: 1.5rem;
-    }
-
-        .catalog-content h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .catalog-content p {
-            font-size: 0.95rem;
-            color: #666;
-            margin-bottom: 1rem;
-        }
-
-        .catalog-content h4 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #ffc107;
-        }
-</style>
