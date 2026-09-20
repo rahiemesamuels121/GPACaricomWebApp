@@ -7,6 +7,7 @@ namespace GPACARICOM.Models
         public int programid { get; set; }
         public string programName { get; set; } = string.Empty;
         public string programDescription { get; set; } = string.Empty;
+        public string? ImagePath { get; set; }
         public DateTime programDate { get; set; } 
         public DateTime CreatedDate { get ; set ; }
         public string CreatedBy { get; set; } = string.Empty;

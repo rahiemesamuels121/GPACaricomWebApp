@@ -21,8 +21,8 @@ builder.Services
         options.AccessDeniedPath = "/access-denied";
         options.Cookie.SecurePolicy = CookieSecurePolicy.None;
         options.Cookie.Name = "GPACARICOM.Auth";
-        options.SlidingExpiration = false;
-        options.ExpireTimeSpan = TimeSpan.FromMinutes(15);
+        options.SlidingExpiration = true;
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
     });
 builder.Services.AddAuthorization();
 //builder.Services.AddDistributedMemoryCache();

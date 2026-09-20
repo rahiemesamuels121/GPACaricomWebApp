@@ -1,0 +1,1252 @@
+﻿@page "/admin"
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+@inject NavigationManager Navigation
+
+<PageTitle>Admin Dashboard | GPA Caribbean</PageTitle>
+
+<div class="admin-page">
+
+    <!-- ================= HEADER ================= -->
+
+    <section class="admin-header">
+
+        <div>
+            <span class="admin-eyebrow">GPA CARIBBEAN</span>
+
+            <h1>Admin Dashboard</h1>
+
+            <p>
+                Manage programmes, registrations, users and website content
+                from one central location.
+            </p>
+        </div>
+
+        <button class="primary-action"
+                @onclick="AddNewProgram">
+
+            <i class="bi bi-plus-lg"></i>
+
+            Add New Program
+
+        </button>
+
+    </section>
+
+
+    <!-- ================= STATS ================= -->
+
+    <section class="stats-grid">
+
+        <div class="stat-card">
+
+            <div class="stat-icon blue">
+                <i class="bi bi-calendar-event"></i>
+            </div>
+
+            <div>
+                <span class="stat-label">Total Programs</span>
+                <h2>@TotalPrograms</h2>
+                <span class="stat-caption">
+                    Programs currently registered
+                </span>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon yellow">
+                <i class="bi bi-person-check"></i>
+            </div>
+
+            <div>
+                <span class="stat-label">Applications</span>
+                <h2>@TotalApplications</h2>
+                <span class="stat-caption">
+                    Program applications received
+                </span>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon green">
+                <i class="bi bi-people"></i>
+            </div>
+
+            <div>
+                <span class="stat-label">Participants</span>
+                <h2>@TotalParticipants</h2>
+                <span class="stat-caption">
+                    Registered participants
+                </span>
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon purple">
+                <i class="bi bi-clock-history"></i>
+            </div>
+
+            <div>
+                <span class="stat-label">Upcoming</span>
+                <h2>@UpcomingPrograms</h2>
+                <span class="stat-caption">
+                    Upcoming programmes
+                </span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= QUICK ACTIONS ================= -->
+
+    <section class="dashboard-section">
+
+        <div class="section-heading">
+
+            <div>
+                <span class="section-eyebrow">MANAGEMENT</span>
+                <h2>Quick Actions</h2>
+            </div>
+
+        </div>
+
+
+        <div class="actions-grid">
+
+
+            <!-- ADD PROGRAM -->
+
+            <button class="action-card featured"
+                    @onclick="AddNewProgram">
+
+                <div class="action-icon">
+                    <i class="bi bi-plus-circle"></i>
+                </div>
+
+                <div class="action-content">
+                    <h3>Add New Program</h3>
+
+                    <p>
+                        Create a new GPA Caribbean training,
+                        internship or development programme.
+                    </p>
+
+                    <span class="action-link">
+                        Create Program
+                        <i class="bi bi-arrow-right"></i>
+                    </span>
+                </div>
+
+            </button>
+
+
+
+            <!-- MANAGE PROGRAMS -->
+
+            <button class="action-card"
+                    @onclick="ManagePrograms">
+
+                <div class="action-icon">
+                    <i class="bi bi-journal-text"></i>
+                </div>
+
+                <div class="action-content">
+
+                    <h3>Manage Programs</h3>
+
+                    <p>
+                        View, edit, publish or deactivate
+                        existing programmes.
+                    </p>
+
+                    <span class="action-link">
+                        View Programs
+                        <i class="bi bi-arrow-right"></i>
+                    </span>
+
+                </div>
+
+            </button>
+
+
+
+            <!-- APPLICATIONS -->
+
+            <button class="action-card"
+                    @onclick="ManageApplications">
+
+                <div class="action-icon">
+                    <i class="bi bi-file-earmark-person"></i>
+                </div>
+
+                <div class="action-content">
+
+                    <h3>Applications</h3>
+
+                    <p>
+                        Review individual and organisation
+                        programme applications.
+                    </p>
+
+                    <span class="action-link">
+                        Review Applications
+                        <i class="bi bi-arrow-right"></i>
+                    </span>
+
+                </div>
+
+            </button>
+
+
+
+            <!-- USERS -->
+
+            <button class="action-card"
+                    @onclick="ManageUsers">
+
+                <div class="action-icon">
+                    <i class="bi bi-people"></i>
+                </div>
+
+                <div class="action-content">
+
+                    <h3>Users</h3>
+
+                    <p>
+                        View registered users, organisations
+                        and account information.
+                    </p>
+
+                    <span class="action-link">
+                        Manage Users
+                        <i class="bi bi-arrow-right"></i>
+                    </span>
+
+                </div>
+
+            </button>
+
+
+
+            <!-- CONTENT -->
+
+            <button class="action-card"
+                    @onclick="ManageContent">
+
+                <div class="action-icon">
+                    <i class="bi bi-layout-text-window-reverse"></i>
+                </div>
+
+                <div class="action-content">
+
+                    <h3>Website Content</h3>
+
+                    <p>
+                        Manage articles, testimonials and
+                        other public website information.
+                    </p>
+
+                    <span class="action-link">
+                        Manage Content
+                        <i class="bi bi-arrow-right"></i>
+                    </span>
+
+                </div>
+
+            </button>
+
+
+
+            <!-- REPORTS -->
+
+            <button class="action-card"
+                    @onclick="ViewReports">
+
+                <div class="action-icon">
+                    <i class="bi bi-bar-chart"></i>
+                </div>
+
+                <div class="action-content">
+
+                    <h3>Reports</h3>
+
+                    <p>
+                        View programme registration and
+                        participation statistics.
+                    </p>
+
+                    <span class="action-link">
+                        View Reports
+                        <i class="bi bi-arrow-right"></i>
+                    </span>
+
+                </div>
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= RECENT PROGRAMS ================= -->
+
+    <section class="dashboard-section">
+
+        <div class="section-heading">
+
+            <div>
+                <span class="section-eyebrow">PROGRAMS</span>
+                <h2>Recent Programs</h2>
+            </div>
+
+            <button class="secondary-button"
+                    @onclick="ManagePrograms">
+
+                View All
+
+                <i class="bi bi-arrow-right"></i>
+
+            </button>
+
+        </div>
+
+
+        @if (Programs.Count == 0)
+        {
+            <div class="empty-state">
+
+                <div class="empty-icon">
+                    <i class="bi bi-calendar2-plus"></i>
+                </div>
+
+                <h3>No programs added yet</h3>
+
+                <p>
+                    Create your first programme to begin accepting
+                    registrations.
+                </p>
+
+                <button class="primary-action"
+                        @onclick="AddNewProgram">
+
+                    <i class="bi bi-plus-lg"></i>
+                    Add New Program
+
+                </button>
+
+            </div>
+        }
+        else
+        {
+            <div class="program-table-wrapper">
+
+                <table class="program-table">
+
+                    <thead>
+
+                        <tr>
+                            <th>Program</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Registrations</th>
+                            <th></th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var program in Programs)
+                        {
+                            <tr>
+
+                                <td>
+
+                                    <div class="program-name">
+
+                                        <div class="program-thumbnail">
+
+                                            @if (!string.IsNullOrWhiteSpace(program.ImagePath))
+                                            {
+                                                <img src="@program.ImagePath"
+                                                     alt="@program.ProgramName" />
+                                            }
+                                            else
+                                            {
+                                                <i class="bi bi-image"></i>
+                                            }
+
+                                        </div>
+
+                                        <div>
+
+                                            <strong>
+                                                @program.ProgramName
+                                            </strong>
+
+                                            <span>
+                                                Program #@program.ProgramId
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+
+                                <td>
+                                    @program.ProgramDate.ToString("dd MMM yyyy")
+                                </td>
+
+
+                                <td>
+
+                                    @if (program.ProgramDate >= DateTime.Today)
+                                    {
+                                        <span class="status active">
+                                            Upcoming
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="status completed">
+                                            Completed
+                                        </span>
+                                    }
+
+                                </td>
+
+
+                                <td>
+                                    @program.RegistrationCount
+                                </td>
+
+
+                                <td class="table-actions">
+
+                                    <button title="Edit program"
+                                            @onclick="() => EditProgram(program.ProgramId)">
+
+                                        <i class="bi bi-pencil"></i>
+
+                                    </button>
+
+                                    <button title="View program"
+                                            @onclick="() => ViewProgram(program.ProgramId)">
+
+                                        <i class="bi bi-eye"></i>
+
+                                    </button>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+        }
+
+    </section>
+
+</div>
+
+
+<style>
+
+    /* ===============================
+       PAGE
+    =============================== */
+
+    .admin-page {
+        min-height: 100vh;
+        background: #f5f8fb;
+        padding: 2.5rem;
+    }
+
+
+    /* ===============================
+       HEADER
+    =============================== */
+
+    .admin-header {
+        max-width: 1400px;
+        margin: 0 auto 2rem auto;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+
+        padding: 2.3rem;
+
+        background:
+            linear-gradient(
+                120deg,
+                #073b5c 0%,
+                #075a7d 60%,
+                #0782a1 100%
+            );
+
+        border-radius: 24px;
+
+        color: white;
+
+        box-shadow:
+            0 15px 35px rgba(0, 52, 80, 0.18);
+    }
+
+
+    .admin-eyebrow,
+    .section-eyebrow {
+        display: block;
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        margin-bottom: 0.5rem;
+    }
+
+
+    .admin-eyebrow {
+        color: #FDB813;
+    }
+
+
+    .admin-header h1 {
+        font-size: clamp(2rem, 3vw, 3rem);
+        font-weight: 800;
+        margin: 0 0 0.6rem;
+    }
+
+
+    .admin-header p {
+        margin: 0;
+        max-width: 650px;
+        color: rgba(255,255,255,0.82);
+        font-size: 1rem;
+    }
+
+
+    /* ===============================
+       BUTTONS
+    =============================== */
+
+    .primary-action {
+        border: none;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.55rem;
+
+        padding: 0.95rem 1.4rem;
+
+        border-radius: 12px;
+
+        background: #FDB813;
+        color: #143142;
+
+        font-weight: 800;
+        font-size: 0.95rem;
+
+        cursor: pointer;
+
+        white-space: nowrap;
+
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+    }
+
+
+    .primary-action:hover {
+        transform: translateY(-2px);
+
+        box-shadow:
+            0 10px 25px rgba(253, 184, 19, 0.28);
+    }
+
+
+    .secondary-button {
+        border: 1px solid #dbe5eb;
+
+        background: white;
+
+        padding: 0.7rem 1rem;
+
+        border-radius: 10px;
+
+        color: #075a7d;
+
+        font-weight: 700;
+
+        cursor: pointer;
+
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
+
+    /* ===============================
+       STATS
+    =============================== */
+
+    .stats-grid {
+        max-width: 1400px;
+        margin: 0 auto 2rem auto;
+
+        display: grid;
+        grid-template-columns:
+            repeat(4, minmax(0, 1fr));
+
+        gap: 1.25rem;
+    }
+
+
+    .stat-card {
+        background: white;
+
+        padding: 1.5rem;
+
+        border-radius: 18px;
+
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        border: 1px solid #edf1f4;
+
+        box-shadow:
+            0 8px 24px rgba(0, 44, 72, 0.05);
+    }
+
+
+    .stat-icon {
+        width: 52px;
+        height: 52px;
+
+        border-radius: 15px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 1.35rem;
+    }
+
+
+    .stat-icon.blue {
+        background: #e8f6fb;
+        color: #057b9c;
+    }
+
+
+    .stat-icon.yellow {
+        background: #fff5d9;
+        color: #bd8200;
+    }
+
+
+    .stat-icon.green {
+        background: #e9f8ee;
+        color: #26864a;
+    }
+
+
+    .stat-icon.purple {
+        background: #f2ebff;
+        color: #7451b8;
+    }
+
+
+    .stat-label {
+        display: block;
+        color: #647785;
+        font-size: 0.82rem;
+        font-weight: 700;
+    }
+
+
+    .stat-card h2 {
+        margin: 0.15rem 0;
+        font-size: 1.75rem;
+        color: #143142;
+        font-weight: 800;
+    }
+
+
+    .stat-caption {
+        font-size: 0.75rem;
+        color: #93a0a8;
+    }
+
+
+    /* ===============================
+       SECTIONS
+    =============================== */
+
+    .dashboard-section {
+        max-width: 1400px;
+
+        margin: 0 auto 2rem auto;
+
+        background: white;
+
+        padding: 2rem;
+
+        border-radius: 22px;
+
+        border: 1px solid #edf1f4;
+
+        box-shadow:
+            0 8px 25px rgba(0, 44, 72, 0.04);
+    }
+
+
+    .section-heading {
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 1rem;
+
+        margin-bottom: 1.5rem;
+    }
+
+
+    .section-eyebrow {
+        color: #0984a8;
+    }
+
+
+    .section-heading h2 {
+        margin: 0;
+
+        color: #173747;
+
+        font-size: 1.4rem;
+
+        font-weight: 800;
+    }
+
+
+    /* ===============================
+       QUICK ACTIONS
+    =============================== */
+
+    .actions-grid {
+        display: grid;
+
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        gap: 1rem;
+    }
+
+
+    .action-card {
+        text-align: left;
+
+        border: 1px solid #e9eff3;
+
+        background: #ffffff;
+
+        padding: 1.5rem;
+
+        border-radius: 16px;
+
+        display: flex;
+
+        gap: 1rem;
+
+        cursor: pointer;
+
+        color: inherit;
+
+        transition:
+            transform 0.2s ease,
+            border-color 0.2s ease,
+            box-shadow 0.2s ease;
+    }
+
+
+    .action-card:hover {
+        transform: translateY(-3px);
+
+        border-color: #9bd1df;
+
+        box-shadow:
+            0 12px 28px rgba(7, 90, 125, 0.10);
+    }
+
+
+    .action-card.featured {
+        background:
+            linear-gradient(
+                135deg,
+                #effbfe,
+                #ffffff
+            );
+
+        border-color: #a6dce8;
+    }
+
+
+    .action-icon {
+        min-width: 48px;
+        width: 48px;
+        height: 48px;
+
+        border-radius: 13px;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        background: #e9f7fb;
+
+        color: #087a9a;
+
+        font-size: 1.25rem;
+    }
+
+
+    .action-content h3 {
+        font-size: 1rem;
+        font-weight: 800;
+        color: #173747;
+
+        margin-bottom: 0.4rem;
+    }
+
+
+    .action-content p {
+        font-size: 0.84rem;
+
+        line-height: 1.5;
+
+        color: #72838d;
+
+        margin-bottom: 0.8rem;
+    }
+
+
+    .action-link {
+        font-size: 0.8rem;
+
+        color: #0781a1;
+
+        font-weight: 800;
+
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 0.35rem;
+    }
+
+
+    /* ===============================
+       PROGRAM TABLE
+    =============================== */
+
+    .program-table-wrapper {
+        overflow-x: auto;
+    }
+
+
+    .program-table {
+        width: 100%;
+
+        border-collapse: collapse;
+
+        min-width: 750px;
+    }
+
+
+    .program-table th {
+        text-align: left;
+
+        padding: 0.9rem 1rem;
+
+        color: #81909a;
+
+        font-size: 0.75rem;
+
+        font-weight: 800;
+
+        text-transform: uppercase;
+
+        border-bottom: 1px solid #e8eef2;
+    }
+
+
+    .program-table td {
+        padding: 1rem;
+
+        border-bottom: 1px solid #edf1f4;
+
+        color: #405966;
+
+        vertical-align: middle;
+
+        font-size: 0.88rem;
+    }
+
+
+    .program-name {
+        display: flex;
+
+        align-items: center;
+
+        gap: 0.8rem;
+    }
+
+
+    .program-name strong {
+        display: block;
+
+        color: #173747;
+    }
+
+
+    .program-name span {
+        display: block;
+
+        color: #91a0aa;
+
+        font-size: 0.74rem;
+
+        margin-top: 0.15rem;
+    }
+
+
+    .program-thumbnail {
+        width: 48px;
+        height: 48px;
+
+        flex-shrink: 0;
+
+        border-radius: 10px;
+
+        overflow: hidden;
+
+        background: #edf5f7;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        color: #7b99a7;
+    }
+
+
+    .program-thumbnail img {
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+    }
+
+
+    .status {
+        display: inline-block;
+
+        padding: 0.35rem 0.65rem;
+
+        border-radius: 20px;
+
+        font-size: 0.72rem;
+
+        font-weight: 800;
+    }
+
+
+    .status.active {
+        color: #19743b;
+        background: #e9f8ee;
+    }
+
+
+    .status.completed {
+        color: #5e6870;
+        background: #eef1f3;
+    }
+
+
+    .table-actions {
+        text-align: right;
+    }
+
+
+    .table-actions button {
+        border: none;
+
+        background: #f4f7f9;
+
+        color: #527080;
+
+        width: 35px;
+        height: 35px;
+
+        border-radius: 8px;
+
+        cursor: pointer;
+
+        margin-left: 0.3rem;
+    }
+
+
+    .table-actions button:hover {
+        background: #e5f5f9;
+
+        color: #057b9c;
+    }
+
+
+    /* ===============================
+       EMPTY STATE
+    =============================== */
+
+    .empty-state {
+        min-height: 300px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+        justify-content: center;
+
+        text-align: center;
+
+        padding: 2rem;
+    }
+
+
+    .empty-icon {
+        width: 70px;
+        height: 70px;
+
+        border-radius: 50%;
+
+        background: #edf8fb;
+
+        color: #0782a1;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        font-size: 1.7rem;
+
+        margin-bottom: 1rem;
+    }
+
+
+    .empty-state h3 {
+        font-weight: 800;
+
+        color: #173747;
+
+        margin-bottom: 0.4rem;
+    }
+
+
+    .empty-state p {
+        color: #80909a;
+
+        max-width: 420px;
+
+        margin-bottom: 1.2rem;
+    }
+
+
+    /* ===============================
+       RESPONSIVE
+    =============================== */
+
+    @@media (max-width: 1100px) {
+
+        .stats-grid {
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+        }
+
+        .actions-grid {
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+        }
+    }
+
+
+    @@media (max-width: 768px) {
+
+        .admin-page {
+            padding: 1rem;
+        }
+
+        .admin-header {
+            flex-direction: column;
+
+            align-items: stretch;
+
+            padding: 1.5rem;
+        }
+
+        .primary-action {
+            width: 100%;
+        }
+
+        .actions-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+
+    @@media (max-width: 520px) {
+
+        .stats-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .dashboard-section {
+            padding: 1.25rem;
+        }
+
+        .section-heading {
+            align-items: flex-start;
+
+            flex-direction: column;
+        }
+    }
+
+</style>
+
+
+@code {
+
+    // Temporary dashboard values.
+    // Replace these with values returned by your API.
+
+    private int TotalPrograms = 8;
+    private int TotalApplications = 147;
+    private int TotalParticipants = 119;
+    private int UpcomingPrograms = 4;
+
+
+    private List<AdminProgramModel> Programs = new()
+    {
+        new AdminProgramModel
+        {
+            ProgramId = 1,
+            ProgramName = "Drone Awareness & Basic Operation",
+            ProgramDate = DateTime.Today.AddDays(14),
+            RegistrationCount = 34
+        },
+
+        new AdminProgramModel
+        {
+            ProgramId = 2,
+            ProgramName = "Caribbean Leadership Programme",
+            ProgramDate = DateTime.Today.AddDays(35),
+            RegistrationCount = 52
+        },
+
+        new AdminProgramModel
+        {
+            ProgramId = 3,
+            ProgramName = "STEM Internship Programme",
+            ProgramDate = DateTime.Today.AddDays(-10),
+            RegistrationCount = 61
+        }
+    };
+
+
+    private void AddNewProgram()
+    {
+        Navigation.NavigateTo("/admin/programs/new");
+    }
+
+
+    private void ManagePrograms()
+    {
+        Navigation.NavigateTo("/admin/programs");
+    }
+
+
+    private void ManageApplications()
+    {
+        Navigation.NavigateTo("/admin/applications");
+    }
+
+
+    private void ManageUsers()
+    {
+        Navigation.NavigateTo("/admin/users");
+    }
+
+
+    private void ManageContent()
+    {
+        Navigation.NavigateTo("/admin/content");
+    }
+
+
+    private void ViewReports()
+    {
+        Navigation.NavigateTo("/admin/reports");
+    }
+
+
+    private void EditProgram(int programId)
+    {
+        Navigation.NavigateTo(
+            $"/admin/programs/edit/{programId}");
+    }
+
+
+    private void ViewProgram(int programId)
+    {
+        Navigation.NavigateTo(
+            $"/programdetails/{programId}");
+    }
+
+
+    private class AdminProgramModel
+    {
+        public int ProgramId { get; set; }
+
+        public string ProgramName { get; set; }
+            = string.Empty;
+
+        public string? ImagePath { get; set; }
+
+        public DateTime ProgramDate { get; set; }
+
+        public int RegistrationCount { get; set; }
+    }
+}

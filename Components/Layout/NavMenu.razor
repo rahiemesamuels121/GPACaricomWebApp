@@ -1,154 +1,256 @@
-﻿
-@using Microsoft.AspNetCore.Components.Authorization
-@inject AuthenticationStateProvider AuthenticationStateProvider
-@inject HttpClient Http
-@inject NavigationManager Navigation
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using System.Security.Claims
 
-<div class="navbar-top-banner">
-    Youth • Leadership • Opportunity
-</div>
+<header class="site-header">
 
-<nav class="navbar navbar-expand-lg  custom-navbar ">
+    <!-- Compact brand statement -->
+    <div class="utility-bar">
+        <div class="container utility-bar__content">
+            <span class="utility-bar__tagline">
+                Youth <span aria-hidden="true">•</span>
+                Leadership <span aria-hidden="true">•</span>
+                Opportunity
+            </span>
 
-    <div class="container">
+            <span class="utility-bar__message">
+                <i class="bi bi-globe-americas" aria-hidden="true"></i>
+                Empowering Caribbean youth
+            </span>
+        </div>
+    </div>
 
-        <!-- Logo -->
-        <a class="navbar-brand d-flex align-items-center" href="/">
+    <nav class="navbar navbar-expand-lg gpa-navbar"
+         aria-label="Primary navigation">
 
-            <img src="/images/logomain.png"
-                 alt="GPA Caribbean"
-                 class="navbar-logo" />
+        <div class="container">
 
-            <div class="ms-3">
-              
+            <!-- Brand -->
+            <a class="navbar-brand gpa-brand"
+               href="/"
+               aria-label="GPA Caribbean home">
 
-                <div class="brand-subtitle">
-                    Youth • Leadership • Opportunity
+                <img src="/images/logomain.png"
+                     alt="GPA Caribbean"
+                     class="gpa-brand__logo"
+                     width="190"
+                     height="58" />
+            </a>
+
+            <!-- Mobile menu button -->
+            <button class="navbar-toggler gpa-toggler"
+                    type="button"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#mainNavigation"
+                    aria-controls="mainNavigation"
+                    aria-expanded="false"
+                    aria-label="Open navigation menu">
+
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Responsive navigation drawer -->
+            <div class="offcanvas-lg offcanvas-end gpa-navigation"
+                 tabindex="-1"
+                 id="mainNavigation"
+                 aria-labelledby="mainNavigationLabel">
+
+                <!-- Mobile drawer header -->
+                <div class="offcanvas-header">
+                    <div>
+                        <span class="offcanvas-eyebrow">GPA Caribbean</span>
+                        <h2 class="offcanvas-title"
+                            id="mainNavigationLabel">
+                            Navigation
+                        </h2>
+                    </div>
+
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="offcanvas"
+                            data-bs-target="#mainNavigation"
+                            aria-label="Close navigation menu">
+                    </button>
+                </div>
+
+                <div class="offcanvas-body">
+
+                    <!-- Primary links -->
+                    <ul class="navbar-nav gpa-nav mx-lg-auto">
+
+                        <li class="nav-item">
+                            <NavLink class="nav-link"
+                                     href=""
+                                     Match="NavLinkMatch.All">
+                                Home
+                            </NavLink>
+                        </li>
+
+                        <li class="nav-item">
+                            <NavLink class="nav-link"
+                                     href="who-we-are">
+                                Who We Are
+                            </NavLink>
+                        </li>
+
+                        <li class="nav-item">
+                            <NavLink class="nav-link"
+                                     href="our-programs">
+                                Programs
+                            </NavLink>
+                        </li>
+
+                        <li class="nav-item">
+                            <NavLink class="nav-link"
+                                     href="admin">
+                                Contact
+                            </NavLink>
+                        </li>
+
+                    </ul>
+
+                    <!-- Account and conversion actions -->
+                    <div class="gpa-actions">
+
+                        <a href="/our-programs"
+                           class="btn gpa-primary-action">
+                           
+
+                            Explore Programs
+
+                            <i class="bi bi-arrow-right"
+                               aria-hidden="true"></i>
+                        </a>
+
+                        <AuthorizeView Context="authenticationState">
+
+                            <Authorized>
+
+                                <div class="dropdown gpa-account-dropdown">
+
+                                    <button class="btn gpa-account-button dropdown-toggle"
+                                            type="button"
+                                            id="accountMenuButton"
+                                            data-bs-toggle="dropdown"
+                                            data-bs-auto-close="true"
+                                            aria-expanded="false">
+
+                                        <span class="gpa-avatar"
+                                              aria-hidden="true">
+                                            @GetInitials(authenticationState.User)
+                                        </span>
+
+                                        <span class="gpa-account-button__text">
+                                            My Account
+                                        </span>
+                                    </button>
+
+                                    <ul class="dropdown-menu dropdown-menu-end gpa-account-menu"
+                                        aria-labelledby="accountMenuButton">
+
+                                        <li class="gpa-account-summary">
+                                            <span class="gpa-account-summary__label">
+                                                Signed in as
+                                            </span>
+
+                                            <strong class="gpa-account-summary__name">
+                                                @GetDisplayName(authenticationState.User)
+                                            </strong>
+                                        </li>
+
+                                        <li>
+                                            <hr class="dropdown-divider" />
+                                        </li>
+
+                                        <li>
+                                            <a class="dropdown-item"
+                                               href="/dashboard">
+
+                                                <i class="bi bi-grid-1x2"
+                                                   aria-hidden="true"></i>
+
+                                                Dashboard
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <form method="post"
+                                                  action="/account/logout"
+                                                  class="gpa-logout-form">
+
+                                                <button type="submit"
+                                                        class="dropdown-item gpa-logout-button">
+
+                                                    <i class="bi bi-box-arrow-right"
+                                                       aria-hidden="true"></i>
+
+                                                    Log Out
+                                                </button>
+                                            </form>
+                                        </li>
+
+                                    </ul>
+                                </div>
+
+                            </Authorized>
+
+                            <NotAuthorized>
+
+                                <a href="/login"
+                                   class="btn gpa-login-button"
+                                   >
+
+                                    Log In
+                                </a>
+
+                            </NotAuthorized>
+
+                        </AuthorizeView>
+
+                    </div>
+
                 </div>
             </div>
 
-        </a>
-
-        <!-- Mobile Toggle -->
-        <button class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#mainNav">
-
-            <span class="navbar-toggler-icon"></span>
-
-        </button>
-
-        <!-- Navigation -->
-        <div class="collapse navbar-collapse"
-             id="mainNav">
-            <ul class="navbar-nav mx-auto">
-                <li class="nav-item">
-                    <NavLink class="nav-link"
-                             href=""
-                             Match="NavLinkMatch.All">
-
-                        <i class="bi bi-house-door-fill"></i>
-                        Home
-                    </NavLink>
-                </li>
-                <li class="nav-item">
-                    <NavLink class="nav-link"
-                             href="who-we-are">
-                        <i class="bi bi-people-fill"></i>
-                        Who We Are
-                    </NavLink>
-                </li>
-                <li class="nav-item">
-                    <NavLink class="nav-link"
-                          href="our-programs">
-                        <i class="bi bi-mortarboard-fill"></i>
-                        Programs
-                    </NavLink>
-                </li>
-                @* <li class="nav-item">
-                    <NavLink class="nav-link"
-                             href="our-services">
-
-                        <i class="bi bi-briefcase-fill"></i>
-                        Our Services
-
-                    </NavLink>
-                </li> *@
-                <li class="nav-item">
-                    <NavLink class="nav-link"
-                             href="contact-us">
-
-                        <i class="bi bi-envelope-fill"></i>
-                        Contact
-
-                    </NavLink>
-                </li>
-            </ul>
-            <div class="d-flex">
-
-                <a href="/our-programs"
-                   class="btn btn-outline-light me-2">
-                    Join a Program
-                </a>
-                <AuthorizeView>
-                    <Authorized>
-                        <div class="dropdown">
-                            <button class="dropbtn">My Profile</button>
-
-                            <div class="dropdown-content">
-                                <a href="/dashboard">Dashboard</a>
-
-                                <form method="post" action="/account/logout">
-                                    <button type="submit" class="dropdown-link">
-                                        Logout
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </Authorized>
-                    <NotAuthorized>
-                        <a href="/login"
-                            class="btn login-btn">
-                            Log In
-                        </a>
-                    </NotAuthorized>
-                </AuthorizeView>
-            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
-@code{
+</header>
 
-    string userId = string.Empty; 
-
-    bool showContextMenu = false;
-
-    void setShowContextMenu()
+@code {
+    private static string GetDisplayName(ClaimsPrincipal user)
     {
-        if (showContextMenu)
-        {
-            showContextMenu = false;
-        }
-        else
-        {
-            showContextMenu = true;    
-        }
+        var displayName = user.Identity?.Name;
+
+        return string.IsNullOrWhiteSpace(displayName)
+            ? "GPA Member"
+            : displayName;
     }
 
-    // protected override async Task OnInitializedAsync()
-    // {
-    //     await checkLoginStatus();
-    // }
-    // public async Task checkLoginStatus(){
-    //     var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-    //     var user = authState.User;
-    //     if (user.Identity?.IsAuthenticated ?? false == true)
-    //     {
+    private static string GetInitials(ClaimsPrincipal user)
+    {
+        var displayName = GetDisplayName(user);
 
-    //         userId = user.FindFirst(ClaimTypes.Name)?.Value ?? "No User";
-    //     }
+        var nameParts = displayName.Split(
+            ' ',
+            StringSplitOptions.RemoveEmptyEntries
+        );
 
-    // }
+        if (nameParts.Length == 0)
+        {
+            return "GP";
+        }
+
+        if (nameParts.Length == 1)
+        {
+            return nameParts[0][0]
+                .ToString()
+                .ToUpperInvariant();
+        }
+
+        return string.Concat(
+                nameParts[0][0],
+                nameParts[^1][0]
+            )
+            .ToUpperInvariant();
+    }
 }

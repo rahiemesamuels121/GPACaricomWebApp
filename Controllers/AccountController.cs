@@ -29,13 +29,13 @@ public class AccountController : Controller
 
         if (result == null || string.IsNullOrWhiteSpace(result.jwt))
 
-            return Redirect("/login");
+            return Redirect("/login?error=invalid_credentials");
 
         var claims = new List<Claim>
         {
             new Claim(ClaimTypes.NameIdentifier, result.UserId.ToString()),
             new Claim(ClaimTypes.Name, $"{result.FirstName} {result.LastName}"),
-            new Claim(ClaimTypes.Role, "2"),
+            new Claim(ClaimTypes.Role, result.Role),
            
 
         };
@@ -49,7 +49,7 @@ public class AccountController : Controller
         var authProperties = new AuthenticationProperties()
         {
             IsPersistent = true,
-            ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(15)
+            ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10)
         };
 
         authProperties.StoreTokens(new[]
@@ -62,7 +62,7 @@ public class AccountController : Controller
     CookieAuthenticationDefaults.AuthenticationScheme,
     principal,
     authProperties);
-        return Redirect("/dashboard");
+        return LocalRedirect("/dashboard");
     }
 
     [HttpPost("register")]

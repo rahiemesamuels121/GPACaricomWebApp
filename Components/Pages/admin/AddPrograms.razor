@@ -1,0 +1,1059 @@
+﻿@page "/admin/programs/new"
+
+@using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Forms
+
+@attribute [Authorize]
+
+@inject NavigationManager Navigation
+@* @inject IProgramApiService ProgramApiService *@
+
+<PageTitle>Add New Program | GPA Caribbean</PageTitle>
+
+
+<div class="add-program-page">
+
+    <!-- ===============================
+         PAGE HEADER
+    ================================ -->
+
+    <div class="page-header">
+
+        <div>
+
+            <button type="button"
+                    class="back-button"
+                    @onclick="GoBack">
+
+                <i class="bi bi-arrow-left"></i>
+                Programs
+
+            </button>
+
+            <span class="page-eyebrow">
+                PROGRAM MANAGEMENT
+            </span>
+
+            <h1>Add New Program</h1>
+
+            <p>
+                Create a new GPA Caribbean programme and upload
+                its featured image.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ===============================
+         MESSAGES
+    ================================ -->
+    @if (!string.IsNullOrWhiteSpace(ErrorMessage))
+    {
+        <div class="alert-message error">
+
+            <i class="bi bi-exclamation-circle"></i>
+
+            <span>@ErrorMessage</span>
+
+        </div>
+    }
+
+
+    <!-- ===============================
+         FORM
+    ================================ -->
+
+    <EditForm Model="@Program"
+              OnValidSubmit="HandleValidSubmit">
+
+        <DataAnnotationsValidator />
+
+        <div class="form-layout">
+
+
+            <!-- ===============================
+                 LEFT COLUMN
+            ================================ -->
+
+            <div class="form-card">
+
+                <div class="card-header">
+
+                    <div class="card-icon">
+                        <i class="bi bi-journal-text"></i>
+                    </div>
+
+                    <div>
+                        <h2>Program Information</h2>
+                        <p>
+                            Enter the main information about the program.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <!-- PROGRAM NAME -->
+
+                <div class="form-group">
+
+                    <label>
+                        Program Name
+                        <span class="required">*</span>
+                    </label>
+
+                    <InputText class="form-control"
+                               @bind-Value="Program.ProgramName"
+                               placeholder="e.g. Drone Awareness & Basic Operation" />
+
+                    <ValidationMessage For="@(() => Program.ProgramName)" />
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="form-group">
+
+                    <label>
+                        Program Description
+                        <span class="required">*</span>
+                    </label>
+
+                    <InputTextArea class="form-control description"
+                                   @bind-Value="Program.Description"
+                                   placeholder="Describe the program, its objectives and what participants can expect..." />
+
+                    <div class="field-footer">
+
+                        <ValidationMessage For="@(() => Program.Description)" />
+
+                        <span>
+                            @(Program.Description?.Length ?? 0) / 2000
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PROGRAM DATE -->
+
+                <div class="form-group">
+
+                    <label>
+                        Program Date
+                        <span class="required">*</span>
+                    </label>
+
+                    <div class="input-icon-wrapper">
+
+                        <i class="bi bi-calendar-event"></i>
+
+                        <InputDate class="form-control date-input"
+                                   @bind-Value="Program.ProgramDate" />
+
+                    </div>
+
+                    <ValidationMessage For="@(() => Program.ProgramDate)" />
+
+                </div>
+
+            </div>
+
+
+            <!-- ===============================
+                 RIGHT COLUMN
+            ================================ -->
+
+            <div class="form-card">
+
+                <div class="card-header">
+
+                    <div class="card-icon yellow">
+                        <i class="bi bi-image"></i>
+                    </div>
+
+                    <div>
+
+                        <h2>Program Image</h2>
+
+                        <p>
+                            Upload the featured image displayed
+                            with the program.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- IMAGE UPLOAD -->
+
+                <div class="image-upload-container">
+
+
+                    @if (string.IsNullOrWhiteSpace(ImagePreview))
+                    {
+                        <label class="upload-zone">
+
+                            <InputFile OnChange="HandleImageSelected"
+                                       accept=".jpg,.jpeg,.png,.webp"
+                                       class="file-input" />
+
+                            <div class="upload-icon">
+
+                                <i class="bi bi-cloud-arrow-up"></i>
+
+                            </div>
+
+                            <h3>Upload program image</h3>
+
+                            <p>
+                                Click to browse for an image
+                            </p>
+
+                            <span>
+                                JPG, JPEG, PNG or WEBP • Maximum 5 MB
+                            </span>
+
+                        </label>
+                    }
+                    else
+                    {
+                        <div class="image-preview">
+
+                            <img src="@ImagePreview"
+                                 alt="Selected program image" />
+
+                            <div class="preview-overlay">
+
+                                <label class="change-image-button">
+
+                                    <InputFile OnChange="HandleImageSelected"
+                                               accept=".jpg,.jpeg,.png,.webp"
+                                               class="file-input" />
+
+                                    <i class="bi bi-camera"></i>
+
+                                    Change Image
+
+                                </label>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="selected-file">
+
+                            <div class="file-icon">
+                                <i class="bi bi-image"></i>
+                            </div>
+
+                            <div class="file-information">
+
+                                <strong>
+                                    @SelectedImage?.Name
+                                </strong>
+
+                                <span>
+                                    @GetFileSize()
+                                </span>
+
+                            </div>
+
+                            <button type="button"
+                                    class="remove-file"
+                                    title="Remove image"
+                                    @onclick="RemoveImage">
+
+                                <i class="bi bi-trash"></i>
+
+                            </button>
+
+                        </div>
+                    }
+
+                </div>
+
+
+                <div class="image-help">
+
+                    <i class="bi bi-info-circle"></i>
+
+                    <span>
+                        For the best appearance, use a landscape image
+                        with a 16:9 aspect ratio.
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ===============================
+             ACTION BAR
+        ================================ -->
+
+        <div class="form-actions">
+
+            <button type="button"
+                    class="cancel-button"
+                    disabled="@IsSaving"
+                    @onclick="GoBack">
+
+                Cancel
+
+            </button>
+
+
+            <button type="submit"
+                    class="save-button"
+                    disabled="@IsSaving">
+
+                @if (IsSaving)
+                {
+                    <span class="spinner-border spinner-border-sm"></span>
+
+                    <span>
+                        Creating Program...
+                    </span>
+                }
+                else
+                {
+                    <i class="bi bi-check-lg"></i>
+
+                    <span>
+                        Create Program
+                    </span>
+                }
+
+            </button>
+
+        </div>
+
+    </EditForm>
+
+</div>
+
+
+<style>
+
+    .add-program-page {
+        min-height: 100vh;
+        background: #f5f8fb;
+        padding: 2.5rem;
+    }
+
+
+    /* ==============================
+           HEADER
+        ============================== */
+
+    .page-header {
+        max-width: 1200px;
+        margin: 0 auto 2rem;
+    }
+
+
+    .back-button {
+        border: none;
+        background: transparent;
+        padding: 0;
+        margin-bottom: 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+        color: #527080;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+
+        .back-button:hover {
+            color: #0782a1;
+        }
+
+
+    .page-eyebrow {
+        display: block;
+        color: #0782a1;
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        margin-bottom: 0.4rem;
+    }
+
+
+    .page-header h1 {
+        color: #173747;
+        font-size: clamp(2rem, 3vw, 2.8rem);
+        font-weight: 800;
+        margin-bottom: 0.45rem;
+    }
+
+
+    .page-header p {
+        color: #71828d;
+        margin: 0;
+        max-width: 650px;
+    }
+
+
+    /* ==============================
+           LAYOUT
+        ============================== */
+
+    .form-layout {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: minmax(0, 1.4fr) minmax(320px, 0.8fr);
+        gap: 1.5rem;
+    }
+
+
+    .form-card {
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 2rem;
+        border: 1px solid #e9eff3;
+        box-shadow: 0 10px 30px rgba(0, 48, 72, 0.05);
+    }
+
+
+    .card-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+
+    .card-icon {
+        width: 48px;
+        height: 48px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 13px;
+        background: #e8f6fb;
+        color: #0782a1;
+        font-size: 1.25rem;
+    }
+
+
+        .card-icon.yellow {
+            background: #fff5d9;
+            color: #b97d00;
+        }
+
+
+    .card-header h2 {
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: #173747;
+        margin: 0 0 0.25rem;
+    }
+
+
+    .card-header p {
+        color: #81909a;
+        font-size: 0.82rem;
+        margin: 0;
+    }
+
+
+    /* ==============================
+           FORM FIELDS
+        ============================== */
+
+    .form-group {
+        margin-bottom: 1.6rem;
+    }
+
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.55rem;
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #324e5e;
+        }
+
+
+    .required {
+        color: #d74a4a;
+    }
+
+
+    .form-control {
+        width: 100%;
+        border: 1px solid #dce5ea;
+        border-radius: 11px;
+        padding: 0.9rem 1rem;
+        font-size: 0.92rem;
+        color: #284553;
+        background: white;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+
+        .form-control:focus {
+            border-color: #0790b3;
+            box-shadow: 0 0 0 3px rgba(7, 144, 179, 0.10);
+            outline: none;
+        }
+
+
+    .description {
+        min-height: 210px;
+        resize: vertical;
+    }
+
+
+    .field-footer {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 0.4rem;
+        font-size: 0.72rem;
+        color: #91a0a9;
+    }
+
+
+    .validation-message {
+        color: #c43f3f;
+        font-size: 0.75rem;
+        margin-top: 0.35rem;
+    }
+
+
+    .input-icon-wrapper {
+        position: relative;
+    }
+
+
+        .input-icon-wrapper > i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #78909c;
+            pointer-events: none;
+        }
+
+
+    .date-input {
+        padding-left: 2.8rem;
+    }
+
+
+    /* ==============================
+           IMAGE UPLOAD
+        ============================== */
+
+    .file-input {
+        display: none;
+    }
+
+
+    .upload-zone {
+        min-height: 330px;
+        border: 2px dashed #c9dce4;
+        background: linear-gradient( 135deg, #f8fcfd, #f4fafc );
+        border-radius: 16px;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        cursor: pointer;
+        transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+
+        .upload-zone:hover {
+            border-color: #0782a1;
+            background: #f0fafc;
+        }
+
+
+    .upload-icon {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: #e4f5f9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #0782a1;
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+
+
+    .upload-zone h3 {
+        color: #274957;
+        font-size: 1rem;
+        font-weight: 800;
+        margin-bottom: 0.3rem;
+    }
+
+
+    .upload-zone p {
+        color: #71858f;
+        font-size: 0.85rem;
+        margin-bottom: 0.5rem;
+    }
+
+
+    .upload-zone span {
+        color: #9aa8af;
+        font-size: 0.7rem;
+    }
+
+
+    /* ==============================
+           IMAGE PREVIEW
+        ============================== */
+
+    .image-preview {
+        position: relative;
+        height: 300px;
+        overflow: hidden;
+        border-radius: 16px;
+        background: #eaf1f4;
+    }
+
+
+        .image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
+    .preview-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient( transparent 50%, rgba(0,0,0,0.65) );
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding: 1.2rem;
+    }
+
+
+    .change-image-button {
+        background: rgba(255,255,255,0.95);
+        border-radius: 9px;
+        padding: 0.7rem 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-size: 0.8rem;
+        font-weight: 800;
+        color: #274957;
+        cursor: pointer;
+    }
+
+
+    .selected-file {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        margin-top: 1rem;
+        padding: 0.85rem;
+        border: 1px solid #e2eaee;
+        border-radius: 11px;
+    }
+
+
+    .file-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 9px;
+        background: #e8f6fb;
+        color: #0782a1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+    .file-information {
+        flex: 1;
+        min-width: 0;
+    }
+
+
+        .file-information strong {
+            display: block;
+            font-size: 0.78rem;
+            color: #344f5d;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+
+        .file-information span {
+            color: #92a0a7;
+            font-size: 0.7rem;
+        }
+
+
+    .remove-file {
+        border: none;
+        width: 35px;
+        height: 35px;
+        border-radius: 8px;
+        background: #fff0f0;
+        color: #c44747;
+        cursor: pointer;
+    }
+
+
+    .image-help {
+        margin-top: 1rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        color: #71858f;
+        font-size: 0.75rem;
+        line-height: 1.5;
+    }
+
+
+    /* ==============================
+           ALERT
+        ============================== */
+
+    .alert-message {
+        max-width: 1200px;
+        margin: 0 auto 1.5rem;
+        padding: 1rem 1.2rem;
+        border-radius: 11px;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+    }
+
+
+        .alert-message.error {
+            background: #fff1f1;
+            border: 1px solid #f3cccc;
+            color: #a93c3c;
+        }
+
+
+    /* ==============================
+           ACTION BAR
+        ============================== */
+
+    .form-actions {
+        max-width: 1200px;
+        margin: 1.5rem auto 0;
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.8rem;
+        padding: 1.3rem 1.5rem;
+        background: #ffffff;
+        border-radius: 16px;
+        border: 1px solid #e9eff3;
+        box-shadow: 0 8px 25px rgba(0, 48, 72, 0.04);
+    }
+
+
+    .cancel-button,
+    .save-button {
+        border: none;
+        border-radius: 10px;
+        padding: 0.85rem 1.3rem;
+        font-size: 0.88rem;
+        font-weight: 800;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+
+    .cancel-button {
+        background: #edf2f4;
+        color: #4d6571;
+    }
+
+
+    .save-button {
+        min-width: 170px;
+        background: #FDB813;
+        color: #173747;
+        box-shadow: 0 7px 18px rgba(253,184,19,0.25);
+    }
+
+
+        .save-button:hover:not(:disabled) {
+            transform: translateY(-1px);
+        }
+
+
+        .save-button:disabled,
+        .cancel-button:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+
+    /* ==============================
+           RESPONSIVE
+        ============================== */
+
+    @@media (max-width: 900px) {
+
+        .form-layout {
+            grid-template-columns: 1fr;
+        }
+    }
+
+
+    @@media (max-width: 600px) {
+
+        .add-program-page {
+            padding: 1rem;
+        }
+
+
+        .form-card {
+            padding: 1.25rem;
+        }
+
+
+        .form-actions {
+            flex-direction: column-reverse;
+        }
+
+
+        .cancel-button,
+        .save-button {
+            width: 100%;
+        }
+    }
+
+</style>
+
+
+@code {
+
+    private const long MaxFileSize =
+        5 * 1024 * 1024;
+
+
+    private CreateProgramModel Program { get; set; }
+        = new();
+
+
+    private IBrowserFile? SelectedImage;
+
+    private string? ImagePreview;
+
+    private string? ErrorMessage;
+
+    private bool IsSaving;
+
+
+    protected override void OnInitialized()
+    {
+        Program.ProgramDate =
+            DateTime.Today.AddDays(1);
+    }
+
+
+    private async Task HandleImageSelected(
+        InputFileChangeEventArgs e)
+    {
+        ErrorMessage = null;
+
+        var file = e.File;
+
+
+        if (file.Size > MaxFileSize)
+        {
+            ErrorMessage =
+                "The image cannot exceed 5 MB.";
+
+            RemoveImage();
+
+            return;
+        }
+
+
+        var allowedTypes = new[]
+        {
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+        };
+
+
+        if (!allowedTypes.Contains(
+                file.ContentType.ToLowerInvariant()))
+        {
+            ErrorMessage =
+                "Only JPG, JPEG, PNG and WEBP images are allowed.";
+
+            RemoveImage();
+
+            return;
+        }
+
+
+        SelectedImage = file;
+
+
+        try
+        {
+            await using var stream =
+                file.OpenReadStream(MaxFileSize);
+
+            using var memoryStream =
+                new MemoryStream();
+
+            await stream.CopyToAsync(memoryStream);
+
+
+            ImagePreview =
+                $"data:{file.ContentType};base64," +
+                Convert.ToBase64String(
+                    memoryStream.ToArray());
+        }
+        catch
+        {
+            ErrorMessage =
+                "Unable to preview the selected image.";
+
+            RemoveImage();
+        }
+    }
+
+
+    private void RemoveImage()
+    {
+        SelectedImage = null;
+        ImagePreview = null;
+    }
+
+
+    private string GetFileSize()
+    {
+        if (SelectedImage == null)
+            return string.Empty;
+
+
+        if (SelectedImage.Size >= 1024 * 1024)
+        {
+            return
+                $"{SelectedImage.Size / 1024d / 1024d:0.0} MB";
+        }
+
+
+        return
+            $"{SelectedImage.Size / 1024d:0} KB";
+    }
+
+
+    private async Task HandleValidSubmit()
+    {
+        ErrorMessage = null;
+
+
+        if (SelectedImage == null)
+        {
+            ErrorMessage =
+                "Please upload an image for the program.";
+
+            return;
+        }
+
+
+        try
+        {
+            IsSaving = true;
+
+
+            // var result =
+            //     await ProgramApiService.CreateProgram(
+            //         Program,
+            //         SelectedImage);
+
+
+            // if (result != null && result.success)
+            // {
+            //     Navigation.NavigateTo(
+            //         "/admin/programs");
+            // }
+            // else
+            // {
+            //     ErrorMessage =
+            //         result?.message
+            //         ?? "Unable to create program.";
+            // }
+        }
+        catch (Exception)
+        {
+            ErrorMessage =
+                "An error occurred while creating the program.";
+        }
+        finally
+        {
+            IsSaving = false;
+        }
+    }
+
+
+    private void GoBack()
+    {
+        Navigation.NavigateTo(
+            "/admin/programs");
+    }
+
+
+    public class CreateProgramModel
+    {
+        [Required(
+            ErrorMessage = "Program name is required.")]
+        [StringLength(
+            200,
+            ErrorMessage =
+                "Program name cannot exceed 200 characters.")]
+        public string ProgramName { get; set; }
+            = string.Empty;
+
+
+        [Required(
+            ErrorMessage =
+                "Program description is required.")]
+        [StringLength(
+            2000,
+            MinimumLength = 20,
+            ErrorMessage =
+                "Description must be between 20 and 2000 characters.")]
+        public string Description { get; set; }
+            = string.Empty;
+
+
+        [Required(
+            ErrorMessage =
+                "Program date is required.")]
+        public DateTime? ProgramDate { get; set; }
+    }
+}

@@ -48,16 +48,18 @@
 
                     <label class="form-label">Register As</label>
 
-                    <select class="form-select" name="RoleId" >
+                    <select class="form-select"
+                            name="RoleId"
+                            @bind="RoleId">
 
                         <option value="">Select Account Type</option>
-                        <option value=2>Individual</option>
-                        <option value=1>Organization</option>
+                        <option value="2">Individual</option>
+                        <option value="1">Organization</option>
 
                     </select>
 
                 </div>
-                @if (AccountType == "Individual")
+                @if (RoleId == 2)
                 {
                     <div class="mb-3">
 
@@ -83,7 +85,7 @@
                     </div>
                 }
 
-                @if (AccountType == "Organization")
+                @if (RoleId == 1)
                 {
                     <div class="mb-3">
 
@@ -94,7 +96,7 @@
                         <input class="form-control"
                                type="text"
                                name="Organization"
-                               placeholder="Enter your Organization's' Name" />
+                               placeholder="Enter your Organization's Name" />
 
                     </div>
                     <div class="mb-3">
@@ -106,7 +108,7 @@
                         <input class="form-control"
                                type="text"
                                name="Firstname"
-                               placeholder="Enter your Name" />
+                               placeholder="Enter your Firstname" />
 
                     </div>
                     <div class="mb-3">
@@ -118,7 +120,7 @@
                         <input class="form-control"
                                type="text"
                                name="Lastname"
-                               placeholder="Enter your Name" />
+                               placeholder="Enter your Lastname" />
 
                     </div>
                 }
@@ -136,7 +138,7 @@
                     <input class="form-control"
                            type="email"
                            name="Email"
-                           placeholder="example@email.com" />
+                           placeholder="yourname@company.com" />
 
                 </div>
 
@@ -252,6 +254,8 @@
     }
 </script>
 @code {
-    private string? AccountType;
+    @code {
+    private int? RoleId;
+}
     
 }
