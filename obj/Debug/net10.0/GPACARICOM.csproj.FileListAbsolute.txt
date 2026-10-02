@@ -816,7 +816,6 @@ C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\obj\Debug\net10.0\compres
 C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\obj\Debug\net10.0\compressed\i1901ftr2x-{0}-cjvtifvnlk-cjvtifvnlk.gz
 C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\obj\Debug\net10.0\compressed\6xb9o06z95-{0}-cis8qdv5k3-cis8qdv5k3.gz
 C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\obj\Debug\net10.0\compressed\t2tvocn0z4-{0}-0mszqgqney-0mszqgqney.gz
-C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\obj\Debug\net10.0\compressed\0kflhpufn0-{0}-zxaf3xugol-zxaf3xugol.gz
 C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\obj\Debug\net10.0\compressed\7aihphi6ov-{0}-fs7m30jngr-fs7m30jngr.gz
 C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\obj\Debug\net10.0\compressed\19p9qjnqp4-{0}-bov3fol7vj-bov3fol7vj.gz
 C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\obj\Debug\net10.0\compressed\hnkyj2mm0i-{0}-t1cqhe9u97-t1cqhe9u97.gz
@@ -885,6 +884,17 @@ C:\Users\rahie\Documents\Codex\2026-09-22\c\work\wat-build\GPACARICOM.runtimecon
 C:\Users\rahie\Documents\Codex\2026-09-22\c\work\wat-build\GPACARICOM.dll
 C:\Users\rahie\Documents\Codex\2026-09-22\c\work\wat-build\GPACARICOM.pdb
 C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\obj\Debug\net10.0\compressed\cbywjwme5a-{0}-8pa5zmql0h-8pa5zmql0h.gz
-C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\obj\Debug\net10.0\compressed\mofdwdf3u9-{0}-v34ft5lr5n-v34ft5lr5n.gz
-C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\obj\Debug\net10.0\compressed\3f5mrt8af5-{0}-v34ft5lr5n-v34ft5lr5n.gz
+C:\Users\rahie\Documents\Codex\2026-09-22\c\work\homepage-build\appsettings.Development.json
+C:\Users\rahie\Documents\Codex\2026-09-22\c\work\homepage-build\appsettings.json
+C:\Users\rahie\Documents\Codex\2026-09-22\c\work\homepage-build\GPACARICOM.staticwebassets.runtime.json
+C:\Users\rahie\Documents\Codex\2026-09-22\c\work\homepage-build\GPACARICOM.staticwebassets.endpoints.json
+C:\Users\rahie\Documents\Codex\2026-09-22\c\work\homepage-build\GPACARICOM.exe
+C:\Users\rahie\Documents\Codex\2026-09-22\c\work\homepage-build\GPACARICOM.deps.json
+C:\Users\rahie\Documents\Codex\2026-09-22\c\work\homepage-build\GPACARICOM.runtimeconfig.json
+C:\Users\rahie\Documents\Codex\2026-09-22\c\work\homepage-build\GPACARICOM.dll
+C:\Users\rahie\Documents\Codex\2026-09-22\c\work\homepage-build\GPACARICOM.pdb
 C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
+C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\obj\Debug\net10.0\compressed\0kflhpufn0-{0}-6najy1saek-6najy1saek.gz
+C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\obj\Debug\net10.0\compressed\26g1m3fibq-{0}-zstyc8l1sh-zstyc8l1sh.gz
+C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\obj\Debug\net10.0\compressed\mofdwdf3u9-{0}-jav9jf5oxo-jav9jf5oxo.gz
+C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\obj\Debug\net10.0\compressed\3f5mrt8af5-{0}-jav9jf5oxo-jav9jf5oxo.gz

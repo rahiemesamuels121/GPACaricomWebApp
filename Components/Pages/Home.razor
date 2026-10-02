@@ -1,98 +1,483 @@
 ﻿@page "/"
 @rendermode InteractiveServer
+
 @using GPACARICOM.Models
 @using GPACARICOM.Components
 @using GPACARICOM.Services.API
-@inject NavigationManager NavigationManager
 
-@inject ArticleApiService articleapiservice;
-@inject TestimonialApiService testimonialApiService;
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JS
+@inject ArticleApiService articleapiservice
+@inject TestimonialApiService testimonialApiService
+
+@implements IAsyncDisposable
 
 
 <PageTitle>Home</PageTitle>
-<!-- Infinite Carousel -->
 
-     <div style="padding : 0px">
-        <Carosel></Carosel>
 
-     </div>
-    <div class="homepage-hero">
-        <div class="container">
+<div @ref="homepageRoot"
+     class="gpa-home">
 
-            <h1>
-                Empowering Caribbean Youth Through
-                Education, Leadership & Opportunity
-            </h1>
 
-            <p>
-                GPA Caribbean provides programs,
-                mentorship, and opportunities that help
-                young people achieve academic and professional success.
-            </p>
+    <!-- =========================================================
+         HERO
+         ========================================================= -->
+    <section class="home-hero">
 
-            <div class="hero-buttons">
-                <a href="/work-and-travel-registration" class="btn btn-warning">
-                    Apply for Work &amp; Travel 2027
-                </a>
-                <a href="/our-programs" class="btn btn-warning">
-                    Explore Programs
-                </a>
+        <div class="hero-carousel">
+            <Carosel />
+        </div>
 
-            <a href="/verify-email" class="btn btn-outline-light">
-                    Learn About Us
-                </a>
+        <div class="hero-overlay"></div>
+
+
+        <div class="container hero-container">
+
+            <div class="hero-content"
+                 data-scroll-reveal
+                 data-reveal="hero">
+
+                <span class="hero-eyebrow">
+                    GPA Caribbean
+                </span>
+
+
+                <h1>
+                    Empowering Caribbean
+                    Youth Through Opportunity
+                </h1>
+
+
+                <p>
+                    GPA Caribbean provides programs,
+                    mentorship and opportunities that help
+                    young people achieve academic and
+                    professional success.
+                </p>
+
+
+                <div class="hero-actions">
+
+                    <a href="/work-and-travel-registration"
+                       class="btn-primary-modern">
+
+                        Apply for Work &amp; Travel 2027
+
+                    </a>
+
+
+                    <a href="/our-programs"
+                       class="btn-secondary-modern">
+
+                        Explore Programs
+
+                    </a>
+
+                </div>
+
             </div>
 
         </div>
-    </div>
-<section class="section-spacing">
 
-    <div class="section-header">
-        <h2>Latest News & Updates</h2>
-    </div>
+    </section>
 
-    @if (isLoadingArticles)
-    {
-        <div class="center-div">
-            <RadzenProgressBarCircular ShowValue="true"
-                                       Mode="ProgressBarMode.Indeterminate">
-            </RadzenProgressBarCircular>
-        </div>
-    }
-    else
-    {
-        <div class="row g-4">
 
-            @for (int i = 0; i < articleList.Count; i++)
-            {
-                var article = articleList[i];
-                var accent = cardColors[i % cardColors.Length];
 
-                <div class="col-lg-4">
+    <!-- =========================================================
+         PROGRAMS
+         ========================================================= -->
+    <section class="home-section programs-section">
 
-                    <div class="news-card">
+        <div class="container">
 
-                        <div class="news-accent"
-                             style="background:var(@accent)">
-                        </div>
+            <div class="section-shell">
 
-                        <div class="p-4">
 
-                            <small>
-                                @article.CreatedDate.ToString("MMM dd, yyyy")
-                            </small>
+                <div class="section-eyebrow"
+                     data-scroll-reveal
+                     data-reveal="fade">
 
-                            <h4>
-                                @article.title
-                            </h4>
+                    Our Programs
+
+                </div>
+
+
+                <div class="section-intro"
+                     data-scroll-reveal
+                     data-reveal="title">
+
+                    <div>
+
+                        <h2>
+                            Opportunities Designed
+                            To Move You Forward
+                        </h2>
+
+                        <span class="title-line"></span>
+
+                    </div>
+
+
+                    <div>
+
+                        <p>
+                            Explore programs designed to help
+                            Caribbean youth build professional
+                            experience, develop leadership skills,
+                            and create meaningful opportunities.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="row g-4 program-grid">
+
+
+                    <!-- WORK & TRAVEL -->
+                    <div class="col-lg-4 col-md-6"
+                         data-scroll-reveal
+                         data-reveal="slide-left">
+
+
+                        <a href="/work-and-travel-registration"
+                           class="program-card">
+
+
+                            <span class="program-number">
+                                01
+                            </span>
+
+
+                            <div class="program-icon">
+
+                                <i class="bi bi-airplane"></i>
+
+                            </div>
+
+
+                            <h3>
+                                Work &amp; Travel
+                            </h3>
+
 
                             <p>
-                                @article.shortDescription
+                                Gain valuable international
+                                employment experience while building
+                                professional, cultural and leadership
+                                skills.
                             </p>
 
-                            <a href="@article.hyperlink"
-                               target="_blank">
-                                Read More →
+
+                            <span class="program-link">
+
+                                Learn More
+
+                                <i class="bi bi-arrow-right"></i>
+
+                            </span>
+
+                        </a>
+
+                    </div>
+
+
+
+                    <!-- EDUCATION -->
+                    <div class="col-lg-4 col-md-6"
+                         data-scroll-reveal
+                         data-reveal="zoom"
+                         data-reveal-delay="120">
+
+
+                        <a href="/our-programs"
+                           class="program-card program-card-featured">
+
+
+                            <span class="program-number">
+                                02
+                            </span>
+
+
+                            <div class="program-icon">
+
+                                <i class="bi bi-mortarboard"></i>
+
+                            </div>
+
+
+                            <h3>
+                                Education Programs
+                            </h3>
+
+
+                            <p>
+                                Access educational opportunities
+                                designed to support academic,
+                                professional and personal development.
+                            </p>
+
+
+                            <span class="program-link">
+
+                                Explore Programs
+
+                                <i class="bi bi-arrow-right"></i>
+
+                            </span>
+
+                        </a>
+
+                    </div>
+
+
+
+                    <!-- LEADERSHIP -->
+                    <div class="col-lg-4 col-md-6"
+                         data-scroll-reveal
+                         data-reveal="slide-right"
+                         data-reveal-delay="240">
+
+
+                        <a href="/who-we-are"
+                           class="program-card">
+
+
+                            <span class="program-number">
+                                03
+                            </span>
+
+
+                            <div class="program-icon">
+
+                                <i class="bi bi-people"></i>
+
+                            </div>
+
+
+                            <h3>
+                                Youth Leadership
+                            </h3>
+
+
+                            <p>
+                                Build confidence, leadership
+                                capability and meaningful professional
+                                connections throughout the Caribbean.
+                            </p>
+
+
+                            <span class="program-link">
+
+                                Learn More
+
+                                <i class="bi bi-arrow-right"></i>
+
+                            </span>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         ABOUT
+         ========================================================= -->
+    <section class="home-section about-section">
+
+        <div class="container">
+
+            <div class="section-shell">
+
+
+                <div class="row g-5 align-items-center">
+
+
+                    <!-- LEFT VISUAL -->
+                    <div class="col-lg-6"
+                         data-scroll-reveal
+                         data-reveal="slide-left">
+
+
+                        <div class="about-visual">
+
+
+                            <div class="about-visual-main">
+
+                                <i class="bi bi-globe-americas"></i>
+
+                            </div>
+
+
+                            <div class="about-floating-card">
+
+                                <strong>
+                                    Caribbean
+                                </strong>
+
+                                <span>
+                                    Education • Leadership • Opportunity
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- RIGHT CONTENT -->
+                    <div class="col-lg-6"
+                         data-scroll-reveal
+                         data-reveal="slide-right">
+
+
+                        <div class="about-content">
+
+
+                            <div class="section-eyebrow">
+                                About GPA Caribbean
+                            </div>
+
+
+                            <h2>
+                                Creating Pathways
+                                For Caribbean Youth
+                            </h2>
+
+
+                            <span class="title-line"></span>
+
+
+                            <p class="about-description">
+                                GPA Caribbean connects young people
+                                with education, leadership,
+                                professional development and
+                                international opportunities.
+                            </p>
+
+
+
+                            <div class="about-feature-list">
+
+
+                                <div class="about-feature">
+
+                                    <div class="feature-icon">
+
+                                        <i class="bi bi-check2"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Education
+                                        </strong>
+
+                                        <span>
+                                            Building knowledge and professional skills.
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="about-feature">
+
+                                    <div class="feature-icon">
+
+                                        <i class="bi bi-check2"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Leadership
+                                        </strong>
+
+                                        <span>
+                                            Developing confidence and capability.
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="about-feature">
+
+                                    <div class="feature-icon">
+
+                                        <i class="bi bi-check2"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            International Experience
+                                        </strong>
+
+                                        <span>
+                                            Connecting participants with opportunities abroad.
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="about-feature">
+
+                                    <div class="feature-icon">
+
+                                        <i class="bi bi-check2"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Professional Development
+                                        </strong>
+
+                                        <span>
+                                            Supporting long-term career growth.
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <a href="/who-we-are"
+                               class="text-arrow-link">
+
+                                Learn More About GPA
+
+                                <i class="bi bi-arrow-right"></i>
+
                             </a>
 
                         </div>
@@ -100,118 +485,2043 @@
                     </div>
 
                 </div>
-            }
+
+            </div>
 
         </div>
-    }
 
-</section>
-<section class="testimonial-section">
-    @* <section class="cta-section" style="background-color:grey">
-
-        <h2>
-            Ready to Get Involved?
-        </h2>
-
-        <p>
-            Join one of our programs and become part
-            of a growing Caribbean network of leaders.
-        </p>
-
-        <a href="/contact-us"
-           class="btn btn-warning btn-lg">
-            Contact Us
-        </a>
-
-    </section> *@
-    <section class="section-spacing">
-     </section>
+    </section>
 
 
 
-    <div class="section-header">
-        <h2>What People Are Saying</h2>
-    </div>
+    <!-- =========================================================
+         PROCESS
+         ========================================================= -->
+    <section class="home-section process-section">
 
-    <div class="row g-4">
+        <div class="container">
 
-        @foreach (var testimonial in testimonialList)
-        {
-            <div class="col-lg-4">
+            <div class="section-shell">
 
-                <div class="testimonial-card">
 
-                    <RadzenGravatar Email="info@gpa.com" />
+                <div class="section-heading-center"
+                     data-scroll-reveal
+                     data-reveal="title">
 
-                    <h5>
-                        @testimonial.username
-                    </h5>
+                    <div class="section-eyebrow">
+                        How It Works
+                    </div>
 
-                    <h6>
-                        @testimonial.testimonialTitle
-                    </h6>
+                    <h2>
+                        Your Journey With GPA Caribbean
+                    </h2>
 
-                    <p>
-                        "@testimonial.testimonialbody"
-                    </p>
+                    <span class="title-line title-line-center"></span>
+
+                </div>
+
+
+
+                <div class="process-grid">
+
+
+                    <div class="process-item"
+                         data-scroll-reveal
+                         data-reveal="slide-left">
+
+
+                        <span class="process-number">
+                            01
+                        </span>
+
+
+                        <div class="process-icon">
+
+                            <i class="bi bi-search"></i>
+
+                        </div>
+
+
+                        <h3>
+                            Discover
+                        </h3>
+
+
+                        <p>
+                            Explore available programs and
+                            opportunities.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="process-item"
+                         data-scroll-reveal
+                         data-reveal="zoom"
+                         data-reveal-delay="120">
+
+
+                        <span class="process-number">
+                            02
+                        </span>
+
+
+                        <div class="process-icon">
+
+                            <i class="bi bi-file-earmark-text"></i>
+
+                        </div>
+
+
+                        <h3>
+                            Apply
+                        </h3>
+
+
+                        <p>
+                            Complete your application and
+                            required information.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="process-item"
+                         data-scroll-reveal
+                         data-reveal="zoom"
+                         data-reveal-delay="240">
+
+
+                        <span class="process-number">
+                            03
+                        </span>
+
+
+                        <div class="process-icon">
+
+                            <i class="bi bi-check2-circle"></i>
+
+                        </div>
+
+
+                        <h3>
+                            Prepare
+                        </h3>
+
+
+                        <p>
+                            Receive guidance and prepare for
+                            your program.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="process-item"
+                         data-scroll-reveal
+                         data-reveal="slide-right"
+                         data-reveal-delay="360">
+
+
+                        <span class="process-number">
+                            04
+                        </span>
+
+
+                        <div class="process-icon">
+
+                            <i class="bi bi-graph-up-arrow"></i>
+
+                        </div>
+
+
+                        <h3>
+                            Grow
+                        </h3>
+
+
+                        <p>
+                            Build experience, confidence and
+                            your future.
+                        </p>
+
+                    </div>
 
                 </div>
 
             </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         FEATURED OPPORTUNITIES
+         ========================================================= -->
+    <section class="home-section opportunities-section">
+
+        <div class="container">
+
+            <div class="section-shell">
+
+
+                <div class="section-intro section-intro-light"
+                     data-scroll-reveal
+                     data-reveal="title">
+
+                    <div>
+
+                        <div class="section-eyebrow section-eyebrow-yellow">
+                            Featured Opportunities
+                        </div>
+
+                        <h2>
+                            Programs Worth Exploring
+                        </h2>
+
+                        <span class="title-line"></span>
+
+                    </div>
+
+
+                    <div>
+
+                        <p>
+                            Discover opportunities designed to provide
+                            practical experience, career development
+                            and personal growth.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="row g-4">
+
+
+                    <div class="col-lg-4"
+                         data-scroll-reveal
+                         data-reveal="slide-left">
+
+
+                        <a href="/work-and-travel-registration"
+                           class="opportunity-card">
+
+
+                            <div class="opportunity-number">
+                                01
+                            </div>
+
+
+                            <div class="opportunity-bottom">
+
+
+                                <span>
+                                    International Experience
+                                </span>
+
+
+                                <h3>
+                                    Summer Work
+                                    &amp; Travel
+                                </h3>
+
+
+                                <div class="opportunity-arrow">
+
+                                    <i class="bi bi-arrow-up-right"></i>
+
+                                </div>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
+
+
+                    <div class="col-lg-4"
+                         data-scroll-reveal
+                         data-reveal="zoom"
+                         data-reveal-delay="120">
+
+
+                        <a href="/our-programs"
+                           class="opportunity-card opportunity-yellow">
+
+
+                            <div class="opportunity-number">
+                                02
+                            </div>
+
+
+                            <div class="opportunity-bottom">
+
+
+                                <span>
+                                    Professional Growth
+                                </span>
+
+
+                                <h3>
+                                    Training &amp;
+                                    Development
+                                </h3>
+
+
+                                <div class="opportunity-arrow">
+
+                                    <i class="bi bi-arrow-up-right"></i>
+
+                                </div>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
+
+
+                    <div class="col-lg-4"
+                         data-scroll-reveal
+                         data-reveal="slide-right"
+                         data-reveal-delay="240">
+
+
+                        <a href="/who-we-are"
+                           class="opportunity-card opportunity-blue">
+
+
+                            <div class="opportunity-number">
+                                03
+                            </div>
+
+
+                            <div class="opportunity-bottom">
+
+
+                                <span>
+                                    Build Confidence
+                                </span>
+
+
+                                <h3>
+                                    Leadership
+                                    Development
+                                </h3>
+
+
+                                <div class="opportunity-arrow">
+
+                                    <i class="bi bi-arrow-up-right"></i>
+
+                                </div>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         LEADERSHIP BANNER
+         ========================================================= -->
+    <section class="impact-section">
+
+        <div class="impact-overlay"></div>
+
+
+        <div class="container">
+
+            <div class="impact-content"
+                 data-scroll-reveal
+                 data-reveal="title-light">
+
+
+                <span>
+                    Creating Opportunity
+                </span>
+
+
+                <h2>
+                    Building Caribbean Leaders
+                </h2>
+
+
+                <div class="impact-grid">
+
+
+                    <div class="impact-item">
+
+                        <strong>
+                            Education
+                        </strong>
+
+                        <span>
+                            Building Knowledge
+                        </span>
+
+                    </div>
+
+
+                    <div class="impact-item">
+
+                        <strong>
+                            Leadership
+                        </strong>
+
+                        <span>
+                            Building Confidence
+                        </span>
+
+                    </div>
+
+
+                    <div class="impact-item">
+
+                        <strong>
+                            Opportunity
+                        </strong>
+
+                        <span>
+                            Building Futures
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         NEWS
+         ========================================================= -->
+    <section class="home-section news-section">
+
+        <div class="container">
+
+            <div class="section-shell">
+
+
+                <div class="section-intro"
+                     data-scroll-reveal
+                     data-reveal="title">
+
+                    <div>
+
+                        <div class="section-eyebrow">
+                            Latest Updates
+                        </div>
+
+                        <h2>
+                            News &amp; Stories
+                        </h2>
+
+                        <span class="title-line"></span>
+
+                    </div>
+
+
+                    <div>
+
+                        <p>
+                            Stay informed about programs,
+                            opportunities and developments
+                            from GPA Caribbean.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                @if (isLoadingArticles)
+                {
+                    <div class="center-div">
+
+                        <RadzenProgressBarCircular ShowValue="true"
+                                                   Mode="ProgressBarMode.Indeterminate">
+                        </RadzenProgressBarCircular>
+
+                    </div>
+                }
+                else
+                {
+                    <div class="row g-4">
+
+                        @for (int i = 0; i < articleList.Count; i++)
+                        {
+                            var article = articleList[i];
+
+                            var accent =
+                                cardColors[
+                                    i % cardColors.Length
+                                ];
+
+
+                            var animations = new[]
+                            {
+                                "slide-left",
+                                "zoom",
+                                "slide-right"
+                            };
+
+
+                            var animation =
+                                animations[
+                                    i % animations.Length
+                                ];
+
+
+                            <div class="col-lg-4 col-md-6"
+                                 data-scroll-reveal
+                                 data-reveal="@animation"
+                                 data-reveal-delay="@((i % 3) * 120)">
+
+
+                                <article class="news-card">
+
+
+                                    <div class="news-accent"
+                                         style="background:var(@accent)">
+                                    </div>
+
+
+                                    <div class="news-card-content">
+
+
+                                        <div class="news-date">
+
+                                            <i class="bi bi-calendar3"></i>
+
+                                            @article.CreatedDate.ToString(
+                                                "MMM dd, yyyy"
+                                            )
+
+                                        </div>
+
+
+                                        <h3>
+                                            @article.title
+                                        </h3>
+
+
+                                        <p>
+                                            @article.shortDescription
+                                        </p>
+
+
+                                        <a href="@article.hyperlink"
+                                           target="_blank">
+
+                                            Read More
+
+                                            <i class="bi bi-arrow-right"></i>
+
+                                        </a>
+
+                                    </div>
+
+                                </article>
+
+                            </div>
+                        }
+
+                    </div>
+                }
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         TESTIMONIALS
+         ========================================================= -->
+    <section class="home-section testimonials-section">
+
+        <div class="container">
+
+            <div class="section-shell">
+
+
+                <div class="section-heading-center"
+                     data-scroll-reveal
+                     data-reveal="title">
+
+
+                    <div class="section-eyebrow">
+                        Testimonials
+                    </div>
+
+
+                    <h2>
+                        What People Are Saying
+                    </h2>
+
+
+                    <span class="title-line title-line-center"></span>
+
+                </div>
+
+
+
+                @if (isLoadingTestimonials)
+                {
+                    <div class="center-div">
+
+                        <RadzenProgressBarCircular ShowValue="true"
+                                                   Mode="ProgressBarMode.Indeterminate">
+                        </RadzenProgressBarCircular>
+
+                    </div>
+                }
+                else
+                {
+                    <div class="row g-4 testimonial-grid">
+
+                        @for (
+                            int i = 0;
+                            i < testimonialList.Count;
+                            i++
+                        )
+                        {
+                            var testimonial =
+                                testimonialList[i];
+
+
+                            var animation =
+                                i % 2 == 0
+                                    ? "slide-left"
+                                    : "slide-right";
+
+
+                            <div class="col-lg-6"
+                                 data-scroll-reveal
+                                 data-reveal="@animation"
+                                 data-reveal-delay="@((i % 4) * 130)">
+
+
+                                <article class="testimonial-card">
+
+
+                                    <div class="testimonial-quote">
+                                        “
+                                    </div>
+
+
+                                    <p class="testimonial-text">
+                                        @testimonial.testimonialbody
+                                    </p>
+
+
+                                    <div class="testimonial-footer">
+
+
+                                        <RadzenGravatar Email="info@gpa.com" />
+
+
+                                        <div>
+
+                                            <h5>
+                                                @testimonial.username
+                                            </h5>
+
+                                            <span>
+                                                @testimonial.testimonialTitle
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </article>
+
+                            </div>
+                        }
+
+                    </div>
+                }
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         FINAL CTA
+         ========================================================= -->
+    <section class="final-cta">
+
+        <div class="container">
+
+            <div class="final-cta-inner"
+                 data-scroll-reveal
+                 data-reveal="fade">
+
+
+                <div>
+
+                    <span>
+                        Your Next Opportunity Starts Here
+                    </span>
+
+                    <h2>
+                        Ready To Take The Next Step?
+                    </h2>
+
+                </div>
+
+
+                <div class="final-cta-actions">
+
+
+                    <a href="/our-programs"
+                       class="final-cta-primary">
+
+                        Explore Programs
+
+                    </a>
+
+
+                    <a href="/contact-us"
+                       class="final-cta-secondary">
+
+                        Contact Us
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<style>
+
+    /* ============================================================
+           ROOT
+           ============================================================ */
+
+    .gpa-home {
+        width: 100%;
+        overflow: hidden;
+        background: var(--surface);
+        color: var(--text-primary);
+    }
+
+
+    /* ============================================================
+           COMMON
+           ============================================================ */
+
+    .home-section {
+        padding: clamp(75px, 8vw, 115px) 0;
+    }
+
+
+    .section-shell {
+        padding-left: clamp(18px, 3vw, 48px);
+        padding-right: clamp(18px, 3vw, 48px);
+    }
+
+
+    .section-eyebrow {
+        margin-bottom: 15px;
+        color: var(--primary-blue);
+        font-size: .72rem;
+        font-weight: 800;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+
+    .section-eyebrow-yellow {
+        color: var(--primary-yellow);
+    }
+
+
+    .section-intro {
+        display: grid;
+        grid-template-columns: 1.15fr .85fr;
+        align-items: end;
+        gap: clamp(30px, 5vw, 70px);
+        margin-bottom: clamp(40px, 5vw, 62px);
+    }
+
+
+        .section-intro h2,
+        .section-heading-center h2,
+        .about-content h2 {
+            margin: 0;
+            color: var(--text-primary);
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 800;
+            line-height: 1.08;
+            letter-spacing: -1.2px;
         }
 
-    </div>
 
-</section>
+        .section-intro p {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: .94rem;
+            line-height: 1.85;
+        }
 
+
+    .title-line {
+        display: block;
+        width: 58px;
+        height: 4px;
+        margin-top: 17px;
+        background: var(--primary-yellow);
+    }
+
+
+    .title-line-center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+    .section-heading-center {
+        max-width: 760px;
+        margin: 0 auto clamp(45px, 5vw, 65px);
+        text-align: center;
+    }
+
+
+    /* ============================================================
+           HERO
+           ============================================================ */
+
+    .home-hero {
+        position: relative;
+        min-height: 620px;
+        overflow: hidden;
+        background: var(--primary-blue);
+    }
+
+
+    .hero-carousel {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+    }
+
+
+        .hero-carousel > * {
+            width: 100%;
+            height: 100%;
+        }
+
+
+    .hero-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        background: linear-gradient( 90deg, rgba(0,0,0,.82), rgba(0,0,0,.58) 48%, rgba(0,169,206,.15) );
+    }
+
+
+    .hero-container {
+        position: relative;
+        z-index: 3;
+        display: flex;
+        align-items: center;
+        min-height: 620px;
+    }
+
+
+    .hero-content {
+        max-width: 720px;
+        padding: 40px 0;
+        color: var(--surface);
+    }
+
+
+    .hero-eyebrow {
+        display: inline-block;
+        margin-bottom: 18px;
+        color: var(--primary-yellow);
+        font-size: .72rem;
+        font-weight: 800;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+    }
+
+
+    .hero-content h1 {
+        max-width: 700px;
+        margin: 0;
+        color: var(--surface);
+        font-size: clamp(3rem, 6vw, 5rem);
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -2.5px;
+    }
+
+
+    .hero-content p {
+        max-width: 570px;
+        margin: 25px 0 32px;
+        color: rgba(255,255,255,.82);
+        font-size: 1rem;
+        line-height: 1.8;
+    }
+
+
+    .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+
+    .btn-primary-modern,
+    .btn-secondary-modern {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 47px;
+        padding: 11px 21px;
+        font-size: .7rem;
+        font-weight: 800;
+        letter-spacing: .5px;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: transform .55s cubic-bezier(.16,1,.3,1), box-shadow .55s cubic-bezier(.16,1,.3,1), background-color .4s ease, color .4s ease;
+    }
+
+
+    .btn-primary-modern {
+        background: var(--primary-yellow);
+        color: var(--text-primary);
+    }
+
+
+    .btn-secondary-modern {
+        background: var(--primary-blue);
+        color: var(--surface);
+    }
+
+
+        .btn-primary-modern:hover,
+        .btn-secondary-modern:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0,0,0,.16);
+        }
+
+
+    /* ============================================================
+           PROGRAMS
+           ============================================================ */
+
+    .programs-section {
+        background: var(--surface);
+    }
+
+
+    .program-card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        min-height: 350px;
+        padding: clamp(26px, 3vw, 38px);
+        overflow: hidden;
+        border: 1px solid rgba(0,169,206,.10);
+        background: var(--surface);
+        color: var(--text-primary);
+        text-decoration: none;
+        transition: transform .7s cubic-bezier(.16,1,.3,1), box-shadow .7s cubic-bezier(.16,1,.3,1), border-color .5s ease;
+    }
+
+
+        .program-card::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary-yellow);
+            content: "";
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform .65s cubic-bezier(.16,1,.3,1);
+        }
+
+
+        .program-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0,169,206,.25);
+            box-shadow: 0 30px 70px rgba(0,169,206,.11);
+        }
+
+
+            .program-card:hover::before {
+                transform: scaleX(1);
+            }
+
+
+    .program-card-featured {
+        background: rgba(253,184,19,.08);
+    }
+
+
+    .program-number {
+        position: absolute;
+        top: 24px;
+        right: 28px;
+        color: rgba(0,169,206,.09);
+        font-size: 3.5rem;
+        font-weight: 800;
+    }
+
+
+    .program-icon {
+        margin-bottom: 34px;
+        color: var(--primary-blue);
+        font-size: 2.8rem;
+        transition: transform .6s cubic-bezier(.16,1,.3,1);
+    }
+
+
+    .program-card:hover
+    .program-icon {
+        transform: translateY(-5px) scale(1.05);
+    }
+
+
+    .program-card h3 {
+        margin-bottom: 14px;
+        font-size: 1.18rem;
+        font-weight: 800;
+    }
+
+
+    .program-card p {
+        flex-grow: 1;
+        margin-bottom: 30px;
+        color: var(--text-secondary);
+        font-size: .87rem;
+        line-height: 1.8;
+    }
+
+
+    .program-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        color: var(--primary-blue);
+        font-size: .67rem;
+        font-weight: 800;
+        text-transform: uppercase;
+    }
+
+
+        .program-link i {
+            transition: transform .4s ease;
+        }
+
+
+    .program-card:hover
+    .program-link i {
+        transform: translateX(5px);
+    }
+
+
+    /* ============================================================
+           ABOUT
+           ============================================================ */
+
+    .about-section {
+        background: #f7f8f9;
+    }
+
+
+    .about-visual {
+        position: relative;
+        min-height: 520px;
+    }
+
+
+    .about-visual-main {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 470px;
+        background: var(--primary-blue);
+        color: var(--primary-yellow);
+        font-size: 10rem;
+    }
+
+
+    .about-floating-card {
+        position: absolute;
+        right: -20px;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        width: 260px;
+        padding: 28px;
+        background: var(--primary-yellow);
+        color: var(--text-primary);
+        box-shadow: 0 20px 50px rgba(0,0,0,.12);
+    }
+
+
+        .about-floating-card strong {
+            font-size: 1.15rem;
+        }
+
+
+        .about-floating-card span {
+            margin-top: 5px;
+            font-size: .72rem;
+        }
+
+
+    .about-content {
+        padding-left: clamp(0px, 4vw, 45px);
+    }
+
+
+    .about-description {
+        margin: 25px 0 28px;
+        color: var(--text-secondary);
+        font-size: .94rem;
+        line-height: 1.85;
+    }
+
+
+    .about-feature-list {
+        display: grid;
+        gap: 18px;
+        margin-bottom: 30px;
+    }
+
+
+    .about-feature {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+    }
+
+
+    .feature-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 34px;
+        height: 34px;
+        background: var(--primary-yellow);
+        color: var(--text-primary);
+    }
+
+
+    .about-feature strong {
+        display: block;
+        margin-bottom: 3px;
+        font-size: .86rem;
+    }
+
+
+    .about-feature span {
+        color: var(--text-secondary);
+        font-size: .78rem;
+    }
+
+
+    .text-arrow-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--primary-blue);
+        font-size: .68rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        text-decoration: none;
+    }
+
+
+        .text-arrow-link i {
+            transition: transform .4s ease;
+        }
+
+
+        .text-arrow-link:hover i {
+            transform: translateX(6px);
+        }
+
+
+    /* ============================================================
+           PROCESS
+           ============================================================ */
+
+    .process-section {
+        background: var(--surface);
+    }
+
+
+    .process-grid {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        gap: 0;
+    }
+
+
+        .process-grid::before {
+            position: absolute;
+            top: 54px;
+            left: 12%;
+            width: 76%;
+            height: 1px;
+            background: rgba(0,169,206,.18);
+            content: "";
+        }
+
+
+    .process-item {
+        position: relative;
+        z-index: 2;
+        padding: 10px 28px;
+        text-align: center;
+    }
+
+
+    .process-number {
+        display: block;
+        margin-bottom: 13px;
+        color: var(--primary-yellow);
+        font-size: .68rem;
+        font-weight: 800;
+    }
+
+
+    .process-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 75px;
+        height: 75px;
+        margin: 0 auto 25px;
+        border: 1px solid rgba(0,169,206,.15);
+        background: var(--surface);
+        color: var(--primary-blue);
+        font-size: 1.8rem;
+        transition: transform .6s cubic-bezier(.16,1,.3,1), background-color .4s ease, color .4s ease;
+    }
+
+
+    .process-item:hover
+    .process-icon {
+        transform: translateY(-5px);
+        background: var(--primary-blue);
+        color: var(--surface);
+    }
+
+
+    .process-item h3 {
+        margin-bottom: 8px;
+        font-size: .95rem;
+        font-weight: 800;
+    }
+
+
+    .process-item p {
+        color: var(--text-secondary);
+        font-size: .78rem;
+        line-height: 1.65;
+    }
+
+
+    /* ============================================================
+           OPPORTUNITIES
+           ============================================================ */
+
+    .opportunities-section {
+        background: #171717;
+    }
+
+
+    .section-intro-light h2,
+    .section-intro-light p {
+        color: var(--surface);
+    }
+
+
+    .section-intro-light p {
+        opacity: .7;
+    }
+
+
+    .opportunity-card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 370px;
+        padding: 34px;
+        overflow: hidden;
+        background: #232323;
+        color: var(--surface);
+        text-decoration: none;
+        transition: transform .7s cubic-bezier(.16,1,.3,1), box-shadow .7s cubic-bezier(.16,1,.3,1);
+    }
+
+
+        .opportunity-card:hover {
+            transform: translateY(-8px);
+            color: var(--surface);
+            box-shadow: 0 28px 60px rgba(0,0,0,.30);
+        }
+
+
+    .opportunity-yellow {
+        background: var(--primary-yellow);
+        color: var(--text-primary);
+    }
+
+
+        .opportunity-yellow:hover {
+            color: var(--text-primary);
+        }
+
+
+    .opportunity-blue {
+        background: var(--primary-blue);
+    }
+
+
+    .opportunity-number {
+        color: rgba(255,255,255,.13);
+        font-size: 4rem;
+        font-weight: 800;
+    }
+
+
+    .opportunity-yellow
+    .opportunity-number {
+        color: rgba(0,0,0,.10);
+    }
+
+
+    .opportunity-bottom > span {
+        display: block;
+        margin-bottom: 9px;
+        font-size: .64rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        opacity: .65;
+    }
+
+
+    .opportunity-card h3 {
+        max-width: 250px;
+        margin: 0;
+        font-size: 1.45rem;
+        font-weight: 800;
+        line-height: 1.2;
+    }
+
+
+    .opportunity-arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        margin-top: 24px;
+        border: 1px solid rgba(255,255,255,.25);
+        transition: transform .5s cubic-bezier(.16,1,.3,1);
+    }
+
+
+    .opportunity-card:hover
+    .opportunity-arrow {
+        transform: translate(4px,-4px);
+    }
+
+
+    /* ============================================================
+           IMPACT
+           ============================================================ */
+
+    .impact-section {
+        position: relative;
+        overflow: hidden;
+        background: var(--primary-blue);
+    }
+
+
+    .impact-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient( 90deg, rgba(0,169,206,.90), rgba(0,0,0,.50) );
+    }
+
+
+    .impact-content {
+        position: relative;
+        z-index: 2;
+        padding: 95px 0;
+        text-align: center;
+        color: var(--surface);
+    }
+
+
+        .impact-content > span {
+            color: var(--primary-yellow);
+            font-size: .7rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+
+        .impact-content h2 {
+            margin: 12px 0 45px;
+            font-size: clamp(2.3rem,5vw,4rem);
+            font-weight: 800;
+        }
+
+
+    .impact-grid {
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        max-width: 850px;
+        margin: auto;
+    }
+
+
+    .impact-item {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        border-right: 1px solid rgba(255,255,255,.18);
+    }
+
+
+        .impact-item:last-child {
+            border-right: none;
+        }
+
+
+        .impact-item strong {
+            font-size: 1.15rem;
+        }
+
+
+        .impact-item span {
+            margin-top: 4px;
+            color: rgba(255,255,255,.60);
+            font-size: .67rem;
+            text-transform: uppercase;
+        }
+
+
+    /* ============================================================
+           NEWS
+           ============================================================ */
+
+    .news-section {
+        background: var(--surface);
+    }
+
+
+    .news-card {
+        height: 100%;
+        border: 1px solid rgba(0,169,206,.09);
+        background: var(--surface);
+        transition: transform .7s cubic-bezier(.16,1,.3,1), box-shadow .7s cubic-bezier(.16,1,.3,1);
+    }
+
+
+        .news-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 70px rgba(0,169,206,.10);
+        }
+
+
+    .news-accent {
+        height: 4px;
+    }
+
+
+    .news-card-content {
+        padding: 30px;
+    }
+
+
+    .news-date {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        margin-bottom: 15px;
+        color: var(--text-secondary);
+        font-size: .68rem;
+    }
+
+
+        .news-date i {
+            color: var(--primary-yellow);
+        }
+
+
+    .news-card h3 {
+        margin-bottom: 13px;
+        font-size: 1.08rem;
+        font-weight: 800;
+    }
+
+
+    .news-card p {
+        min-height: 82px;
+        color: var(--text-secondary);
+        font-size: .83rem;
+        line-height: 1.75;
+    }
+
+
+    .news-card a {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--primary-blue);
+        font-size: .66rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        text-decoration: none;
+    }
+
+
+        .news-card a i {
+            transition: transform .4s ease;
+        }
+
+
+        .news-card a:hover i {
+            transform: translateX(5px);
+        }
+
+
+    /* ============================================================
+           TESTIMONIALS
+           ============================================================ */
+
+    .testimonials-section {
+        background: #f7f8f9;
+    }
+
+
+    .testimonial-card {
+        position: relative;
+        height: 100%;
+        padding: clamp(30px, 4vw, 46px);
+        border: 1px solid rgba(0,169,206,.08);
+        background: var(--surface);
+        transition: transform .75s cubic-bezier(.16,1,.3,1), box-shadow .75s cubic-bezier(.16,1,.3,1);
+    }
+
+
+        .testimonial-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 32px 72px rgba(0,169,206,.11);
+        }
+
+
+    .testimonial-quote {
+        height: 55px;
+        color: var(--primary-yellow);
+        font-family: Georgia, serif;
+        font-size: 5rem;
+        line-height: .8;
+    }
+
+
+    .testimonial-text {
+        min-height: 110px;
+        margin: 22px 0 30px;
+        color: var(--text-secondary);
+        font-size: .95rem;
+        font-style: italic;
+        line-height: 1.8;
+    }
+
+
+    .testimonial-footer {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
+
+
+        .testimonial-footer h5 {
+            margin: 0;
+            font-size: .82rem;
+            font-weight: 800;
+        }
+
+
+        .testimonial-footer span {
+            color: var(--primary-blue);
+            font-size: .67rem;
+        }
+
+
+    /* ============================================================
+           FINAL CTA
+           ============================================================ */
+
+    .final-cta {
+        padding: 55px 0;
+        background: var(--primary-yellow);
+    }
+
+
+    .final-cta-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+    }
+
+
+        .final-cta-inner > div:first-child > span {
+            display: block;
+            margin-bottom: 7px;
+            color: var(--primary-blue);
+            font-size: .68rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+
+    .final-cta h2 {
+        margin: 0;
+        color: var(--text-primary);
+        font-size: clamp(1.8rem,3vw,2.6rem);
+        font-weight: 800;
+    }
+
+
+    .final-cta-actions {
+        display: flex;
+        gap: 9px;
+    }
+
+
+    .final-cta-primary,
+    .final-cta-secondary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 43px;
+        padding: 10px 18px;
+        font-size: .66rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: transform .45s cubic-bezier(.16,1,.3,1);
+    }
+
+
+    .final-cta-primary {
+        background: var(--primary-blue);
+        color: var(--surface);
+    }
+
+
+    .final-cta-secondary {
+        border: 1px solid var(--text-primary);
+        color: var(--text-primary);
+    }
+
+
+        .final-cta-primary:hover,
+        .final-cta-secondary:hover {
+            transform: translateY(-3px);
+        }
+
+
+    /* ============================================================
+           LOADER
+           ============================================================ */
+
+    .center-div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 230px;
+    }
+
+
+    /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+
+    @@media (max-width: 991px) {
+
+        .section-intro {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+
+        .process-grid {
+            grid-template-columns: repeat(2,1fr);
+            gap: 35px;
+        }
+
+
+            .process-grid::before {
+                display: none;
+            }
+
+
+        .about-floating-card {
+            right: 20px;
+        }
+
+
+        .final-cta-inner {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+    }
+
+
+    @@media (max-width: 767px) {
+
+        .home-hero,
+        .hero-container {
+            min-height: 540px;
+        }
+
+
+        .hero-overlay {
+            background: rgba(0,0,0,.68);
+        }
+
+
+        .hero-content h1 {
+            font-size: 2.55rem;
+        }
+
+
+        .section-shell {
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+
+        .process-grid {
+            grid-template-columns: 1fr;
+        }
+
+
+        .about-visual {
+            min-height: 430px;
+        }
+
+
+        .about-visual-main {
+            min-height: 400px;
+            font-size: 7rem;
+        }
+
+
+        .about-floating-card {
+            right: 10px;
+            width: 230px;
+        }
+
+
+        .impact-grid {
+            grid-template-columns: 1fr;
+            gap: 5px;
+        }
+
+
+        .impact-item {
+            border-right: none;
+            border-bottom: 1px solid rgba(255,255,255,.15);
+        }
+
+
+            .impact-item:last-child {
+                border-bottom: none;
+            }
+    }
+
+
+    @@media (max-width: 576px) {
+
+        .hero-content h1 {
+            font-size: 2.25rem;
+        }
+
+
+        .hero-actions,
+        .final-cta-actions {
+            flex-direction: column;
+            width: 100%;
+        }
+
+
+        .btn-primary-modern,
+        .btn-secondary-modern,
+        .final-cta-primary,
+        .final-cta-secondary {
+            width: 100%;
+        }
+
+
+        .program-card {
+            min-height: 320px;
+        }
+    }
+
+
+    /* ============================================================
+           ACCESSIBILITY
+           ============================================================ */
+
+    @@media (prefers-reduced-motion: reduce) {
+
+        .gpa-home *,
+        .gpa-home *::before,
+        .gpa-home *::after {
+            animation: none !important;
+            transition: none !important;
+        }
+    }
+
+</style>
 
 
 @code {
+
+    private ElementReference homepageRoot;
+
+    private IJSObjectReference? revealModule;
+
+    private IJSObjectReference? revealController;
+
+    private bool disposed;
+
+
+    protected override async Task OnAfterRenderAsync(
+        bool firstRender
+    )
+    {
+        if (disposed)
+            return;
+
+
+        try
+        {
+            if (firstRender)
+            {
+                revealModule =
+                    await JS.InvokeAsync<IJSObjectReference>(
+                        "import",
+                        "./Components/Pages/Home.razor.js"
+                    );
+
+
+                if (disposed)
+                {
+                    await revealModule.DisposeAsync();
+
+                    return;
+                }
+
+
+                revealController =
+                    await revealModule
+                        .InvokeAsync<IJSObjectReference>(
+                            "initialize",
+                            homepageRoot
+                        );
+            }
+
+
+            if (revealController is not null)
+            {
+                await revealController
+                    .InvokeVoidAsync(
+                        "refresh"
+                    );
+            }
+        }
+        catch (JSDisconnectedException)
+        {
+        }
+    }
+
+
+    public async ValueTask DisposeAsync()
+    {
+        disposed = true;
+
+
+        try
+        {
+            if (revealController is not null)
+            {
+                await revealController
+                    .InvokeVoidAsync(
+                        "dispose"
+                    );
+
+
+                await revealController
+                    .DisposeAsync();
+            }
+
+
+            if (revealModule is not null)
+            {
+                await revealModule
+                    .DisposeAsync();
+            }
+        }
+        catch (JSDisconnectedException)
+        {
+        }
+    }
+
+
     private readonly string[] cardColors =
-{
-    "--primary-blue",
-    "--primary-yellow",
-    "--primary-red",
-};
-    private List<Article> articleList= new();
-    private List<TestimonialModel> testimonialList = new();
-    private bool isLoadingArticles = true;
-    private bool isLoadingTestimonials = true;
+    {
+        "--primary-blue",
+        "--primary-yellow"
+    };
+
+
+    private List<Article> articleList =
+        new();
+
+
+    private List<TestimonialModel> testimonialList =
+        new();
+
+
+    private bool isLoadingArticles =
+        true;
+
+
+    private bool isLoadingTestimonials =
+        true;
 
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            var articlesTask = articleapiservice.GetAllArticles();
-            var testimonialsTask = testimonialApiService.GetAllTestimonials();
+            var articlesTask =
+                articleapiservice
+                    .GetAllArticles();
 
-            await Task.WhenAll(articlesTask,testimonialsTask);
-            
-            articleList = articlesTask.Result.data!;
-           testimonialList = testimonialsTask.Result.data!;
+
+            var testimonialsTask =
+                testimonialApiService
+                    .GetAllTestimonials();
+
+
+            await Task.WhenAll(
+                articlesTask,
+                testimonialsTask
+            );
+
+
+            articleList =
+                articlesTask.Result.data!;
+
+
+            testimonialList =
+                testimonialsTask.Result.data!;
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex.Message);
+            Console.WriteLine(
+                ex.Message
+            );
         }
         finally
         {
-            isLoadingArticles = false;
-            isLoadingTestimonials = false;
+            isLoadingArticles =
+                false;
+
+
+            isLoadingTestimonials =
+                false;
         }
-
-
-       
     }
-    private void openlink(string link)
+
+
+    private void openlink(
+        string link
+    )
     {
-        NavigationManager.NavigateTo(link);
+        NavigationManager.NavigateTo(
+            link
+        );
     }
+
 
     private string getTodaysDate()
     {
-        return DateTime.Now.ToString("dddd, MMMM dd, yyyy");
+        return DateTime.Now
+            .ToString(
+                "dddd, MMMM dd, yyyy"
+            );
     }
 
 }

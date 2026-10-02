@@ -51,6 +51,7 @@ wwwroot\lib\bootstrap\dist\js\bootstrap.js.map
 wwwroot\lib\bootstrap\dist\js\bootstrap.min.js
 wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
 Components\Layout\ReconnectModal.razor.js
+Components\Pages\Home.razor.js
 Components\Pages\WorkAndTravelRegistration.razor.js
 C:\Users\rahie\.nuget\packages\microsoft.aspnetcore.app.internal.assets\10.0.12\build\..\_framework\blazor.web.js
 C:\Users\rahie\.nuget\packages\microsoft.aspnetcore.app.internal.assets\10.0.12\build\..\_framework\blazor.server.js
@@ -72,6 +73,8 @@ C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\wwwroot\lib\bootstrap\dis
 C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css
 C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css.map
 C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css
+C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\wwwroot\app.css
+C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\Components\Pages\Home.razor.js
 C:\Users\rahie\.nuget\packages\microsoft.aspnetcore.app.internal.assets\10.0.12\_framework\blazor.server.js
 C:\Users\rahie\.nuget\packages\microsoft.aspnetcore.app.internal.assets\10.0.12\_framework\blazor.web.js
 C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\Components\Layout\ReconnectModal.razor.js
@@ -102,6 +105,5 @@ C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\wwwroot\lib\bootstrap\dis
 C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css
 C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
 C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map
-C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\wwwroot\app.css
 C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js
 C:\Users\rahie\Documents\personal\GPA\GPACaricomWebApp\Components\Pages\WorkAndTravelRegistration.razor.js

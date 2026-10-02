@@ -1,13 +1,13 @@
 @import url('https://googleapis.com');
 :root {
     --primary-blue: #00A9CE;
-    --primary-red: #CE1126;
+ 
     --primary-yellow: #FDB813;
-    --primary-green: #A7C957;
+
     --secondary-blue: #1A2E3B;
-    --secondary-red: #FDEDED;
+
     --secondary-yellow: #fffae5;
-    --secondary-green: #E3FCEF;
+ 
     --gold: #D4A017;
     --background: #F5F7FA;
     --surface: #FFFFFF;

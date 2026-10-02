@@ -1,129 +1,911 @@
-﻿
-@using Microsoft.AspNetCore.Components.Authorization
+﻿@using Microsoft.AspNetCore.Components.Authorization
+
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject HttpClient Http
 @inject NavigationManager Navigation
 
-<div class="navbar-top-banner">
-    Youth • Leadership • Opportunity
-</div>
 
-<nav class="navbar navbar-expand-lg  custom-navbar ">
+<nav class="navbar navbar-expand-lg gpa-xtra-navbar">
 
     <div class="container">
 
-        <!-- Logo -->
-        <a class="navbar-brand d-flex align-items-center" href="/">
+        <!-- =====================================================
+             BRAND
+             ===================================================== -->
+        <a class="navbar-brand gpa-xtra-brand"
+           href="/">
 
             <img src="/images/logomain.png"
                  alt="GPA Caribbean"
-                 class="navbar-logo" />
-
-            <div class="ms-3">
-              
-
-                <div class="brand-subtitle">
-                    Youth • Leadership • Opportunity
-                </div>
-            </div>
+                 class="gpa-xtra-logo" />
 
         </a>
 
-        <!-- Mobile Toggle -->
-        <button class="navbar-toggler"
+
+        <!-- =====================================================
+             MOBILE TOGGLE
+             ===================================================== -->
+        <button class="navbar-toggler gpa-xtra-toggler"
                 type="button"
                 data-bs-toggle="collapse"
-                data-bs-target="#mainNav">
+                data-bs-target="#mainNav"
+                aria-controls="mainNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
 
-            <span class="navbar-toggler-icon"></span>
+            <span class="gpa-hamburger"
+                  aria-hidden="true">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </span>
 
         </button>
 
-        <!-- Navigation -->
+
+        <!-- =====================================================
+             NAVIGATION
+             ===================================================== -->
         <div class="collapse navbar-collapse"
              id="mainNav">
-            <ul class="navbar-nav mx-auto">
+
+            <ul class="navbar-nav ms-auto gpa-xtra-menu">
+
+                <!-- HOME -->
                 <li class="nav-item">
+
                     <NavLink class="nav-link"
                              href=""
                              Match="NavLinkMatch.All">
 
-                        <i class="bi bi-house-door-fill"></i>
-                        Home
+                        <span class="nav-label">
+                            Home
+                        </span>
+
                     </NavLink>
+
                 </li>
+
+
+                <!-- WHO WE ARE -->
                 <li class="nav-item">
+
                     <NavLink class="nav-link"
                              href="who-we-are">
-                        <i class="bi bi-people-fill"></i>
-                        Who We Are
+
+                        <span class="nav-label">
+                            Who We Are
+                        </span>
+
                     </NavLink>
+
                 </li>
+
+
+                <!-- PROGRAMS -->
                 <li class="nav-item">
+
                     <NavLink class="nav-link"
-                          href="our-programs">
-                        <i class="bi bi-mortarboard-fill"></i>
-                        Programs
+                             href="our-programs">
+
+                        <span class="nav-label">
+                            Programs
+                        </span>
+
                     </NavLink>
+
                 </li>
-                @* <li class="nav-item">
+
+
+                @*
+                <li class="nav-item">
+
                     <NavLink class="nav-link"
                              href="our-services">
 
-                        <i class="bi bi-briefcase-fill"></i>
-                        Our Services
+                        <span class="nav-label">
+                            Our Services
+                        </span>
 
                     </NavLink>
-                </li> *@
+
+                </li>
+                *@
+
+
+                <!-- CONTACT -->
                 <li class="nav-item">
+
                     <NavLink class="nav-link"
                              href="contact-us">
 
-                        <i class="bi bi-envelope-fill"></i>
-                        Contact
+                        <span class="nav-label">
+                            Contact
+                        </span>
 
                     </NavLink>
+
                 </li>
+
             </ul>
-            <div class="d-flex">
+
+
+            <!-- =================================================
+                 RIGHT-SIDE ACTIONS
+                 ================================================= -->
+            <div class="gpa-xtra-actions">
 
                 <a href="/our-programs"
-                   class="btn btn-outline-light me-2">
-                    Join a Program
+                   class="gpa-consultation-btn">
+
+                    <span>
+                        Join a Program
+                    </span>
+
+                    <i class="bi bi-arrow-right"></i>
+
                 </a>
+
+
                 <AuthorizeView>
+
+                    <!-- =========================================
+                         AUTHENTICATED
+                         ========================================= -->
                     <Authorized>
-                        <div class="dropdown">
-                            <button class="dropbtn">My Profile</button>
 
-                            <div class="dropdown-content">
-                                <a href="/dashboard">Dashboard</a>
+                        <div class="gpa-profile-dropdown">
 
-                                <form method="post" action="/account/logout">
-                                    <button type="submit" class="dropdown-link">
-                                        Logout
+                            <button class="gpa-profile-trigger"
+                                    type="button">
+
+                                <span>
+                                    My Profile
+                                </span>
+
+                                <i class="bi bi-chevron-down"></i>
+
+                            </button>
+
+
+                            <div class="gpa-profile-menu">
+
+                                <a href="/dashboard">
+
+                                    <i class="bi bi-grid"></i>
+
+                                    <span>
+                                        Dashboard
+                                    </span>
+
+                                </a>
+
+
+                                <form method="post"
+                                      action="/account/logout">
+
+                                    <button type="submit"
+                                            class="gpa-profile-link">
+
+                                        <i class="bi bi-box-arrow-right"></i>
+
+                                        <span>
+                                            Logout
+                                        </span>
+
                                     </button>
+
                                 </form>
+
                             </div>
+
                         </div>
+
                     </Authorized>
+
+
+                    <!-- =========================================
+                         NOT AUTHENTICATED
+                         ========================================= -->
                     <NotAuthorized>
+
                         <a href="/login"
-                            class="btn login-btn">
+                           class="gpa-login-link">
+
                             Log In
+
                         </a>
+
                     </NotAuthorized>
+
                 </AuthorizeView>
+
             </div>
+
         </div>
+
     </div>
+
 </nav>
 
-@code{
 
-    string userId = string.Empty; 
+<style>
+
+    /* ============================================================
+           GPA NAVIGATION
+
+           Strict project colour system:
+           ------------------------------------------------------------
+           --primary-blue
+           --primary-yellow
+           --secondary-blue
+           --secondary-yellow
+           --gold
+           --background
+           --surface
+           --text-primary
+           --text-secondary
+           ============================================================ */
+
+
+    /* ============================================================
+           NAVBAR
+           ============================================================ */
+
+    .gpa-xtra-navbar {
+        position: relative;
+        z-index: 1000;
+        width: 100%;
+        min-height: 80px;
+        padding: 0;
+        background: var(--surface);
+        border-bottom: 1px solid rgba(26, 46, 59, 0.07);
+        box-shadow: 0 3px 18px rgba(26, 46, 59, 0.04);
+    }
+
+
+        .gpa-xtra-navbar > .container {
+            min-height: 80px;
+        }
+
+
+    /* ============================================================
+           BRAND
+           ============================================================ */
+
+    .gpa-xtra-brand {
+        display: flex;
+        align-items: center;
+        margin-right: 48px;
+        padding: 0;
+    }
+
+
+    .gpa-xtra-logo {
+        display: block;
+        width: auto;
+        height: 50px;
+        object-fit: contain;
+        transition: transform 0.3s ease;
+    }
+
+
+    .gpa-xtra-brand:hover
+    .gpa-xtra-logo {
+        transform: scale(1.025);
+    }
+
+
+    /* ============================================================
+           MAIN MENU
+           ============================================================ */
+
+    .gpa-xtra-menu {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+
+        .gpa-xtra-menu .nav-item {
+            position: relative;
+        }
+
+
+        .gpa-xtra-menu .nav-link {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80px;
+            padding: 0 15px !important;
+            overflow: hidden;
+            color: var(--secondary-blue);
+            font-size: 0.73rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.45px;
+            white-space: nowrap;
+            transition: color 0.25s ease, transform 0.25s ease;
+        }
+
+
+    /* ============================================================
+           NAV LABEL
+
+           Separating the text allows us to animate it independently.
+           ============================================================ */
+
+    .nav-label {
+        position: relative;
+        z-index: 3;
+        transition: transform 0.25s ease;
+    }
+
+
+    /* ============================================================
+           SOFT HOVER BACKGROUND
+           ============================================================ */
+
+    .gpa-xtra-menu .nav-link::after {
+        position: absolute;
+        top: 15px;
+        right: 4px;
+        bottom: 15px;
+        left: 4px;
+        z-index: 1;
+        background: var(--secondary-yellow);
+        content: "";
+        opacity: 0;
+        transform: scale(0.88);
+        transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+
+    /* ============================================================
+           YELLOW UNDERLINE ANIMATION
+           ============================================================ */
+
+    .gpa-xtra-menu .nav-link::before {
+        position: absolute;
+        right: 15px;
+        bottom: 17px;
+        left: 15px;
+        z-index: 4;
+        height: 2px;
+        background: var(--primary-yellow);
+        content: "";
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: transform 0.3s cubic-bezier( 0.4, 0, 0.2, 1 );
+    }
+
+
+    /* ============================================================
+           MENU HOVER
+           ============================================================ */
+
+    .gpa-xtra-menu .nav-link:hover {
+        color: var(--primary-blue);
+        transform: translateY(-2px);
+    }
+
+
+        .gpa-xtra-menu .nav-link:hover
+        .nav-label {
+            transform: translateY(-1px);
+        }
+
+
+        .gpa-xtra-menu .nav-link:hover::before {
+            transform: scaleX(1);
+        }
+
+
+        .gpa-xtra-menu .nav-link:hover::after {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+
+    /* ============================================================
+           ACTIVE MENU
+           ============================================================ */
+
+    .gpa-xtra-menu .nav-link.active {
+        color: var(--primary-blue);
+    }
+
+
+        .gpa-xtra-menu .nav-link.active::before {
+            transform: scaleX(1);
+        }
+
+
+    /* ============================================================
+           ACTIONS
+           ============================================================ */
+
+    .gpa-xtra-actions {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        margin-left: 26px;
+    }
+
+
+    /* ============================================================
+           JOIN PROGRAM CTA
+           ============================================================ */
+
+    .gpa-consultation-btn {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        min-height: 40px;
+        padding: 9px 18px;
+        overflow: hidden;
+        border: 1px solid var(--primary-blue);
+        background: var(--primary-blue);
+        color: var(--surface);
+        font-size: 0.68rem;
+        font-weight: 750;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+        text-decoration: none;
+        transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    }
+
+
+        .gpa-consultation-btn span,
+        .gpa-consultation-btn i {
+            position: relative;
+            z-index: 2;
+        }
+
+
+        .gpa-consultation-btn i {
+            font-size: 0.77rem;
+            transition: transform 0.25s ease;
+        }
+
+
+        .gpa-consultation-btn:hover {
+            border-color: var(--secondary-blue);
+            background: var(--secondary-blue);
+            color: var(--surface);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(26, 46, 59, 0.15);
+        }
+
+
+            .gpa-consultation-btn:hover i {
+                transform: translateX(4px);
+            }
+
+
+    /* ============================================================
+           LOGIN
+           ============================================================ */
+
+    .gpa-login-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 40px;
+        padding: 9px 16px;
+        border: 1px solid var(--primary-yellow);
+        background: transparent;
+        color: var(--secondary-blue);
+        font-size: 0.68rem;
+        font-weight: 750;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+        text-decoration: none;
+        transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+
+        .gpa-login-link:hover {
+            background: var(--primary-yellow);
+            color: var(--secondary-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 9px 20px rgba(253, 184, 19, 0.20);
+        }
+
+
+    /* ============================================================
+           PROFILE
+           ============================================================ */
+
+    .gpa-profile-dropdown {
+        position: relative;
+    }
+
+
+    .gpa-profile-trigger {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-height: 40px;
+        padding: 9px 14px;
+        border: 1px solid rgba(26, 46, 59, 0.14);
+        background: var(--surface);
+        color: var(--secondary-blue);
+        font-size: 0.68rem;
+        font-weight: 750;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+        cursor: pointer;
+        transition: border-color 0.25s ease, color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+
+        .gpa-profile-trigger i {
+            font-size: 0.6rem;
+            transition: transform 0.25s ease;
+        }
+
+
+    .gpa-profile-dropdown:hover
+    .gpa-profile-trigger {
+        border-color: var(--primary-blue);
+        color: var(--primary-blue);
+        transform: translateY(-1px);
+        box-shadow: 0 7px 18px rgba(26, 46, 59, 0.08);
+    }
+
+
+        .gpa-profile-dropdown:hover
+        .gpa-profile-trigger i {
+            transform: rotate(180deg);
+        }
+
+
+    /* ============================================================
+           PROFILE DROPDOWN
+           ============================================================ */
+
+    .gpa-profile-menu {
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 0;
+        z-index: 1500;
+        display: block;
+        min-width: 195px;
+        padding: 7px;
+        visibility: hidden;
+        background: var(--surface);
+        border-top: 3px solid var(--primary-yellow);
+        opacity: 0;
+        box-shadow: 0 18px 42px rgba(26, 46, 59, 0.14);
+        transform: translateY(10px);
+        pointer-events: none;
+        transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
+    }
+
+
+    .gpa-profile-dropdown:hover
+    .gpa-profile-menu {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+
+
+    .gpa-profile-menu a,
+    .gpa-profile-link {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        padding: 10px 11px;
+        border: none;
+        background: transparent;
+        color: var(--text-primary);
+        font-size: 0.77rem;
+        font-weight: 600;
+        text-align: left;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+
+
+        .gpa-profile-menu a i,
+        .gpa-profile-link i {
+            width: 16px;
+            color: var(--primary-blue);
+        }
+
+
+        .gpa-profile-menu a:hover,
+        .gpa-profile-link:hover {
+            background: var(--background);
+            color: var(--primary-blue);
+            transform: translateX(3px);
+        }
+
+
+    /* ============================================================
+           HAMBURGER
+           ============================================================ */
+
+    .gpa-xtra-toggler {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 43px;
+        height: 39px;
+        padding: 0;
+        border: 1px solid rgba(26, 46, 59, 0.15);
+        border-radius: 0;
+        background: var(--surface);
+        box-shadow: none !important;
+        transition: border-color 0.25s ease, background-color 0.25s ease;
+    }
+
+
+        .gpa-xtra-toggler:hover {
+            border-color: var(--primary-blue);
+            background: var(--background);
+        }
+
+
+        .gpa-xtra-toggler:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(0, 169, 206, 0.10) !important;
+        }
+
+
+    .gpa-hamburger {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 21px;
+    }
+
+
+        .gpa-hamburger span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: var(--secondary-blue);
+            transform-origin: center;
+            transition: background-color 0.25s ease, transform 0.25s ease;
+        }
+
+
+    .gpa-xtra-toggler:hover
+    .gpa-hamburger span {
+        background: var(--primary-blue);
+    }
+
+
+        /* Small staggered movement on hover */
+
+        .gpa-xtra-toggler:hover
+        .gpa-hamburger span:nth-child(1) {
+            transform: translateX(2px);
+        }
+
+
+        .gpa-xtra-toggler:hover
+        .gpa-hamburger span:nth-child(3) {
+            transform: translateX(-2px);
+        }
+
+
+    /* ============================================================
+           TABLET / MOBILE
+           ============================================================ */
+
+    @@media (max-width: 991px) {
+
+        .gpa-xtra-navbar {
+            min-height: 68px;
+            padding: 9px 0;
+        }
+
+
+            .gpa-xtra-navbar > .container {
+                min-height: auto;
+            }
+
+
+        .gpa-xtra-logo {
+            height: 43px;
+        }
+
+
+        .gpa-xtra-navbar
+        .navbar-collapse {
+            margin-top: 10px;
+            padding: 9px 0 18px;
+            background: var(--surface);
+            border-top: 1px solid rgba(26, 46, 59, 0.07);
+        }
+
+
+        .gpa-xtra-menu {
+            align-items: stretch;
+            gap: 0;
+        }
+
+
+            .gpa-xtra-menu
+            .nav-link {
+                justify-content: flex-start;
+                min-height: auto;
+                padding: 13px 10px !important;
+                border-bottom: 1px solid rgba(26, 46, 59, 0.06);
+                transform: none;
+            }
+                /* Mobile hover background */
+
+                .gpa-xtra-menu
+                .nav-link::after {
+                    top: 4px;
+                    right: 0;
+                    bottom: 4px;
+                    left: 0;
+                    transform: scaleX(0.97);
+                }
+                /* Mobile underline */
+
+                .gpa-xtra-menu
+                .nav-link::before {
+                    right: auto;
+                    bottom: 5px;
+                    left: 10px;
+                    width: 28px;
+                    transform: scaleX(0);
+                    transform-origin: left;
+                }
+
+
+                .gpa-xtra-menu
+                .nav-link:hover {
+                    color: var(--primary-blue);
+                    transform: translateX(4px);
+                }
+
+
+                    .gpa-xtra-menu
+                    .nav-link:hover::before,
+                    .gpa-xtra-menu
+                    .nav-link.active::before {
+                        transform: scaleX(1);
+                    }
+
+
+                    .gpa-xtra-menu
+                    .nav-link:hover::after {
+                        opacity: 1;
+                        transform: scaleX(1);
+                    }
+
+
+                    .gpa-xtra-menu
+                    .nav-link:hover
+                    .nav-label {
+                        transform: none;
+                    }
+        /* ============================================
+               MOBILE ACTIONS
+               ============================================ */
+
+        .gpa-xtra-actions {
+            align-items: stretch;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 16px;
+            margin-left: 0;
+        }
+
+
+        .gpa-consultation-btn,
+        .gpa-login-link,
+        .gpa-profile-trigger {
+            width: 100%;
+            min-height: 43px;
+        }
+
+
+        .gpa-profile-dropdown {
+            width: 100%;
+        }
+        /* Mobile profile dropdown */
+
+        .gpa-profile-menu {
+            position: static;
+            width: 100%;
+            min-width: 0;
+            margin-top: 6px;
+            visibility: hidden;
+            max-height: 0;
+            padding: 0;
+            overflow: hidden;
+            border: 0;
+            opacity: 0;
+            box-shadow: none;
+            transform: none;
+            pointer-events: none;
+            transition: max-height 0.25s ease, opacity 0.25s ease, padding 0.25s ease;
+        }
+
+
+        .gpa-profile-dropdown:hover
+        .gpa-profile-menu {
+            visibility: visible;
+            max-height: 150px;
+            padding: 7px;
+            border: 1px solid rgba(26, 46, 59, 0.08);
+            border-top: 3px solid var(--primary-yellow);
+            opacity: 1;
+            pointer-events: auto;
+        }
+    }
+
+
+    /* ============================================================
+           SMALL MOBILE
+           ============================================================ */
+
+    @@media (max-width: 576px) {
+
+        .gpa-xtra-navbar {
+            padding: 8px 0;
+        }
+
+
+        .gpa-xtra-logo {
+            height: 39px;
+        }
+
+
+        .gpa-xtra-toggler {
+            width: 40px;
+            height: 36px;
+        }
+
+
+        .gpa-hamburger {
+            width: 19px;
+        }
+    }
+
+
+    /* ============================================================
+           REDUCED MOTION ACCESSIBILITY
+           ============================================================ */
+
+    @@media (prefers-reduced-motion: reduce) {
+
+        .gpa-xtra-navbar *,
+        .gpa-xtra-navbar *::before,
+        .gpa-xtra-navbar *::after {
+            transition: none !important;
+            animation: none !important;
+        }
+    }
+
+</style>
+
+
+@code {
+
+    string userId = string.Empty;
 
     bool showContextMenu = false;
+
 
     void setShowContextMenu()
     {
@@ -133,22 +915,34 @@
         }
         else
         {
-            showContextMenu = true;    
+            showContextMenu = true;
         }
     }
+
 
     // protected override async Task OnInitializedAsync()
     // {
     //     await checkLoginStatus();
     // }
-    // public async Task checkLoginStatus(){
-    //     var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-    //     var user = authState.User;
+
+
+    // public async Task checkLoginStatus()
+    // {
+    //     var authState =
+    //         await AuthenticationStateProvider
+    //             .GetAuthenticationStateAsync();
+
+    //     var user =
+    //         authState.User;
+
     //     if (user.Identity?.IsAuthenticated ?? false == true)
     //     {
-
-    //         userId = user.FindFirst(ClaimTypes.Name)?.Value ?? "No User";
+    //         userId =
+    //             user.FindFirst(
+    //                 ClaimTypes.Name
+    //             )?.Value
+    //             ?? "No User";
     //     }
-
     // }
+
 }
