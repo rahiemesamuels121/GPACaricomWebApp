@@ -1,0 +1,1586 @@
+﻿@page "/workandtravel-application-readonly"
+
+@layout DashboardLayout
+@using GPACARICOM.Models
+@using GPACARICOM.Services.API
+@using Microsoft.JSInterop
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+
+@inject IJSRuntime JS
+@inject WorkAndTravelApiService WorkAndTravelApiService
+@attribute [Authorize(Roles = "-1,2")]
+
+
+<div class="application-review">
+
+    @if (Application is null)
+    {
+        <div class="review-empty-state">
+
+            <div class="empty-icon">
+                <i class="bi bi-file-earmark-x"></i>
+            </div>
+
+            <h2>No Application Available</h2>
+
+            <p>
+                We could not find application information to display.
+            </p>
+
+        </div>
+    }
+    else
+    {
+        <!-- =====================================================
+             HEADER
+             ===================================================== -->
+        <header class="review-header no-print">
+
+            <div>
+
+                <span class="page-eyebrow">
+                    Work &amp; Travel 2027
+                </span>
+
+                <h1>
+                    Application Review
+                </h1>
+
+                <p>
+                    Review the information submitted with your
+                    Work &amp; Travel application.
+                </p>
+
+            </div>
+
+
+            <div class="header-actions">
+
+                <button type="button"
+                        class="pdf-button"
+                        @onclick="ExportToPdf">
+
+                    <i class="bi bi-file-earmark-pdf"></i>
+
+                    Export to PDF
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- =====================================================
+             PRINT HEADER
+             ===================================================== -->
+        <div class="print-header">
+
+            <img src="/images/logomain.png"
+                 alt="GPA Caribbean"
+                 class="print-logo" />
+
+            <div>
+
+                <h1>
+                    Work &amp; Travel Application
+                </h1>
+
+                <p>
+                    Summer 2027
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             APPLICATION SUMMARY
+             ===================================================== -->
+        <section class="review-summary">
+
+            <div class="summary-icon">
+
+                <i class="bi bi-file-earmark-person"></i>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Applicant
+                </span>
+
+                <h2>
+                    @DisplayFullName()
+                </h2>
+
+                <p>
+                    Work &amp; Travel Program Application
+                </p>
+
+            </div>
+
+
+            @if (Application.ReceivedDate.HasValue)
+            {
+                <div class="summary-date">
+
+                    <span>
+                        Received
+                    </span>
+
+                    <strong>
+                        @FormatDate(Application.ReceivedDate)
+                    </strong>
+
+                </div>
+            }
+
+        </section>
+
+
+        <!-- =====================================================
+             PERSONAL INFORMATION
+             ===================================================== -->
+        <ReviewSection Title="Personal Information"
+                       Subtitle="Applicant profile and contact information"
+                       Icon="bi-person">
+
+            <div class="information-grid">
+
+                <ReviewField Label="First Name"
+                             Value="@Application.FirstName" />
+
+                <ReviewField Label="Middle Name"
+                             Value="@Application.MiddleName" />
+
+                <ReviewField Label="Last Name"
+                             Value="@Application.LastName" />
+
+                <ReviewField Label="Date of Birth"
+                             Value="@FormatDate(Application.DateOfBirth)" />
+
+                <ReviewField Label="Parish of Birth"
+                             Value="@Application.ParishOfBirth" />
+
+                <ReviewField Label="Gender"
+                             Value="@FormatGender(Application.Gender)" />
+
+                <ReviewField Label="Email Address"
+                             Value="@Application.Email" />
+
+                <ReviewField Label="Cell Phone"
+                             Value="@Application.CellPhone" />
+
+                <ReviewField Label="Home Phone"
+                             Value="@Application.HomePhone" />
+
+                <ReviewField Label="Home Address"
+                             Value="@Application.HomeAddress"
+                             Wide="true" />
+
+            </div>
+
+        </ReviewSection>
+
+
+        <!-- =====================================================
+             SOCIAL MEDIA
+             ===================================================== -->
+        <ReviewSection Title="Social Media"
+                       Subtitle="Social media information provided"
+                       Icon="bi-at">
+
+            <div class="information-grid">
+
+                <ReviewField Label="Instagram"
+                             Value="@Application.Instagram" />
+
+                <ReviewField Label="Facebook"
+                             Value="@Application.Facebook" />
+
+                <ReviewField Label="TikTok"
+                             Value="@Application.TikTok" />
+
+                <ReviewField Label="Other Social Media"
+                             Value="@Application.OtherSocialMedia" />
+
+            </div>
+
+        </ReviewSection>
+
+
+        <!-- =====================================================
+             UNIVERSITY INFORMATION
+             ===================================================== -->
+        <ReviewSection Title="University Information"
+                       Subtitle="Academic and travel information"
+                       Icon="bi-mortarboard">
+
+            <div class="information-grid">
+
+                <ReviewField Label="University / Institution"
+                             Value="@Application.University" />
+
+                <ReviewField Label="Programme of Study"
+                             Value="@Application.ProgrammeOfStudy" />
+
+                <ReviewField Label="Academic Year"
+                             Value="@FormatAcademicYear(Application.AcademicYear)" />
+
+                <ReviewField Label="School Address"
+                             Value="@Application.SchoolAddress"
+                             Wide="true" />
+
+                <ReviewField Label="Proposed Departure Date"
+                             Value="@FormatDate(Application.DepartureDate)" />
+
+                <ReviewField Label="Proposed Return Date"
+                             Value="@FormatDate(Application.ReturnDate)" />
+
+            </div>
+
+        </ReviewSection>
+
+
+        <!-- =====================================================
+             EMERGENCY CONTACT 1
+             ===================================================== -->
+        <ReviewSection Title="Emergency Contact 1"
+                       Subtitle="Primary emergency contact"
+                       Icon="bi-person-lines-fill">
+
+            <div class="information-grid">
+
+                <ReviewField Label="Name"
+                             Value="@Application.Emergency1Name" />
+
+                <ReviewField Label="Relationship"
+                             Value="@Application.Emergency1Relation" />
+
+                <ReviewField Label="Phone"
+                             Value="@Application.Emergency1Phone" />
+
+                <ReviewField Label="Email"
+                             Value="@Application.Emergency1Email" />
+
+                <ReviewField Label="Address"
+                             Value="@Application.Emergency1Address"
+                             Wide="true" />
+
+            </div>
+
+        </ReviewSection>
+
+
+        <!-- =====================================================
+             EMERGENCY CONTACT 2
+             ===================================================== -->
+        <ReviewSection Title="Emergency Contact 2"
+                       Subtitle="Secondary emergency contact"
+                       Icon="bi-person-lines-fill">
+
+            <div class="information-grid">
+
+                <ReviewField Label="Name"
+                             Value="@Application.Emergency2Name" />
+
+                <ReviewField Label="Relationship"
+                             Value="@Application.Emergency2Relation" />
+
+                <ReviewField Label="Phone"
+                             Value="@Application.Emergency2Phone" />
+
+                <ReviewField Label="Email"
+                             Value="@Application.Emergency2Email" />
+
+                <ReviewField Label="Address"
+                             Value="@Application.Emergency2Address"
+                             Wide="true" />
+
+            </div>
+
+        </ReviewSection>
+
+
+        <!-- =====================================================
+             J1 / PROGRAM HISTORY
+             ===================================================== -->
+        <ReviewSection Title="Previous J-1 Experience"
+                       Subtitle="Previous participation and programme history"
+                       Icon="bi-clock-history">
+
+            <div class="information-grid">
+
+                <ReviewField Label="Previously participated in J-1?"
+                             Value="@FormatBoolean(Application.PreviousJ1)" />
+
+                <ReviewField Label="Number of Previous J-1 Programmes"
+                             Value="@FormatNumber(Application.PreviousJ1Count)" />
+
+                <ReviewField Label="Previous J-1 Details"
+                             Value="@Application.PreviousJ1Details"
+                             Wide="true" />
+
+                <ReviewField Label="Overseas Sponsors"
+                             Value="@Application.OverseasSponsors" />
+
+                <ReviewField Label="Local Agency"
+                             Value="@Application.LocalAgency" />
+
+            </div>
+
+        </ReviewSection>
+
+
+        <!-- =====================================================
+             PASSPORT AND VISA
+             ===================================================== -->
+        <ReviewSection Title="Passport &amp; Visa Information"
+                       Subtitle="Travel document and visa history"
+                       Icon="bi-passport">
+
+            <div class="information-grid">
+
+                <ReviewField Label="Passport Number"
+                             Value="@Application.PassportNumber" />
+
+                <ReviewField Label="Social Security Number"
+                             Value="@Application.Ssn" />
+
+                <ReviewField Label="Previously Refused a Visa?"
+                             Value="@FormatBoolean(Application.VisaRefused)" />
+
+                <ReviewField Label="Visa Refusal Category"
+                             Value="@Application.VisaRefusedCategory" />
+
+            </div>
+
+        </ReviewSection>
+
+
+        <!-- =====================================================
+             PARTICIPATION SUMMARY
+             ===================================================== -->
+        <ReviewSection Title="Participation Summary"
+                       Subtitle="Additional information provided by the applicant"
+                       Icon="bi-journal-text">
+
+            <div class="long-text-field">
+
+                @if (string.IsNullOrWhiteSpace(Application.ParticipationSummary))
+                {
+                    <span class="not-provided">
+                        Not provided
+                    </span>
+                }
+                else
+                {
+                    <p>
+                        @Application.ParticipationSummary
+                    </p>
+                }
+
+            </div>
+
+        </ReviewSection>
+
+
+        <!-- =====================================================
+             ACKNOWLEDGEMENT
+             ===================================================== -->
+        <ReviewSection Title="Acknowledgements"
+                       Subtitle="Application declarations and approvals"
+                       Icon="bi-patch-check">
+
+            <div class="acknowledgement-box
+                        @(Application.AllAcknowledgementsApproved
+                            ? "acknowledgement-approved"
+                            : "acknowledgement-pending")">
+
+                <div class="acknowledgement-icon">
+
+                    @if (Application.AllAcknowledgementsApproved)
+                    {
+                        <i class="bi bi-check-lg"></i>
+                    }
+                    else
+                    {
+                        <i class="bi bi-exclamation-lg"></i>
+                    }
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        @(Application.AllAcknowledgementsApproved
+                            ? "Acknowledgements Approved"
+                            : "Acknowledgements Not Completed")
+                    </strong>
+
+                    <p>
+                        @(Application.AllAcknowledgementsApproved
+                            ? "All required acknowledgements have been signed or approved."
+                            : "One or more required acknowledgements have not yet been approved.")
+                    </p>
+
+                </div>
+
+            </div>
+
+        </ReviewSection>
+
+
+        <!-- =====================================================
+             OFFICE INFORMATION
+             ===================================================== -->
+        <ReviewSection Title="Application Processing"
+                       Subtitle="Office processing information"
+                       Icon="bi-building-check">
+
+            <div class="information-grid">
+
+                <ReviewField Label="Received By"
+                             Value="@Application.ReceivedBy" />
+
+                <ReviewField Label="Received Date"
+                             Value="@FormatDate(Application.ReceivedDate)" />
+
+            </div>
+
+        </ReviewSection>
+
+
+        <!-- =====================================================
+             BOTTOM ACTION
+             ===================================================== -->
+        <div class="bottom-actions no-print">
+
+            <button type="button"
+                    class="pdf-button pdf-button-large"
+                    @onclick="ExportToPdf">
+
+                <i class="bi bi-file-earmark-pdf"></i>
+
+                Export Application to PDF
+
+            </button>
+
+        </div>
+
+
+        <footer class="print-footer">
+
+            <span>
+                GPA Caribbean
+            </span>
+
+            <span>
+                Work &amp; Travel Program – Summer 2027
+            </span>
+
+        </footer>
+    }
+
+</div>
+
+
+<style>
+
+    /* ============================================================
+       ROOT
+       ============================================================ */
+
+    .application-review {
+        --gpa-blue: #00A9CE;
+        --gpa-blue-dark: #087BB8;
+        --gpa-yellow: #FDB813;
+
+        --review-dark: #202B33;
+        --review-muted: #768188;
+        --review-bg: #F5F7FA;
+        --review-border: #E5EBEF;
+        --review-surface: #FFFFFF;
+        --review-green: #25A875;
+
+        min-height: 100vh;
+
+        padding:
+            30px
+            clamp(20px, 4vw, 52px)
+            60px;
+
+        background:
+            var(--review-bg);
+
+        color:
+            var(--review-dark);
+    }
+
+
+    /* ============================================================
+       HEADER
+       ============================================================ */
+
+    .review-header {
+        display: flex;
+
+        align-items: flex-end;
+        justify-content: space-between;
+
+        gap: 25px;
+
+        margin-bottom: 25px;
+    }
+
+
+    .page-eyebrow {
+        display: block;
+
+        margin-bottom: 4px;
+
+        color:
+            var(--gpa-blue);
+
+        font-size: .58rem;
+
+        font-weight: 800;
+
+        letter-spacing: 1.4px;
+
+        text-transform: uppercase;
+    }
+
+
+    .review-header h1 {
+        margin: 0;
+
+        color:
+            var(--review-dark);
+
+        font-size:
+            clamp(1.7rem, 3vw, 2.25rem);
+
+        font-weight: 800;
+
+        letter-spacing: -.8px;
+    }
+
+
+    .review-header p {
+        margin:
+            7px 0 0;
+
+        color:
+            var(--review-muted);
+
+        font-size: .72rem;
+
+        line-height: 1.65;
+    }
+
+
+    /* ============================================================
+       PDF BUTTON
+       ============================================================ */
+
+    .pdf-button {
+        display: inline-flex;
+
+        align-items: center;
+        justify-content: center;
+
+        gap: 8px;
+
+        min-height: 43px;
+
+        padding:
+            0 17px;
+
+        border: 0;
+
+        border-radius: 9px;
+
+        background:
+            var(--gpa-blue);
+
+        color:
+            white;
+
+        font-size: .63rem;
+
+        font-weight: 800;
+
+        cursor: pointer;
+
+        transition:
+            background-color .3s ease,
+            transform .3s ease,
+            box-shadow .3s ease;
+    }
+
+
+    .pdf-button:hover {
+        background:
+            var(--gpa-blue-dark);
+
+        transform:
+            translateY(-2px);
+
+        box-shadow:
+            0 9px 22px
+            rgba(0,169,206,.20);
+    }
+
+
+    /* ============================================================
+       SUMMARY
+       ============================================================ */
+
+    .review-summary {
+        display: flex;
+
+        align-items: center;
+
+        gap: 16px;
+
+        margin-bottom: 20px;
+
+        padding:
+            23px 25px;
+
+        border-radius: 15px;
+
+        background:
+            linear-gradient(
+                110deg,
+                #087BB8,
+                var(--gpa-blue)
+            );
+
+        color:
+            white;
+
+        box-shadow:
+            0 12px 28px
+            rgba(0,169,206,.14);
+    }
+
+
+    .summary-icon {
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        flex:
+            0 0 48px;
+
+        width: 48px;
+        height: 48px;
+
+        border-radius: 11px;
+
+        background:
+            var(--gpa-yellow);
+
+        color:
+            #27323A;
+
+        font-size: 1.2rem;
+    }
+
+
+    .review-summary span {
+        display: block;
+
+        margin-bottom: 2px;
+
+        color:
+            rgba(255,255,255,.65);
+
+        font-size: .53rem;
+
+        font-weight: 800;
+
+        letter-spacing: .8px;
+
+        text-transform: uppercase;
+    }
+
+
+    .review-summary h2 {
+        margin: 0;
+
+        font-size: 1rem;
+
+        font-weight: 800;
+    }
+
+
+    .review-summary p {
+        margin:
+            3px 0 0;
+
+        color:
+            rgba(255,255,255,.72);
+
+        font-size: .62rem;
+    }
+
+
+    .summary-date {
+        margin-left: auto;
+
+        text-align: right;
+    }
+
+
+    .summary-date strong {
+        font-size: .67rem;
+    }
+
+
+    /* ============================================================
+       SECTIONS
+       ============================================================ */
+
+    .review-section {
+        margin-bottom: 17px;
+
+        padding:
+            23px 25px;
+
+        border:
+            1px solid
+            var(--review-border);
+
+        border-radius: 14px;
+
+        background:
+            var(--review-surface);
+
+        box-shadow:
+            0 4px 18px
+            rgba(30,50,60,.035);
+    }
+
+
+    .section-header {
+        display: flex;
+
+        align-items: center;
+
+        gap: 11px;
+
+        margin-bottom: 20px;
+
+        padding-bottom: 15px;
+
+        border-bottom:
+            1px solid
+            #EEF2F4;
+    }
+
+
+    .section-icon {
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        flex:
+            0 0 38px;
+
+        width: 38px;
+        height: 38px;
+
+        border-radius: 9px;
+
+        background:
+            rgba(0,169,206,.09);
+
+        color:
+            var(--gpa-blue);
+
+        font-size: .92rem;
+    }
+
+
+    .section-header h2 {
+        margin: 0;
+
+        font-size: .84rem;
+
+        font-weight: 800;
+    }
+
+
+    .section-header p {
+        margin:
+            2px 0 0;
+
+        color:
+            var(--review-muted);
+
+        font-size: .58rem;
+    }
+
+
+    /* ============================================================
+       INFORMATION GRID
+       ============================================================ */
+
+    .information-grid {
+        display: grid;
+
+        grid-template-columns:
+            repeat(
+                3,
+                minmax(0, 1fr)
+            );
+
+        gap:
+            17px 22px;
+    }
+
+
+    .review-field {
+        min-width: 0;
+    }
+
+
+    .review-field-wide {
+        grid-column:
+            span 2;
+    }
+
+
+    .review-field label {
+        display: block;
+
+        margin-bottom: 5px;
+
+        color:
+            var(--review-muted);
+
+        font-size: .52rem;
+
+        font-weight: 750;
+
+        letter-spacing: .3px;
+
+        text-transform: uppercase;
+    }
+
+
+    .review-value {
+        min-height: 21px;
+
+        color:
+            var(--review-dark);
+
+        font-size: .68rem;
+
+        font-weight: 650;
+
+        line-height: 1.55;
+
+        overflow-wrap:
+            anywhere;
+    }
+
+
+    .not-provided {
+        color:
+            #A4ADB2;
+
+        font-style: italic;
+
+        font-weight: 500;
+    }
+
+
+    /* ============================================================
+       LONG TEXT
+       ============================================================ */
+
+    .long-text-field {
+        padding:
+            16px 18px;
+
+        border:
+            1px solid
+            #EDF1F3;
+
+        border-radius: 10px;
+
+        background:
+            #FAFBFC;
+
+        color:
+            var(--review-dark);
+
+        font-size: .68rem;
+
+        line-height: 1.75;
+    }
+
+
+    .long-text-field p {
+        margin: 0;
+
+        white-space:
+            pre-wrap;
+    }
+
+
+    /* ============================================================
+       ACKNOWLEDGEMENT
+       ============================================================ */
+
+    .acknowledgement-box {
+        display: flex;
+
+        align-items: center;
+
+        gap: 13px;
+
+        padding:
+            15px 17px;
+
+        border-radius: 11px;
+    }
+
+
+    .acknowledgement-approved {
+        border:
+            1px solid
+            rgba(37,168,117,.18);
+
+        background:
+            rgba(37,168,117,.07);
+    }
+
+
+    .acknowledgement-pending {
+        border:
+            1px solid
+            rgba(253,184,19,.24);
+
+        background:
+            rgba(253,184,19,.08);
+    }
+
+
+    .acknowledgement-icon {
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        flex:
+            0 0 37px;
+
+        width: 37px;
+        height: 37px;
+
+        border-radius: 9px;
+
+        background:
+            white;
+
+        color:
+            var(--review-green);
+    }
+
+
+    .acknowledgement-pending
+    .acknowledgement-icon {
+        color:
+            #B57B00;
+    }
+
+
+    .acknowledgement-box strong {
+        display: block;
+
+        margin-bottom: 2px;
+
+        font-size: .67rem;
+    }
+
+
+    .acknowledgement-box p {
+        margin: 0;
+
+        color:
+            var(--review-muted);
+
+        font-size: .59rem;
+    }
+
+
+    /* ============================================================
+       BOTTOM ACTION
+       ============================================================ */
+
+    .bottom-actions {
+        display: flex;
+
+        justify-content: flex-end;
+
+        margin-top: 25px;
+    }
+
+
+    .pdf-button-large {
+        min-height: 46px;
+
+        padding:
+            0 20px;
+    }
+
+
+    /* ============================================================
+       EMPTY
+       ============================================================ */
+
+    .review-empty-state {
+        max-width: 480px;
+
+        margin:
+            80px auto;
+
+        padding:
+            50px 35px;
+
+        border:
+            1px solid
+            var(--review-border);
+
+        border-radius: 16px;
+
+        background:
+            white;
+
+        text-align: center;
+    }
+
+
+    .empty-icon {
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        width: 65px;
+        height: 65px;
+
+        margin:
+            0 auto 18px;
+
+        border-radius: 15px;
+
+        background:
+            rgba(0,169,206,.09);
+
+        color:
+            var(--gpa-blue);
+
+        font-size: 1.5rem;
+    }
+
+
+    .review-empty-state h2 {
+        margin:
+            0 0 6px;
+
+        font-size: 1rem;
+    }
+
+
+    .review-empty-state p {
+        margin: 0;
+
+        color:
+            var(--review-muted);
+
+        font-size: .67rem;
+    }
+
+
+    /* ============================================================
+       PRINT ELEMENTS
+       ============================================================ */
+
+    .print-header,
+    .print-footer {
+        display: none;
+    }
+
+
+    /* ============================================================
+       TABLET
+       ============================================================ */
+
+    @@media (max-width: 900px) {
+
+        .information-grid {
+            grid-template-columns:
+                repeat(
+                    2,
+                    minmax(0,1fr)
+                );
+        }
+
+
+        .review-field-wide {
+            grid-column:
+                span 2;
+        }
+
+    }
+
+
+    /* ============================================================
+       MOBILE
+       ============================================================ */
+
+    @@media (max-width: 600px) {
+
+        .application-review {
+            padding:
+                22px 15px
+                45px;
+        }
+
+
+        .review-header {
+            align-items:
+                flex-start;
+
+            flex-direction:
+                column;
+        }
+
+
+        .pdf-button {
+            width: 100%;
+        }
+
+
+        .header-actions {
+            width: 100%;
+        }
+
+
+        .review-summary {
+            align-items:
+                flex-start;
+
+            flex-wrap:
+                wrap;
+
+            padding:
+                20px;
+        }
+
+
+        .summary-date {
+            width: 100%;
+
+            margin:
+                8px 0 0;
+
+            padding-top: 12px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,.16);
+
+            text-align: left;
+        }
+
+
+        .review-section {
+            padding:
+                20px;
+        }
+
+
+        .information-grid {
+            grid-template-columns:
+                1fr;
+        }
+
+
+        .review-field-wide {
+            grid-column:
+                auto;
+        }
+
+
+        .bottom-actions {
+            display: block;
+        }
+
+    }
+
+
+    /* ============================================================
+       PRINT / PDF
+       ============================================================ */
+
+    @@media print {
+
+        @@page {
+            size: A4;
+            margin: 14mm;
+        }
+
+
+        body {
+            background:
+                white !important;
+        }
+
+
+        .no-print {
+            display:
+                none !important;
+        }
+
+
+        .application-review {
+            padding: 0;
+
+            background:
+                white;
+
+            color:
+                #1F2933;
+        }
+
+
+        .print-header {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            margin-bottom: 18px;
+
+            padding-bottom: 14px;
+
+            border-bottom:
+                2px solid
+                #00A9CE;
+        }
+
+
+        .print-logo {
+            width: 115px;
+
+            max-height: 50px;
+
+            object-fit: contain;
+        }
+
+
+        .print-header div {
+            text-align: right;
+        }
+
+
+        .print-header h1 {
+            margin: 0;
+
+            font-size: 17pt;
+        }
+
+
+        .print-header p {
+            margin:
+                3px 0 0;
+
+            font-size: 9pt;
+        }
+
+
+        .review-summary {
+            margin-bottom: 12px;
+
+            padding: 13px 15px;
+
+            border:
+                1px solid
+                #DDE4E8;
+
+            background:
+                #F4F7F8 !important;
+
+            color:
+                #202B33;
+
+            box-shadow: none;
+
+            print-color-adjust: exact;
+            -webkit-print-color-adjust: exact;
+        }
+
+
+        .review-summary span,
+        .review-summary p {
+            color:
+                #66737A;
+        }
+
+
+        .summary-icon {
+            background:
+                #FDB813 !important;
+
+            print-color-adjust: exact;
+            -webkit-print-color-adjust: exact;
+        }
+
+
+        .review-section {
+            break-inside:
+                avoid;
+
+            margin-bottom: 10px;
+
+            padding:
+                14px 15px;
+
+            border:
+                1px solid
+                #DDE4E8;
+
+            border-radius: 6px;
+
+            box-shadow: none;
+        }
+
+
+        .section-header {
+            margin-bottom: 12px;
+
+            padding-bottom: 9px;
+        }
+
+
+        .section-icon {
+            width: 30px;
+            height: 30px;
+
+            flex-basis: 30px;
+
+            background:
+                #EEF8FA !important;
+
+            print-color-adjust: exact;
+            -webkit-print-color-adjust: exact;
+        }
+
+
+        .section-header h2 {
+            font-size: 9pt;
+        }
+
+
+        .section-header p {
+            font-size: 6.5pt;
+        }
+
+
+        .information-grid {
+            grid-template-columns:
+                repeat(
+                    3,
+                    1fr
+                );
+
+            gap:
+                10px 16px;
+        }
+
+
+        .review-field label {
+            font-size: 6pt;
+        }
+
+
+        .review-value {
+            font-size: 8pt;
+        }
+
+
+        .long-text-field {
+            padding: 10px;
+
+            background:
+                white;
+
+            font-size: 8pt;
+        }
+
+
+        .acknowledgement-box {
+            padding:
+                10px 12px;
+
+            print-color-adjust: exact;
+            -webkit-print-color-adjust: exact;
+        }
+
+
+        .print-footer {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-top: 18px;
+
+            padding-top: 9px;
+
+            border-top:
+                1px solid
+                #DDE4E8;
+
+            color:
+                #748087;
+
+            font-size: 6.5pt;
+        }
+
+    }
+
+</style>
+
+
+@code {
+
+    [Parameter]
+    [EditorRequired]
+    public WorkAndTravelApplications Application
+    {
+        get;
+        set;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await getApplication();
+    }
+
+    private async Task getApplication()
+    {
+        Application = await WorkAndTravelApiService.GetUserPendingApplication(2026);
+    }
+
+
+    private async Task ExportToPdf()
+    {
+        await JS.InvokeVoidAsync(
+            "window.print"
+        );
+    }
+
+
+    private string DisplayFullName()
+    {
+        var names = new[]
+        {
+            Application.FirstName,
+            Application.MiddleName,
+            Application.LastName
+        };
+
+        var fullName =
+            string.Join(
+                " ",
+                names.Where(
+                    x => !string.IsNullOrWhiteSpace(x)
+                )
+            );
+
+        return string.IsNullOrWhiteSpace(fullName)
+            ? "Applicant"
+            : fullName;
+    }
+
+
+    private static string FormatDate(
+        DateOnly? date
+    )
+    {
+        return date.HasValue
+            ? date.Value.ToString("MMMM d, yyyy")
+            : "Not provided";
+    }
+
+
+    private static string FormatBoolean(
+        bool? value
+    )
+    {
+        return value switch
+        {
+            true => "Yes",
+            false => "No",
+            _ => "Not provided"
+        };
+    }
+
+
+    private static string FormatNumber(
+        int? value
+    )
+    {
+        return value?.ToString()
+            ?? "Not provided";
+    }
+
+
+    private static string FormatGender(
+        string? gender
+    )
+    {
+        return gender?.ToUpperInvariant() switch
+        {
+            "M" => "Male",
+            "F" => "Female",
+            _ => "Not provided"
+        };
+    }
+
+
+    private static string FormatAcademicYear(
+        int? year
+    )
+    {
+        return year switch
+        {
+            1 => "Year 1",
+            2 => "Year 2",
+            3 => "Year 3",
+            4 => "Year 4",
+            _ => "Not provided"
+        };
+    }
+
+}

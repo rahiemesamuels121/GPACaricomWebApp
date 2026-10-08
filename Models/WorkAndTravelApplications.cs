@@ -6,7 +6,7 @@ namespace GPACARICOM.Models;
 /// Data for the Summer Work and Travel registration form.
 /// Nullable values preserve unanswered fields; persistence and submission are configured separately.
 /// </summary>
-public class WATApplications : IValidatableObject
+public class WorkAndTravelApplications : IValidatableObject
 {
     // Personal information
     public long Id { get; set; }

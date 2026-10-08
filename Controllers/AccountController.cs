@@ -36,7 +36,7 @@ public class AccountController : Controller
         {
             new Claim(ClaimTypes.NameIdentifier, result.data.UserId.ToString()),
             new Claim(ClaimTypes.Name, $"{result.data.FirstName} {result.data.LastName}"),
-            new Claim(ClaimTypes.Role, "2"),
+            new Claim(ClaimTypes.Role, result.data.Role),
            
 
         };

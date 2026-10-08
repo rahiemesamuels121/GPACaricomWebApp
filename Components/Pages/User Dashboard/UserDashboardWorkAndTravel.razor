@@ -1,0 +1,1145 @@
+﻿@page "/dashboard/work-and-travel"
+@layout DashboardLayout
+
+@using Microsoft.AspNetCore.Authorization
+@using GPACARICOM.Services.API
+@using GPACARICOM.Models
+@using Microsoft.AspNetCore.Components.Forms
+
+@inject NavigationManager Navigation
+@inject WorkAndTravelApiService WorkAndTravelApi
+
+@attribute [Authorize]
+
+<PageTitle>Work & Travel</PageTitle>
+
+
+<div class="wat-page">
+
+    <!-- =========================================================
+         PAGE HEADER
+         ========================================================= -->
+    <section class="wat-header">
+
+        <div>
+
+            <span class="page-eyebrow">
+                Work &amp; Travel
+            </span>
+
+            <h1>
+                Application Journey
+            </h1>
+
+            <p>
+                Track your Work &amp; Travel application,
+                review every stage and see what comes next.
+            </p>
+
+        </div>
+
+
+        @if (HasApplication)
+        {
+            <div class="season-chip">
+
+                <i class="bi bi-diagram-3"></i>
+
+                @CompletedStageCount of @Stages.Count Complete
+
+            </div>
+        }
+
+    </section>
+
+
+    <!-- =========================================================
+         LOADING STATE
+         ========================================================= -->
+    @if (isLoading)
+    {
+        <section class="empty-state">
+
+            <div class="empty-illustration">
+
+                <div class="empty-icon-main">
+                    <i class="bi bi-arrow-repeat"></i>
+                </div>
+
+            </div>
+
+            <span class="empty-eyebrow">
+                Work &amp; Travel
+            </span>
+
+            <h2>
+                Loading Application
+            </h2>
+
+            <p>
+                Retrieving your Work &amp; Travel application progress.
+            </p>
+
+        </section>
+    }
+
+    else if (!string.IsNullOrWhiteSpace(errorMessage))
+    {
+        <section class="empty-state">
+
+            <div class="empty-illustration">
+
+                <div class="empty-icon-main">
+                    <i class="bi bi-exclamation-triangle"></i>
+                </div>
+
+            </div>
+
+            <span class="empty-eyebrow">
+                Work &amp; Travel
+            </span>
+
+            <h2>
+                Unable to Load Application
+            </h2>
+
+            <p>
+                @errorMessage
+            </p>
+
+            <div class="empty-actions">
+
+                <button class="primary-button"
+                        type="button"
+                        @onclick="LoadApplicationAsync">
+
+                    Try Again
+
+                    <i class="bi bi-arrow-clockwise"></i>
+
+                </button>
+
+            </div>
+
+        </section>
+    }
+
+  
+    else if (!HasApplication)
+    {
+        <section class="empty-state">
+
+            <div class="empty-illustration">
+
+                <div class="empty-icon-main">
+
+                    <i class="bi bi-airplane"></i>
+
+                </div>
+
+
+                <div class="empty-icon-small">
+
+                    <i class="bi bi-file-earmark-text"></i>
+
+                </div>
+
+            </div>
+
+
+            <span class="empty-eyebrow">
+                Work &amp; Travel
+            </span>
+
+
+            <h2>
+                No Active Application
+            </h2>
+
+
+            <p>
+                You currently have no active Work &amp; Travel
+                application.
+            </p>
+
+
+            <p class="empty-secondary">
+                Start your application to begin your journey
+                and track your progress directly from your dashboard.
+            </p>
+
+
+            <div class="empty-actions">
+
+                <button class="primary-button"
+                        type="button"
+                        @onclick="StartApplication">
+
+                    Get Started
+
+                    <i class="bi bi-arrow-right"></i>
+
+                </button>
+
+
+                <button class="secondary-button"
+                        type="button"
+                        @onclick='() => Navigation.NavigateTo("/our-programs")'>
+
+                    Explore Programs
+
+                </button>
+
+            </div>
+
+        </section>
+    }
+
+    else
+    {
+        
+        <section class="application-summary">
+
+            <div class="summary-main">
+
+                <span class="summary-label">
+                    Application
+                </span>
+
+                <h2>
+                    Work &amp; Travel
+                </h2>
+
+
+                <div class="application-reference">
+
+                    <span>
+                        Current Stage
+                    </span>
+
+                    <strong>
+                        @(CurrentStage?.StageName ?? "Completed")
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-progress">
+
+                <div class="progress-heading">
+
+                    <span>
+                        Overall Progress
+                    </span>
+
+                    <strong>
+                        @ProgressPercentage%
+                    </strong>
+
+                </div>
+
+
+                <div class="progress-track">
+
+                    <div class="progress-value"
+                         style="width:@($"{ProgressPercentage}%")">
+                    </div>
+
+                </div>
+
+
+                <span class="progress-caption">
+
+                    @CompletedStageCount of
+                    @Stages.Count stages completed
+
+                </span>
+
+            </div>
+
+
+            <div class="summary-status">
+
+                <span class="@GetOverallStatusClass()">
+
+                    <i class="@GetOverallStatusIcon()"></i>
+
+                    @OverallStatus
+
+                </span>
+
+            </div>
+
+        </section>
+
+
+     
+        @if (CurrentStage is not null)
+        {
+
+            
+            <section class="current-stage-banner">
+
+                <div class="current-stage-number">
+                    @CurrentStage.DisplayOrder
+                </div>
+
+
+                <div class="current-stage-content">
+
+                    <span>
+                        Current Stage
+                    </span>
+
+                    <h2>
+                        @CurrentStage.StageName
+                    </h2>
+
+                    <p>
+                        @GetCurrentStageMessage(CurrentStage)
+                    </p>
+
+                </div>
+
+
+                <div class="current-stage-status">
+
+                    <span>
+                        @CurrentStage.StatusName
+                    </span>
+
+                </div>
+
+            </section>
+        }
+
+
+        <section class="journey-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-eyebrow">
+                        Application Progress
+                    </span>
+
+                    <h2>
+                        Your Work &amp; Travel Journey
+                    </h2>
+
+                </div>
+
+
+                <span class="stage-count">
+                    @Stages.Count Stages
+                </span>
+
+            </div>
+
+
+            <div class="journey">
+
+                @for (int i = 0; i < Stages.Count; i++)
+                {
+                    var stage = Stages[i];
+                    var isLastStage = i == Stages.Count - 1;
+
+
+                    <article class="journey-stage @GetStageClass(stage)">
+
+                        <!-- Timeline -->
+                        <div class="stage-timeline">
+
+                            <div class="stage-circle">
+
+                                @if (IsCompleted(stage))
+                                {
+                                    <i class="bi bi-check-lg"></i>
+                                }
+                                else
+                                {
+                                    @stage.DisplayOrder
+                                }
+
+                            </div>
+
+
+                            @if (!isLastStage)
+                            {
+                                <div class="stage-line"></div>
+                            }
+
+                        </div>
+
+
+                        <!-- Stage Card -->
+                        <div class="stage-card">
+
+                          
+
+                            <div class="stage-card-header">
+
+                                <div>
+
+                                    <div class="stage-meta">
+
+                                        <span>
+                                            Stage @stage.DisplayOrder
+                                        </span>
+
+
+                                        @if (stage.CompletedAt.HasValue)
+                                        {
+                                            <span class="stage-date">
+
+                                                <i class="bi bi-calendar-check"></i>
+
+                                                Completed
+                                                @stage.CompletedAt.Value.ToString("MMM dd, yyyy")
+
+                                            </span>
+                                        }
+                                        else if (stage.StartedAt.HasValue)
+                                        {
+                                            <span class="stage-date">
+
+                                                <i class="bi bi-calendar-event"></i>
+
+                                                Started
+                                                @stage.StartedAt.Value.ToString("MMM dd, yyyy")
+
+                                            </span>
+                                        }
+
+                                    </div>
+
+
+                                    <h3>
+                                        @stage.StageName
+                                    </h3>
+
+                                </div>
+
+
+                                <span class="stage-status @GetStatusBadgeClass(stage)">
+                                    @stage.StatusName
+                                </span>
+
+                            </div>
+
+
+                            <p class="stage-description">
+                                @GetStageDescription(stage)
+                            </p>
+
+
+                            <!-- Stage Details -->
+                            <div class="stage-information">
+
+                                <div class="information-icon">
+
+                                    <i class="@GetStageIcon(stage)"></i>
+
+                                </div>
+
+
+                                <div>
+
+                                    <span>
+                                        Stage Status
+                                    </span>
+
+                                    <p>
+                                        @GetStageStatusMessage(stage)
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            @if (!string.IsNullOrWhiteSpace(stage.Notes))
+                            {
+                                <div class="stage-information">
+
+                                    <div class="information-icon">
+
+                                        <i class="bi bi-info-lg"></i>
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <span>
+                                            Notes
+                                        </span>
+
+                                        <p>
+                                            @stage.Notes
+                                        </p>
+
+                                    </div>
+
+                                </div>
+                            }
+
+
+                            <!-- Date Details -->
+                            @if (stage.StartedAt.HasValue ||
+                                 stage.CompletedAt.HasValue)
+                            {
+                                <div class="stage-requirements">
+
+                                    <h4>
+                                        Stage Details
+                                    </h4>
+
+
+                                    <div class="requirements-list">
+
+                                        @if (stage.StartedAt.HasValue)
+                                        {
+                                            <div class="requirement-item">
+
+                                                <i class="bi bi-calendar-event"></i>
+
+                                                <span>
+                                                    Started:
+                                                    @stage.StartedAt.Value.ToString("MMM dd, yyyy 'at' h:mm tt")
+                                                </span>
+
+                                            </div>
+                                        }
+
+                                        @if (stage.CompletedAt.HasValue)
+                                        {
+                                            <div class="requirement-item">
+
+                                                <i class="bi bi-check-circle"></i>
+
+                                                <span>
+                                                    Completed:
+                                                    @stage.CompletedAt.Value.ToString("MMM dd, yyyy 'at' h:mm tt")
+                                                </span>
+
+                                            </div>
+                                        }
+
+                                    </div>
+
+                                </div>
+                            }
+                            @if (stage.StageCode == "REGISTRATION" )
+{
+    <div class="payment-upload-section">
+
+        <label class="payment-upload-button">
+
+            <i class="bi bi-upload"></i>
+
+            Select Proof of Payment
+
+            <InputFile OnChange="HandlePaymentFileSelected"
+                       accept=".pdf,.jpg,.jpeg,.png" />
+
+        </label>
+
+        @if (paymentDocument is not null)
+        {
+            <div class="selected-payment-file">
+
+                <i class="bi bi-file-earmark-check"></i>
+
+                <div>
+                    <strong>@paymentDocument.Name</strong>
+
+                    <span>
+                        @FormatFileSize(paymentDocument.Size)
+                    </span>
+                </div>
+
+            </div>
+
+            <button type="button"
+                    class="stage-action"
+                    @onclick="UploadPaymentDocumentAsync"
+                    disabled="@isUploadingPayment">
+
+                @if (isUploadingPayment)
+                {
+                    <span class="spinner-border spinner-border-sm"></span>
+                    <span>Uploading...</span>
+                }
+                else
+                {
+                    <i class="bi bi-cloud-arrow-up"></i>
+                    <span>Upload Proof of Payment</span>
+                }
+
+            </button>
+        }
+
+    </div>
+}
+
+                        </div>
+
+                    </article>
+                }
+
+            </div>
+
+        </section>
+    }
+
+</div>
+
+
+@code {
+
+    /*
+     * ============================================================
+     * STATE
+     * ============================================================
+     */
+
+    private WorkAndTravelStageResponse? application;
+
+    private bool isLoading = true;
+
+    private string? errorMessage;
+
+
+    /*
+     * ============================================================
+     * LIFECYCLE
+     * ============================================================
+     */
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadApplicationAsync();
+    }
+
+
+    /*
+     * ============================================================
+     * LOAD APPLICATION
+     * ============================================================
+     */
+
+    private async Task LoadApplicationAsync()
+    {
+        try
+        {
+            isLoading = true;
+            errorMessage = null;
+
+            application =
+                await WorkAndTravelApi
+                    .GetWorkAndTravelProgressAsync();
+
+
+            if (application is not null &&
+                !application.Success)
+            {
+                errorMessage =
+                    "Your application progress could not be loaded.";
+            }
+        }
+        catch (HttpRequestException ex)
+        {
+            application = null;
+
+            errorMessage =
+                "Unable to connect to the Work & Travel service.";
+
+            Console.WriteLine(
+                $"Work & Travel API Error: {ex.Message}"
+            );
+        }
+        catch (Exception ex)
+        {
+            application = null;
+
+            errorMessage =
+                "An unexpected error occurred while loading your application.";
+
+            Console.WriteLine(
+                $"Work & Travel Error: {ex}"
+            );
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+
+    /*
+     * ============================================================
+     * STAGES
+     * ============================================================
+     */
+
+    private List<WorkAndTravelStage> Stages =>
+        application?.Data?
+            .OrderBy(stage => stage.DisplayOrder)
+            .ToList()
+        ?? new List<WorkAndTravelStage>();
+
+
+    private bool HasApplication =>
+        application?.Success == true &&
+        Stages.Count > 0;
+
+
+    /*
+     * ============================================================
+     * PROGRESS
+     * ============================================================
+     */
+
+    private int CompletedStageCount =>
+        Stages.Count(IsCompleted);
+
+
+    private int ProgressPercentage
+    {
+        get
+        {
+            if (Stages.Count == 0)
+            {
+                return 0;
+            }
+
+            return (int)Math.Round(
+                (double)CompletedStageCount
+                / Stages.Count
+                * 100
+            );
+        }
+    }
+
+
+    /*
+     * ============================================================
+     * CURRENT STAGE
+     * ============================================================
+     */
+
+    private WorkAndTravelStage? CurrentStage
+    {
+        get
+        {
+            // Prefer a stage currently in progress.
+            var activeStage =
+                Stages.FirstOrDefault(IsInProgress);
+
+            if (activeStage is not null)
+            {
+                return activeStage;
+            }
+
+
+            // Otherwise return the first stage
+            // that has not yet been completed.
+            return Stages.FirstOrDefault(
+                stage => !IsCompleted(stage)
+            );
+        }
+    }
+
+
+    /*
+     * ============================================================
+     * OVERALL STATUS
+     * ============================================================
+     */
+
+    private string OverallStatus
+    {
+        get
+        {
+            if (Stages.Count == 0)
+            {
+                return "Not Started";
+            }
+
+
+            if (Stages.All(IsCompleted))
+            {
+                return "Completed";
+            }
+
+
+            if (Stages.Any(IsInProgress))
+            {
+                return "In Progress";
+            }
+
+
+            return "Not Started";
+        }
+    }
+
+
+    /*
+     * ============================================================
+     * STATUS HELPERS
+     * ============================================================
+     */
+
+    private static bool IsCompleted(
+        WorkAndTravelStage stage)
+    {
+        return string.Equals(
+            stage.StatusCode,
+            "COMPLETED",
+            StringComparison.OrdinalIgnoreCase
+        );
+    }
+
+
+    private static bool IsInProgress(
+        WorkAndTravelStage stage)
+    {
+        return string.Equals(
+            stage.StatusCode,
+            "IN_PROGRESS",
+            StringComparison.OrdinalIgnoreCase
+        );
+    }
+
+
+    private static bool IsNotStarted(
+        WorkAndTravelStage stage)
+    {
+        return string.Equals(
+            stage.StatusCode,
+            "NOT_STARTED",
+            StringComparison.OrdinalIgnoreCase
+        );
+    }
+
+
+    private static bool RequiresAttention(
+        WorkAndTravelStage stage)
+    {
+        return
+            string.Equals(
+                stage.StatusCode,
+                "ACTION_REQUIRED",
+                StringComparison.OrdinalIgnoreCase
+            )
+            ||
+            string.Equals(
+                stage.StatusCode,
+                "REQUIRES_ATTENTION",
+                StringComparison.OrdinalIgnoreCase
+            );
+    }
+
+
+    /*
+     * ============================================================
+     * CSS CLASSES
+     * ============================================================
+     */
+
+    private static string GetStageClass(
+        WorkAndTravelStage stage)
+    {
+        if (IsCompleted(stage))
+        {
+            return "stage-completed";
+        }
+
+
+        if (RequiresAttention(stage))
+        {
+            return "stage-attention";
+        }
+
+
+        if (IsInProgress(stage))
+        {
+            return "stage-active";
+        }
+
+
+        return "stage-pending";
+    }
+
+
+    private static string GetStatusBadgeClass(
+        WorkAndTravelStage stage)
+    {
+        if (IsCompleted(stage))
+        {
+            return "status-completed";
+        }
+
+
+        if (RequiresAttention(stage))
+        {
+            return "status-attention";
+        }
+
+
+        if (IsInProgress(stage))
+        {
+            return "status-active";
+        }
+
+
+        return "status-pending";
+    }
+
+
+    private string GetOverallStatusClass()
+    {
+        return OverallStatus switch
+        {
+            "Completed" =>
+                "overall-status overall-status-completed",
+
+            "Not Started" =>
+                "overall-status overall-status-pending",
+
+            _ =>
+                "overall-status overall-status-active"
+        };
+    }
+
+
+    private string GetOverallStatusIcon()
+    {
+        return OverallStatus switch
+        {
+            "Completed" =>
+                "bi bi-check-circle",
+
+            "Not Started" =>
+                "bi bi-hourglass-split",
+
+            _ =>
+                "bi bi-arrow-repeat"
+        };
+    }
+
+
+    /*
+     * ============================================================
+     * STAGE CONTENT
+     * ============================================================
+     */
+
+    private static string GetCurrentStageMessage(
+        WorkAndTravelStage stage)
+    {
+        if (!string.IsNullOrWhiteSpace(stage.Notes))
+        {
+            return stage.Notes;
+        }
+
+
+        if (IsInProgress(stage))
+        {
+            return
+                $"{stage.StageName} is currently in progress.";
+        }
+
+
+        if (IsNotStarted(stage))
+        {
+            return
+                $"{stage.StageName} is the next stage in your application journey.";
+        }
+
+
+        return
+            $"Your application is currently at the {stage.StageName} stage.";
+    }
+
+
+    private static string GetStageDescription(
+        WorkAndTravelStage stage)
+    {
+        return stage.StageCode switch
+        {
+            "REGISTRATION" =>
+                "Your Work & Travel application has been submitted and registered.",
+
+            "DOCUMENTS_DEPOSIT" =>
+                "Complete the required documents and programme deposit for your application.",
+
+            "INTERVIEW_PLACEMENT" =>
+                "Complete your interview and job placement requirements.",
+
+            "VISA_PROCESSING" =>
+                "Complete the required visa application and processing activities.",
+
+            "PRE_DEPARTURE" =>
+                "Complete all programme requirements before travelling.",
+
+            "READY_TO_TRAVEL" =>
+                "Your Work & Travel application has reached the final travel preparation stage.",
+
+            _ =>
+                $"Track the progress of your {stage.StageName} stage."
+        };
+    }
+
+
+    private static string GetStageStatusMessage(
+        WorkAndTravelStage stage)
+    {
+        if (IsCompleted(stage))
+        {
+            return
+                "This stage has been successfully completed.";
+        }
+
+
+        if (IsInProgress(stage))
+        {
+            return
+                "This stage is currently being processed.";
+        }
+
+
+        if (RequiresAttention(stage))
+        {
+            return
+                "This stage requires your attention before your application can continue.";
+        }
+
+
+        return
+            "This stage has not started yet.";
+    }
+
+
+    private static string GetStageIcon(
+        WorkAndTravelStage stage)
+    {
+        return stage.StageCode switch
+        {
+            "REGISTRATION" =>
+                "bi bi-file-earmark-check",
+
+            "DOCUMENTS_DEPOSIT" =>
+                "bi bi-folder-check",
+
+            "INTERVIEW_PLACEMENT" =>
+                "bi bi-person-workspace",
+
+            "VISA_PROCESSING" =>
+                "bi bi-passport",
+
+            "PRE_DEPARTURE" =>
+                "bi bi-clipboard-check",
+
+            "READY_TO_TRAVEL" =>
+                "bi bi-airplane",
+
+            _ =>
+                "bi bi-circle"
+        };
+    }
+
+
+    /*
+     * ============================================================
+     * NAVIGATION
+     * ============================================================
+     */
+
+    private void StartApplication()
+    {
+        Navigation.NavigateTo(
+            "/work-and-travel-registration"
+        );
+    }
+
+
+
+    private IBrowserFile? paymentDocument;
+
+private bool isUploadingPayment;
+
+
+private void HandlePaymentFileSelected(
+    InputFileChangeEventArgs e)
+{
+    paymentDocument = e.File;
+}
+
+
+private async Task UploadPaymentDocumentAsync()
+{
+    if (paymentDocument is null)
+    {
+        return;
+    }
+
+    try
+    {
+        isUploadingPayment = true;
+
+        // We will connect this to your API next.
+        Console.WriteLine(
+            $"Uploading payment document: {paymentDocument.Name}"
+        );
+
+        Console.WriteLine(
+            $"File size: {paymentDocument.Size}"
+        );
+
+        Console.WriteLine(
+            $"Content type: {paymentDocument.ContentType}"
+        );
+
+
+        // Example:
+        //
+        // var success =
+        //     await WorkAndTravelApi.UploadPaymentDocumentAsync(
+        //         paymentDocument
+        //     );
+        //
+        // if (success)
+        // {
+        //     paymentDocument = null;
+        //     await LoadApplicationAsync();
+        // }
+
+        await Task.CompletedTask;
+    }
+    finally
+    {
+        isUploadingPayment = false;
+    }
+}
+
+
+private static string FormatFileSize(long bytes)
+{
+    if (bytes >= 1024 * 1024)
+    {
+        return $"{bytes / 1024d / 1024d:F2} MB";
+    }
+
+    if (bytes >= 1024)
+    {
+        return $"{bytes / 1024d:F2} KB";
+    }
+
+    return $"{bytes} bytes";
+}
+}

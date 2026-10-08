@@ -1,0 +1,17 @@
+@inherits Microsoft.AspNetCore.Components.ComponentBase
+
+<div class="review-field @(Wide ? "wide" : "")">
+    <label class="review-label">@Label</label>
+    <div class="review-value">@((Value ?? string.Empty))</div>
+</div>
+
+@code {
+    [Parameter]
+    public string Label { get; set; } = string.Empty;
+
+    [Parameter]
+    public string? Value { get; set; }
+
+    [Parameter]
+    public bool Wide { get; set; } = false;
+}

@@ -1,0 +1,796 @@
+﻿@page "/dashboard"
+@layout DashboardLayout
+
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@using System.Security.Claims
+@using GPACARICOM.Services.API
+@using GPACARICOM.Models
+
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager Navigation
+@inject ProgramApiService programApiService
+
+@attribute [Authorize(Roles = "-1,2")]
+
+
+<PageTitle>Dashboard</PageTitle>
+
+
+<div class="dashboard-page">
+
+    <!-- =========================================================
+         TOP BAR
+         ========================================================= -->
+    <header class="dashboard-topbar">
+
+        <div>
+
+            <span class="topbar-eyebrow">
+                Personal Dashboard
+            </span>
+
+            <h1>
+                Dashboard
+            </h1>
+
+            <p>
+                Manage your programs and upcoming activities.
+            </p>
+
+        </div>
+
+
+        <div class="topbar-actions">
+
+            <div class="dashboard-search">
+
+                <i class="bi bi-search"></i>
+
+                <input type="text"
+                       placeholder="Search..." />
+
+            </div>
+
+
+            <button class="topbar-icon-btn"
+                    type="button"
+                    aria-label="Notifications">
+
+                <i class="bi bi-bell"></i>
+
+                <span class="notification-dot"></span>
+
+            </button>
+
+
+            <div class="topbar-avatar">
+                @GetInitial()
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================================================
+         WELCOME BANNER
+         ========================================================= -->
+    <section class="welcome-banner">
+
+        <div class="welcome-decoration welcome-decoration-one"></div>
+        <div class="welcome-decoration welcome-decoration-two"></div>
+
+
+        <div class="welcome-content">
+
+            <div>
+
+                <span class="welcome-label">
+                    Welcome Back
+                </span>
+
+                <h2>
+                    Hello, @userName
+                </h2>
+
+                <p>
+                    You currently have
+                    <strong>
+                        @programs.Count upcoming programmes
+                    </strong>
+                    available on your dashboard.
+                </p>
+
+            </div>
+
+
+            <button class="welcome-button"
+                    type="button"
+                    @onclick='() => Navigation.NavigateTo("/our-programs")'>
+
+                Browse Programs
+
+                <i class="bi bi-arrow-right"></i>
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         MAIN PROGRAM OPTIONS
+         ========================================================= -->
+    <section class="dashboard-section">
+
+        <div class="section-heading-row">
+
+            <div>
+
+                <span class="section-eyebrow">
+                    Quick Access
+                </span>
+
+                <h2>
+                    Explore Opportunities
+                </h2>
+
+            </div>
+
+
+            <a href="/our-programs"
+               class="section-link">
+
+                View All
+
+                <i class="bi bi-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+
+        <div class="opportunity-grid">
+
+            <button class="opportunity-card opportunity-blue"
+                    type="button"
+                    @onclick='() => Navigation.NavigateTo("/dashboard/work-and-travel")'>
+
+                <div class="opportunity-icon">
+                    <i class="bi bi-airplane"></i>
+                </div>
+
+                <div class="opportunity-content">
+
+                    <span>
+                        International Experience
+                    </span>
+
+                    <h3>
+                        Work &amp; Travel
+                    </h3>
+
+                    <p>
+                        Track your Work &amp; Travel application
+                        and see your current stage.
+                    </p>
+
+                </div>
+
+                <i class="bi bi-arrow-up-right opportunity-arrow"></i>
+
+            </button>
+
+
+            <button class="opportunity-card opportunity-yellow"
+                    type="button"
+                    @onclick='() => Navigation.NavigateTo("/dashboard/education")'>
+
+                <div class="opportunity-icon">
+                    <i class="bi bi-mortarboard"></i>
+                </div>
+
+                <div class="opportunity-content">
+
+                    <span>
+                        Learn &amp; Develop
+                    </span>
+
+                    <h3>
+                        Education Programs
+                    </h3>
+
+                    <p>
+                        Access training and academic
+                        development opportunities.
+                    </p>
+
+                </div>
+
+                <i class="bi bi-arrow-up-right opportunity-arrow"></i>
+
+            </button>
+
+
+            <button class="opportunity-card opportunity-dark"
+                    type="button"
+                    @onclick='() => Navigation.NavigateTo("/dashboard/leadership")'>
+
+                <div class="opportunity-icon">
+                    <i class="bi bi-people"></i>
+                </div>
+
+                <div class="opportunity-content">
+
+                    <span>
+                        Build Confidence
+                    </span>
+
+                    <h3>
+                        Leadership Opportunities
+                    </h3>
+
+                    <p>
+                        Strengthen leadership, communication
+                        and professional skills.
+                    </p>
+
+                </div>
+
+                <i class="bi bi-arrow-up-right opportunity-arrow"></i>
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         STATISTICS
+         ========================================================= -->
+    <section class="dashboard-statistics">
+
+        <article class="stat-card">
+
+            <div class="stat-card-top">
+
+                <div class="stat-icon stat-blue">
+                    <i class="bi bi-calendar-event"></i>
+                </div>
+
+                <span class="stat-badge">
+                    Active
+                </span>
+
+            </div>
+
+            <strong>
+                @programs.Count
+            </strong>
+
+            <span class="stat-title">
+                Upcoming Programs
+            </span>
+
+            <div class="stat-progress">
+                <div style="width:75%"></div>
+            </div>
+
+        </article>
+
+
+        <article class="stat-card">
+
+            <div class="stat-card-top">
+
+                <div class="stat-icon stat-green">
+                    <i class="bi bi-check-circle"></i>
+                </div>
+
+                <span class="stat-badge">
+                    Completed
+                </span>
+
+            </div>
+
+            <strong>
+                2
+            </strong>
+
+            <span class="stat-title">
+                Completed Programs
+            </span>
+
+            <div class="stat-progress">
+                <div style="width:55%"></div>
+            </div>
+
+        </article>
+
+
+        <article class="stat-card">
+
+            <div class="stat-card-top">
+
+                <div class="stat-icon stat-yellow">
+                    <i class="bi bi-award"></i>
+                </div>
+
+                <span class="stat-badge">
+                    Earned
+                </span>
+
+            </div>
+
+            <strong>
+                2
+            </strong>
+
+            <span class="stat-title">
+                Certificates
+            </span>
+
+            <div class="stat-progress">
+                <div style="width:65%"></div>
+            </div>
+
+        </article>
+
+
+        <article class="stat-card">
+
+            <div class="stat-card-top">
+
+                <div class="stat-icon stat-purple">
+                    <i class="bi bi-graph-up-arrow"></i>
+                </div>
+
+                <span class="stat-badge">
+                    Progress
+                </span>
+
+            </div>
+
+            <strong>
+                68%
+            </strong>
+
+            <span class="stat-title">
+                Profile Completion
+            </span>
+
+            <div class="stat-progress">
+                <div style="width:68%"></div>
+            </div>
+
+        </article>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         UPCOMING EVENTS
+         ========================================================= -->
+    <section class="dashboard-section">
+
+        <article class="dashboard-panel events-panel">
+
+            <div class="panel-heading">
+
+                <div>
+
+                    <span>
+                        Upcoming Schedule
+                    </span>
+
+                    <h2>
+                        Upcoming Events
+                    </h2>
+
+                </div>
+
+
+                <div class="panel-heading-actions">
+
+                    <span class="event-count">
+                        @programs.Count Events
+                    </span>
+
+                    <a href="/our-programs"
+                       class="panel-view-all">
+
+                        View Programs
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            @if (programs.Count == 0)
+            {
+                <div class="empty-panel">
+
+                    <div class="empty-panel-icon">
+                        <i class="bi bi-calendar2-check"></i>
+                    </div>
+
+                    <h3>
+                        No Upcoming Events
+                    </h3>
+
+                    <p>
+                        There are currently no upcoming
+                        programs on your schedule.
+                    </p>
+
+                    <button class="empty-panel-button"
+                            type="button"
+                            @onclick='() => Navigation.NavigateTo("/our-programs")'>
+
+                        Explore Programs
+
+                    </button>
+
+                </div>
+            }
+            else
+            {
+                <div class="upcoming-events-grid">
+
+                    @for (var i = 0; i < programs.Count; i++)
+                    {
+                        var temp_program = programs[i];
+
+
+                        <article class="event-card">
+
+                            <div class="event-card-date">
+
+                                <span>
+                                    @temp_program.programDate.ToString("MMM")
+                                </span>
+
+                                <strong>
+                                    @temp_program.programDate.Day
+                                </strong>
+
+                            </div>
+
+
+                            <div class="event-card-content">
+
+                                <div class="event-card-label">
+
+                                    <i class="bi bi-calendar-event"></i>
+
+                                    Upcoming Program
+
+                                </div>
+
+                                <h3>
+                                    @temp_program.programName
+                                </h3>
+
+                                <div class="event-meta">
+
+                                    <span>
+                                        <i class="bi bi-clock"></i>
+                                        @temp_program.programDate.ToString("hh:mm tt")
+                                    </span>
+
+                                    <span>
+                                        <i class="bi bi-calendar3"></i>
+                                        @temp_program.programDate.ToString("dddd, MMMM dd")
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <button class="event-card-button"
+                                    type="button">
+
+                                View
+
+                                <i class="bi bi-arrow-right"></i>
+
+                            </button>
+
+                        </article>
+                    }
+
+                </div>
+            }
+
+        </article>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         LOWER SECTION
+         ========================================================= -->
+    <section class="dashboard-lower-grid">
+
+        <article class="dashboard-panel">
+
+            <div class="panel-heading">
+
+                <div>
+
+                    <span>
+                        Frequently Used
+                    </span>
+
+                    <h2>
+                        Quick Actions
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="quick-actions-grid">
+
+                <button class="quick-action quick-action-blue"
+                        type="button"
+                        @onclick='() => Navigation.NavigateTo("/dashboard/work-and-travel")'>
+
+                    <i class="bi bi-airplane"></i>
+
+                    <div>
+
+                        <strong>
+                            Work &amp; Travel
+                        </strong>
+
+                        <span>
+                            View application
+                        </span>
+
+                    </div>
+
+                </button>
+
+
+                <button class="quick-action quick-action-yellow"
+                        type="button"
+                        @onclick='() => Navigation.NavigateTo("/dashboard/education")'>
+
+                    <i class="bi bi-mortarboard"></i>
+
+                    <div>
+
+                        <strong>
+                            Programs
+                        </strong>
+
+                        <span>
+                            Browse opportunities
+                        </span>
+
+                    </div>
+
+                </button>
+
+
+                <button class="quick-action quick-action-dark"
+                        type="button"
+                        @onclick='() => Navigation.NavigateTo("/dashboard/leadership")'>
+
+                    <i class="bi bi-people"></i>
+
+                    <div>
+
+                        <strong>
+                            Leadership
+                        </strong>
+
+                        <span>
+                            Explore development
+                        </span>
+
+                    </div>
+
+                </button>
+
+
+                <button class="quick-action quick-action-outline"
+                        type="button"
+                        @onclick='() => Navigation.NavigateTo("/contact-us")'>
+
+                    <i class="bi bi-envelope"></i>
+
+                    <div>
+
+                        <strong>
+                            Contact GPA
+                        </strong>
+
+                        <span>
+                            Get assistance
+                        </span>
+
+                    </div>
+
+                </button>
+
+            </div>
+
+        </article>
+
+
+        <article class="dashboard-panel">
+
+            <div class="panel-heading">
+
+                <div>
+
+                    <span>
+                        Your Activity
+                    </span>
+
+                    <h2>
+                        Past Events
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="history-list">
+
+                <article class="history-item">
+
+                    <div class="history-icon">
+                        <i class="bi bi-check-lg"></i>
+                    </div>
+
+                    <div class="history-details">
+
+                        <h3>
+                            Drone Mapping Essentials
+                        </h3>
+
+                        <span>
+                            Completed June 18, 2026
+                        </span>
+
+                    </div>
+
+                    <span class="certificate-badge">
+                        <i class="bi bi-award"></i>
+                    </span>
+
+                </article>
+
+
+                <article class="history-item">
+
+                    <div class="history-icon">
+                        <i class="bi bi-check-lg"></i>
+                    </div>
+
+                    <div class="history-details">
+
+                        <h3>
+                            UAV Regulations
+                        </h3>
+
+                        <span>
+                            Completed May 30, 2026
+                        </span>
+
+                    </div>
+
+                    <span class="certificate-badge">
+                        <i class="bi bi-award"></i>
+                    </span>
+
+                </article>
+
+            </div>
+
+        </article>
+
+    </section>
+
+</div>
+
+
+
+
+
+@code {
+
+    private string userName =
+        "User";
+
+
+    private List<ProgramModel> programs =
+        new();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CheckLoginStatus();
+
+        await GetAllPrograms();
+    }
+
+
+    private async Task CheckLoginStatus()
+    {
+        var authState =
+            await AuthenticationStateProvider
+                .GetAuthenticationStateAsync();
+
+
+        var user =
+            authState.User;
+
+
+        if (user.Identity?.IsAuthenticated == true)
+        {
+            userName =
+                user.FindFirst(
+                    ClaimTypes.Name
+                )?.Value
+                ?? "User";
+        }
+    }
+
+
+    private async Task GetAllPrograms()
+    {
+        var results =
+            await programApiService
+                .GetAllPrograms();
+
+
+        programs =
+            results.data?
+                .Where(
+                    p =>
+                        p.programDate.Date
+                        >= DateTime.Today
+                )
+                .OrderBy(
+                    p =>
+                        p.programDate
+                )
+                .ToList()
+            ?? new List<ProgramModel>();
+    }
+
+
+    private string GetInitial()
+    {
+        if (string.IsNullOrWhiteSpace(userName))
+        {
+            return "U";
+        }
+
+
+        return userName
+            .Trim()[0]
+            .ToString()
+            .ToUpperInvariant();
+    }
+
+}

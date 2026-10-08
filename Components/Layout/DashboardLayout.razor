@@ -1,0 +1,476 @@
+﻿@inherits LayoutComponentBase
+
+@using Microsoft.AspNetCore.Components.Authorization
+@using System.Security.Claims
+
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager Navigation
+
+
+<div class="dashboard-layout">
+
+    <!-- =========================================================
+         DESKTOP SIDEBAR
+         ========================================================= -->
+    <aside class="dashboard-sidebar">
+
+        <!-- BRAND -->
+        <div class="sidebar-brand">
+
+           <a href="/"
+   class="sidebar-brand-link"
+   title="Return to GPA Caribbean">
+
+    <img src="/images/logomain.png"
+         alt="GPA Caribbean"
+         class="sidebar-logo" />
+
+</a>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+        <nav class="sidebar-nav">
+
+            <div class="sidebar-section-label">
+                Main
+            </div>
+
+
+            <NavLink href="/dashboard"
+                     Match="NavLinkMatch.All"
+                     class="sidebar-link">
+
+                <span class="sidebar-link-icon">
+                    <i class="bi bi-grid-1x2-fill"></i>
+                </span>
+
+                <span class="sidebar-link-text">
+                    Dashboard
+                </span>
+
+            </NavLink>
+
+
+            <div class="sidebar-section-label sidebar-section-spaced">
+                Programs
+            </div>
+
+
+            <NavLink href="/dashboard/work-and-travel"
+                     class="sidebar-link">
+
+                <span class="sidebar-link-icon">
+                    <i class="bi bi-airplane-fill"></i>
+                </span>
+
+                <span class="sidebar-link-text">
+                    Work &amp; Travel
+                </span>
+
+            </NavLink>
+
+
+            <NavLink href="/dashboard/education"
+                     class="sidebar-link">
+
+                <span class="sidebar-link-icon">
+                    <i class="bi bi-mortarboard-fill"></i>
+                </span>
+
+                <span class="sidebar-link-text">
+                    Education Programs
+                </span>
+
+            </NavLink>
+
+
+            <NavLink href="/dashboard/leadership"
+                     class="sidebar-link">
+
+                <span class="sidebar-link-icon">
+                    <i class="bi bi-people-fill"></i>
+                </span>
+
+                <span class="sidebar-link-text">
+                    Leadership
+                </span>
+
+            </NavLink>
+
+
+            <div class="sidebar-section-label sidebar-section-spaced">
+                Account
+            </div>
+
+
+            <NavLink href="/dashboard/profile"
+                     class="sidebar-link">
+
+                <span class="sidebar-link-icon">
+                    <i class="bi bi-person-fill"></i>
+                </span>
+
+                <span class="sidebar-link-text">
+                    My Profile
+                </span>
+
+            </NavLink>
+
+
+            <NavLink href="/contact-us"
+                     class="sidebar-link">
+
+                <span class="sidebar-link-icon">
+                    <i class="bi bi-headset"></i>
+                </span>
+
+                <span class="sidebar-link-text">
+                    Support
+                </span>
+
+            </NavLink>
+
+        </nav>
+
+
+        <!-- WORK & TRAVEL PROMO -->
+        <div class="sidebar-promo">
+
+            <div class="sidebar-promo-icon">
+
+                <i class="bi bi-airplane"></i>
+
+            </div>
+
+
+            <span>
+                Work &amp; Travel
+            </span>
+
+
+            <strong>
+                2027 Applications
+            </strong>
+
+
+            <p>
+                Start or continue your application.
+            </p>
+
+
+            <a href="/dashboard/work-and-travel">
+
+                View Application
+
+                <i class="bi bi-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+
+        <!-- USER -->
+        <div class="sidebar-footer">
+
+            <div class="sidebar-user">
+
+                <div class="sidebar-avatar">
+
+                    @GetInitial()
+
+                </div>
+
+
+                <div class="sidebar-user-info">
+
+                    <strong>
+                        @userName
+                    </strong>
+
+                    <span>
+                        GPA Member
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <form method="post"
+                  action="/account/logout">
+
+                <button type="submit"
+                        class="sidebar-logout"
+                        title="Log out"
+                        aria-label="Log out">
+
+                    <i class="bi bi-box-arrow-right"></i>
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =========================================================
+         MAIN CONTENT
+         ========================================================= -->
+    <div class="dashboard-content">
+
+        <!-- =====================================================
+             MOBILE HEADER
+             ===================================================== -->
+        <header class="dashboard-mobile-header">
+
+            <a href="/dashboard"
+               class="mobile-brand">
+
+                <img src="/images/logomain.png"
+                     alt="GPA Caribbean" />
+
+            </a>
+
+
+            <button type="button"
+                    class="mobile-menu-button"
+                    @onclick="ToggleMobileMenu"
+                    aria-label="Open dashboard navigation">
+
+                @if (mobileMenuOpen)
+                {
+                    <i class="bi bi-x-lg"></i>
+                }
+                else
+                {
+                    <i class="bi bi-list"></i>
+                }
+
+            </button>
+
+        </header>
+
+
+        <!-- =====================================================
+             MOBILE NAVIGATION
+             ===================================================== -->
+        @if (mobileMenuOpen)
+        {
+            <div class="mobile-nav-overlay"
+                 @onclick="CloseMobileMenu">
+            </div>
+
+
+            <aside class="mobile-sidebar">
+
+                <div class="mobile-sidebar-header">
+
+                    <span>
+                        Menu
+                    </span>
+
+
+                    <button type="button"
+                            @onclick="CloseMobileMenu">
+
+                        <i class="bi bi-x-lg"></i>
+
+                    </button>
+
+                </div>
+
+
+                <nav class="mobile-sidebar-nav">
+
+                    <NavLink href="/dashboard"
+                             Match="NavLinkMatch.All"
+                             class="mobile-sidebar-link"
+                             @onclick="CloseMobileMenu">
+
+                        <i class="bi bi-grid-1x2-fill"></i>
+
+                        Dashboard
+
+                    </NavLink>
+
+
+                    <NavLink href="/dashboard/work-and-travel"
+                             class="mobile-sidebar-link"
+                             @onclick="CloseMobileMenu">
+
+                        <i class="bi bi-airplane-fill"></i>
+
+                        Work &amp; Travel
+
+                    </NavLink>
+
+
+                    <NavLink href="/dashboard/education"
+                             class="mobile-sidebar-link"
+                             @onclick="CloseMobileMenu">
+
+                        <i class="bi bi-mortarboard-fill"></i>
+
+                        Education Programs
+
+                    </NavLink>
+
+
+                    <NavLink href="/dashboard/leadership"
+                             class="mobile-sidebar-link"
+                             @onclick="CloseMobileMenu">
+
+                        <i class="bi bi-people-fill"></i>
+
+                        Leadership
+
+                    </NavLink>
+
+
+                    <NavLink href="/dashboard/profile"
+                             class="mobile-sidebar-link"
+                             @onclick="CloseMobileMenu">
+
+                        <i class="bi bi-person-fill"></i>
+
+                        My Profile
+
+                    </NavLink>
+
+
+                    <NavLink href="/contact-us"
+                             class="mobile-sidebar-link"
+                             @onclick="CloseMobileMenu">
+
+                        <i class="bi bi-headset"></i>
+
+                        Support
+
+                    </NavLink>
+
+                </nav>
+
+
+                <div class="mobile-user">
+
+                    <div class="sidebar-avatar">
+
+                        @GetInitial()
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            @userName
+                        </strong>
+
+                        <span>
+                            GPA Member
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </aside>
+        }
+
+
+        <!-- =====================================================
+             PAGE CONTENT
+             ===================================================== -->
+        <main class="dashboard-body">
+
+            @Body
+
+        </main>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+@code {
+
+    private string userName =
+        "User";
+
+
+    private bool mobileMenuOpen;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadCurrentUser();
+    }
+
+
+    private async Task LoadCurrentUser()
+    {
+        var authState =
+            await AuthenticationStateProvider
+                .GetAuthenticationStateAsync();
+
+
+        var user =
+            authState.User;
+
+
+        if (
+            user.Identity?.IsAuthenticated
+            == true
+        )
+        {
+            userName =
+                user.FindFirst(
+                    ClaimTypes.Name
+                )?.Value
+                ?? "User";
+        }
+    }
+
+
+    private string GetInitial()
+    {
+        if (
+            string.IsNullOrWhiteSpace(
+                userName
+            )
+        )
+        {
+            return "U";
+        }
+
+
+        return userName
+            .Trim()[0]
+            .ToString()
+            .ToUpperInvariant();
+    }
+
+
+    private void ToggleMobileMenu()
+    {
+        mobileMenuOpen =
+            !mobileMenuOpen;
+    }
+
+
+    private void CloseMobileMenu()
+    {
+        mobileMenuOpen =
+            false;
+    }
+
+}

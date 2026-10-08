@@ -1,0 +1,33 @@
+@inherits Microsoft.AspNetCore.Components.ComponentBase
+
+<section class="review-section">
+    <header class="review-section-header">
+        <i class="@Icon"></i>
+        <div>
+            <h3>@Title</h3>
+            @if (!string.IsNullOrWhiteSpace(Subtitle))
+            {
+                <p class="subtitle">@Subtitle</p>
+            }
+        </div>
+    </header>
+
+    <div class="review-section-content">
+        @ChildContent
+    </div>
+
+</section>
+
+@code {
+    [Parameter]
+    public string Title { get; set; } = string.Empty;
+
+    [Parameter]
+    public string? Subtitle { get; set; }
+
+    [Parameter]
+    public string Icon { get; set; } = string.Empty;
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+}

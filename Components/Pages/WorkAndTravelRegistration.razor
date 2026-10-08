@@ -1,13 +1,20 @@
 @page "/work-and-travel-registration"
 @rendermode InteractiveServer
 @using GPACARICOM.Models
+@using Microsoft.AspNetCore.Authorization
 @implements IAsyncDisposable
 @inject IJSRuntime JS
-@inject GPACARICOM.Services.API.WATApplicationApiService ApplicationApi
+@inject GPACARICOM.Services.API.WorkAndTravelApiService WorkAndTravelApi
+@attribute [Authorize]
 
 <PageTitle>Work and Travel Registration 2027</PageTitle>
 <div class="wat-page" @ref="pageRoot">
-<header><p>GPA Caribbean</p><h1>Summer Work and Travel<br>Registration 2027</h1><p>Applicant registration · Updated June 2026</p></header>
+<header>
+    <p>GPA Caribbean</p>
+    <h1>Summer Work and Travel
+        <br>
+        Registration 2027</h1>
+    <p>Applicant registration · Updated June 2026</p></header>
 <main>
 <p class="intro">Complete each step, then review your application. Your entries are kept as you move Back and Next. This form can be printed or saved as a PDF using your browser.</p>
 <nav class="step-progress" aria-label="Application progress">
@@ -70,7 +77,7 @@
 <fieldset class="@StepClass(5)" data-step="5"><legend>For office use only</legend><div class="grid"><label>Application received by<input name="received_by" @bind="application.ReceivedBy" @bind:event="oninput"></label><label>Date<input type="date" name="received_date" @bind="application.ReceivedDate" @bind:event="oninput"></label></div></fieldset>
 </fieldset>
 <p class="privacy hint">Your entries are not automatically saved. A submission is complete only when confirmation appears below. A typed name is provided for convenience; confirm signature requirements with the agency.</p>
-@if (!ApplicationApi.IsConfigured)
+            @if (WorkAndTravelApi == null)
 {
     <p class="hint">Online submission is not available yet. You can complete and print this form.</p>
 }
@@ -85,7 +92,7 @@
     }
     else
     {
-        <button type="submit" disabled="@(isSubmitting || submitted || !ApplicationApi.IsConfigured)">@(isSubmitting ? "Submitting…" : submitted ? "Application submitted" : "Submit application")</button>
+                    <button type="submit" disabled="@(isSubmitting || submitted )">@(isSubmitting ? "Submitting…" : submitted ? "Application submitted" : "Submit application")</button>
     }
     <button type="button" class="secondary" id="print" @onclick="PrintAsync" disabled="@isSubmitting">Print / save as PDF</button>
     <button type="button" class="secondary" id="clear" @onclick="ClearAsync" disabled="@isSubmitting">Clear form</button>
@@ -129,7 +136,7 @@
 
     private ElementReference pageRoot;
     private IJSObjectReference? module;
-    private WATApplications application = new();
+    private WorkAndTravelApplications application = new();
     private EditContext editContext = default!;
     private string?[] initials = new string?[7];
     private string? applicantSignature;
@@ -167,7 +174,7 @@
         status = "Submitting your application…";
         try
         {
-            var result = await ApplicationApi.SubmitAsync(application);
+            var result = await WorkAndTravelApi.SubmitApplication(application);
             submitted = result.success;
             status = result.message;
         }
@@ -187,7 +194,7 @@
         if (!await JS.InvokeAsync<bool>("confirm", "Clear all information entered in this form?"))
             return;
 
-        application = new WATApplications();
+        application = new WorkAndTravelApplications();
         editContext = new EditContext(application);
         initials = new string?[7];
         applicantSignature = null;

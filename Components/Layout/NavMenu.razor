@@ -7,19 +7,27 @@
 
 <nav class="navbar navbar-expand-lg gpa-xtra-navbar">
 
-    <div class="container">
+    <div class="container"> 
 
         <!-- =====================================================
              BRAND
              ===================================================== -->
-        <a class="navbar-brand gpa-xtra-brand"
-           href="/">
+         <a class="navbar-brand gpa-xtra-brand"
+   href="/">
+  
 
-            <img src="/images/logomain.png"
-                 alt="GPA Caribbean"
-                 class="gpa-xtra-logo" />
+    <img src="/images/logomain.png"
+         alt="GPA Caribbean"
+         class="gpa-xtra-logo" />
+     <span class="gpa-brand-name">
+       <span> Global Preparation Academy</span>
+         <span>    (GPA) Caribbean Limited</span>
+    </span>
+   
 
-        </a>
+    
+
+</a>
 
 
         <!-- =====================================================
@@ -233,6 +241,9 @@
 
 <style>
 
+@@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@700;800;900&display=swap');
+
+
     /* ============================================================
            GPA NAVIGATION
 
@@ -275,27 +286,57 @@
            BRAND
            ============================================================ */
 
-    .gpa-xtra-brand {
-        display: flex;
-        align-items: center;
-        margin-right: 48px;
-        padding: 0;
-    }
+   .gpa-xtra-brand {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-right: 16px;
+    padding: 0;
+
+    flex-shrink: 0;
+
+    text-decoration: none;
+}
 
 
-    .gpa-xtra-logo {
-        display: block;
-        width: auto;
-        height: 50px;
-        object-fit: contain;
-        transition: transform 0.3s ease;
-    }
+.gpa-xtra-logo {
+    display: block;
+
+    width: auto;
+    height: 50px;
+
+    object-fit: contain;
+
+    flex-shrink: 0;
+
+    transition: transform 0.3s ease;
+}
 
 
-    .gpa-xtra-brand:hover
-    .gpa-xtra-logo {
-        transform: scale(1.025);
-    }
+.gpa-brand-name {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+
+    color: var(--secondary-blue);
+
+    font-family: "League Spartan", sans-serif;
+    font-size: 1rem;
+    font-weight: 900;
+
+    line-height: .95;
+    letter-spacing: -0.02em;
+
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+
+.gpa-xtra-brand:hover .gpa-xtra-logo {
+    transform: scale(1.025);
+}
 
 
     /* ============================================================
@@ -573,7 +614,7 @@
 
     .gpa-profile-menu {
         position: absolute;
-        top: calc(100% + 10px);
+        top: calc(100%);
         right: 0;
         z-index: 1500;
         display: block;

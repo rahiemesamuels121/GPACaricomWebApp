@@ -1,0 +1,617 @@
+﻿@page "/work-and-travel/information"
+@layout MainLayout
+
+@using Microsoft.AspNetCore.Authorization
+@using GPACARICOM.Services.API
+
+@inject NavigationManager Navigation
+@inject WorkAndTravelApiService WorkAndTravelApiService
+
+
+
+<PageTitle>Work & Travel Information</PageTitle>
+
+
+<div class="wat-info-page">
+
+    <!-- =========================================================
+         PAGE HEADER
+         ========================================================= -->
+    <section class="wat-info-header">
+
+        <div>
+
+            <span class="page-eyebrow">
+                Summer 2027
+            </span>
+
+            <h1>
+                Work &amp; Travel Program
+            </h1>
+
+            <p>
+                Everything you need to know before starting your
+                Summer 2027 Work &amp; Travel application.
+            </p>
+
+        </div>
+
+
+        <button class="header-back-button"
+                type="button"
+                @onclick='() => Navigation.NavigateTo("/dashboard/work-and-travel")'>
+
+            <i class="bi bi-arrow-left"></i>
+
+            Back to Application
+
+        </button>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         HERO / INTRO
+         ========================================================= -->
+    <section class="intro-banner">
+
+        <div class="intro-decoration intro-decoration-one"></div>
+        <div class="intro-decoration intro-decoration-two"></div>
+
+        <div class="intro-content">
+
+            <div class="intro-icon">
+
+                <i class="bi bi-airplane"></i>
+
+            </div>
+
+
+            <div class="intro-copy">
+
+                <span>
+                    Your Summer 2027 Journey
+                </span>
+
+                <h2>
+                    Explore. Experience. Grow.
+                </h2>
+
+                <p>
+                    Thank you for your interest in the
+                    <strong>Work and Travel Program for Summer 2027!</strong>
+                    We’re excited at the possibility of being part of your journey—
+                    one filled with exciting opportunities, unforgettable memories,
+                    and meaningful cultural exchange.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         PROGRAM OVERVIEW
+         ========================================================= -->
+    <section class="info-section">
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-eyebrow">
+                    About the Program
+                </span>
+
+                <h2>
+                    Designed for Tertiary Students
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <article class="overview-card">
+
+            <div class="overview-icon">
+
+                <i class="bi bi-globe-americas"></i>
+
+            </div>
+
+
+            <div class="overview-content">
+
+                <p>
+                    This program is designed for
+                    <strong>full-time tertiary students</strong>
+                    who are open to exploring life outside of Jamaica,
+                    experiencing new cultures, gaining valuable work experience,
+                    and building international friendships along the way.
+                </p>
+
+            </div>
+
+        </article>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         REQUIREMENTS + DOCUMENTS
+         ========================================================= -->
+    <section class="details-grid">
+
+        <!-- =====================================================
+             PROGRAM REQUIREMENTS
+             ===================================================== -->
+        <article class="information-card requirements-card">
+
+            <div class="card-header-row">
+
+                <div class="card-icon card-icon-blue">
+
+                    <i class="bi bi-search"></i>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Eligibility
+                    </span>
+
+                    <h2>
+                        Program Requirements
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <p class="card-intro">
+                To participate in the Summer 2027 Work &amp; Travel Program,
+                you must meet the following requirements:
+            </p>
+
+
+            <div class="check-list">
+
+                <div class="check-item">
+
+                    <span class="check-icon">
+                        <i class="bi bi-check2"></i>
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Age Requirement
+                        </strong>
+
+                        <p>
+                            Be 18 years or older.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <span class="check-icon">
+                        <i class="bi bi-check2"></i>
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Full-Time Student
+                        </strong>
+
+                        <p>
+                            Be a full-time student, enrolled in both semesters,
+                            with at least 12 credits per semester.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <span class="check-icon">
+                        <i class="bi bi-check2"></i>
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Academic Standing
+                        </strong>
+
+                        <p>
+                            Have a GPA of 2.0 or higher.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <span class="check-icon">
+                        <i class="bi bi-check2"></i>
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Adaptability
+                        </strong>
+
+                        <p>
+                            Be flexible and adaptable to new environments.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =====================================================
+             REQUIRED DOCUMENTS
+             ===================================================== -->
+        <article class="information-card documents-card">
+
+            <div class="card-header-row">
+
+                <div class="card-icon card-icon-yellow">
+
+                    <i class="bi bi-file-earmark-text"></i>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Preparation
+                    </span>
+
+                    <h2>
+                        Required Documents
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <p class="card-intro">
+                After registering, you will need to submit the
+                following supporting documents:
+            </p>
+
+
+            <div class="document-list">
+
+                <div class="document-item">
+
+                    <div class="document-icon">
+
+                        <i class="bi bi-person-bounding-box"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Passport-Sized Photos
+                        </strong>
+
+                        <p>
+                            Two (2) passport-sized photos.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="document-item">
+
+                    <div class="document-icon">
+
+                        <i class="bi bi-file-person"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Updated Resume
+                        </strong>
+
+                        <p>
+                            Submit your most recent resume.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="document-item">
+
+                    <div class="document-icon">
+
+                        <i class="bi bi-building"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Status Letter
+                        </strong>
+
+                        <p>
+                            Status letter from your institution.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="document-item">
+
+                    <div class="document-icon">
+
+                        <i class="bi bi-journal-text"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Transcript
+                        </strong>
+
+                        <p>
+                            To be submitted in January and must reflect
+                            Semester 2 courses.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="document-item">
+
+                    <div class="document-icon">
+
+                        <i class="bi bi-passport"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Valid Passport
+                        </strong>
+
+                        <p>
+                            Must have at least 6 months validity beyond
+                            the program end date.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="document-item">
+
+                    <div class="document-icon">
+
+                        <i class="bi bi-person-vcard"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            School ID
+                        </strong>
+
+                        <p>
+                            Copy of your current school identification.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="document-item">
+
+                    <div class="document-icon">
+
+                        <i class="bi bi-card-checklist"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Previous U.S. Visas
+                        </strong>
+
+                        <p>
+                            Copies of any previous U.S. visas,
+                            if applicable.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         IMPORTANT NOTE
+         ========================================================= -->
+    <section class="important-note">
+
+        <div class="important-note-icon">
+
+            <i class="bi bi-info-circle"></i>
+
+        </div>
+
+
+        <div>
+
+            <span>
+                Before You Apply
+            </span>
+
+            <h3>
+                Make sure you can meet the program requirements
+            </h3>
+
+            <p>
+                Review the requirements and prepare your documents early.
+                Having your information ready will help make the registration
+                and application process much smoother.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         CTA
+         ========================================================= -->
+    <section class="start-application-card">
+
+        <div>
+
+            <span>
+                Ready for Summer 2027?
+            </span>
+
+            <h2>
+                Start Your Work &amp; Travel Journey
+            </h2>
+
+            <p>
+                If you meet the requirements and are ready to continue,
+                begin your registration today.
+            </p>
+
+        </div>
+
+
+        <button type="button"
+                class="start-button"
+                @onclick="StartApplication">
+
+            Get Started
+
+            <i class="bi bi-arrow-right"></i>
+
+        </button>
+
+    </section>
+
+</div>
+
+@code {
+    private bool PendingApplicationExists { get; set; }
+
+
+
+
+
+    private async Task GetPendingApplicationStatus()
+    {
+        var now = DateTime.Today;
+        int year;
+        if (now < new DateTime(now.Year, 06, 30))
+        {
+            year = now.Year - 1;
+        } else
+        {
+            year = now.Year;
+        }
+        try
+        {
+            var response = await WorkAndTravelApiService.HasPendingWorkAndTravelApplication(year);
+            PendingApplicationExists = response.success;
+        }
+        catch
+        {
+            return;
+        }
+
+
+    }
+
+    private async Task StartApplication()
+    {
+        if (PendingApplicationExists == null)
+        {
+            return;
+        }
+        if (!PendingApplicationExists)
+        {
+            Navigation.NavigateTo(
+           "/workandtravel-application-readonly"
+       );
+        }
+        else
+        {
+            Navigation.NavigateTo(
+           "/work-and-travel-registration"
+       );
+        }
+
+       
+    }
+
+}

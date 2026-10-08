@@ -39,6 +39,7 @@ builder.Services.AddScoped<ArticleApiService>();
 builder.Services.AddScoped<TestimonialApiService>();
 builder.Services.AddScoped<ProgramApiService>();
 builder.Services.AddScoped<WATApplicationApiService>();
+builder.Services.AddScoped<WorkAndTravelApiService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient<ApiClient>(client =>
 {

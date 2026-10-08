@@ -10,7 +10,7 @@ public class WATApplicationApiService(ApiClient apiClient, IConfiguration config
     private string? Endpoint => configuration["WATApplications:SubmitEndpoint"];
     public bool IsConfigured => !string.IsNullOrWhiteSpace(Endpoint);
 
-    public async Task<ApiResponse<JsonElement>> SubmitAsync(WATApplications application)
+    public async Task<ApiResponse<JsonElement>> SubmitAsync(WorkAndTravelApplications application)
     {
         if (!IsConfigured)
             return Failure("Online applications are not available yet. Please try again later.");
