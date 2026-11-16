@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "BfkjVqTa4bc=",
+  "dgSpecHash": "oiMYTfVjIZc=",
   "success": true,
   "projectFilePath": "C:\\Mac\\Home\\Documents\\DEVELOPMENT\\GPACARICOM.csproj",
   "expectedPackageFiles": [
@@ -26,6 +26,7 @@
     "C:\\Users\\webdeveloper\\.nuget\\packages\\mysql.data\\9.7.0\\mysql.data.9.7.0.nupkg.sha512",
     "C:\\Users\\webdeveloper\\.nuget\\packages\\mysqlconnector\\2.4.0\\mysqlconnector.2.4.0.nupkg.sha512",
     "C:\\Users\\webdeveloper\\.nuget\\packages\\pomelo.entityframeworkcore.mysql\\9.0.0\\pomelo.entityframeworkcore.mysql.9.0.0.nupkg.sha512",
+    "C:\\Users\\webdeveloper\\.nuget\\packages\\questpdf\\2026.9.1\\questpdf.2026.9.1.nupkg.sha512",
     "C:\\Users\\webdeveloper\\.nuget\\packages\\radzen.blazor\\10.4.7\\radzen.blazor.10.4.7.nupkg.sha512",
     "C:\\Users\\webdeveloper\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\10.2.3\\swashbuckle.aspnetcore.swagger.10.2.3.nupkg.sha512",
     "C:\\Users\\webdeveloper\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\10.2.3\\swashbuckle.aspnetcore.swaggergen.10.2.3.nupkg.sha512",

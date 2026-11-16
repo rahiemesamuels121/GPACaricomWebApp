@@ -79,6 +79,10 @@
               "target": "Package",
               "version": "[9.0.0, )"
             },
+            "QuestPDF": {
+              "target": "Package",
+              "version": "[2026.9.1, )"
+            },
             "Radzen.Blazor": {
               "target": "Package",
               "version": "[10.4.7, )"

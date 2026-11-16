@@ -51,10 +51,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xPdXJTZXJ2aWNlcy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Mac/Home/Documents/DEVELOPMENT/Components/Pages/WorkAndTravelReadonlyApplication.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xXb3JrQW5kVHJhdmVsUmVhZG9ubHlBcHBsaWNhdGlvbi5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Mac/Home/Documents/DEVELOPMENT/Components/ReviewField.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xSZXZpZXdGaWVsZC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -142,6 +138,10 @@ build_metadata.AdditionalFiles.CssScope = b-z7fh4v8k9x
 [C:/Mac/Home/Documents/DEVELOPMENT/Components/Pages/WorkAndTravelInformationPage.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xXb3JrQW5kVHJhdmVsSW5mb3JtYXRpb25QYWdlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-8ruz3k7185
+
+[C:/Mac/Home/Documents/DEVELOPMENT/Components/Pages/WorkAndTravelReadonlyApplication.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xXb3JrQW5kVHJhdmVsUmVhZG9ubHlBcHBsaWNhdGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-kqg7cdb2p2
 
 [C:/Mac/Home/Documents/DEVELOPMENT/Components/Pages/WorkAndTravelRegistration.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xXb3JrQW5kVHJhdmVsUmVnaXN0cmF0aW9uLnJhem9y

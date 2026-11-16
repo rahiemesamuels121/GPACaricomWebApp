@@ -1,7 +1,12 @@
 using GPACARICOM.Components;
 using GPACARICOM.Services.API;
+using GPACARICOM.Services.PDF;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using QuestPDF.Infrastructure;
 using Radzen;
+
+// Use Community only if your organization qualifies.
+QuestPDF.Settings.License = LicenseType.Community;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,13 +38,14 @@ builder.Services.AddAuthorization();
 //    options.Cookie.HttpOnly = true;
 //    options.Cookie.IsEssential = true;
 //});
+
+builder.Services.AddScoped<WorkAndTravelPdfService>();
 builder.Services.AddScoped<AuthApiService>();
 builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddScoped<ArticleApiService>();
 builder.Services.AddScoped<TestimonialApiService>();
 builder.Services.AddScoped<ProgramApiService>();
-builder.Services.AddScoped<WATApplicationApiService>();
-builder.Services.AddScoped<WorkAndTravelApiService>();
+builder.Services.AddScoped<WorkAndTravelApplicationApiService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient<ApiClient>(client =>
 {

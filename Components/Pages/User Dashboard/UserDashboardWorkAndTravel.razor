@@ -7,7 +7,7 @@
 @using Microsoft.AspNetCore.Components.Forms
 
 @inject NavigationManager Navigation
-@inject WorkAndTravelApiService WorkAndTravelApi
+@inject WorkAndTravelApplicationApiService WorkAndTravelApi
 
 @attribute [Authorize]
 
@@ -639,17 +639,20 @@
             isLoading = true;
             errorMessage = null;
 
-            application =
+            var response =
                 await WorkAndTravelApi
-                    .GetWorkAndTravelProgressAsync();
+                    .GetWorkAndTravelProgressAsync(DateTime.Now.Year);
 
-
-            if (application is not null &&
-                !application.Success)
+            if (!response.success || response.data is null)
             {
+                application = null;
                 errorMessage =
+                    response.message ??
                     "Your application progress could not be loaded.";
+                return;
             }
+
+            application = response.data;
         }
         catch (HttpRequestException ex)
         {

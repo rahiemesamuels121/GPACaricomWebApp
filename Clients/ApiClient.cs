@@ -33,6 +33,19 @@ public class ApiClient
         await AddToken();
         return await _httpClient.GetAsync(url);
     }
+    public async Task<HttpResponseMessage> PostMultipartAsync(
+     string url,
+     MultipartFormDataContent content,
+     CancellationToken cancellationToken = default)
+    {
+        await AddToken();
+
+        return await _httpClient.PostAsync(
+            url,
+            content,
+            cancellationToken
+        );
+    }
 
     public async Task<HttpResponseMessage> PostAsync<T>(string url, T model)
     {
